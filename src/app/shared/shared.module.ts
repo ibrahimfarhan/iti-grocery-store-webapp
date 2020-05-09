@@ -9,6 +9,7 @@ import { PaginationComponent } from './pagination/pagination.component';
 
 @NgModule({
   declarations: [DropdownMenuComponent, LogoComponent, SearchBarComponent, PaginationComponent],
+  exports: [DropdownMenuComponent, LogoComponent, SearchBarComponent, PaginationComponent],
   imports: [
     CommonModule
   ]

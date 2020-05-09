@@ -1,1 +1,19 @@
-<p>pagination works!</p>
+<ul class="pagination">
+  <li class="page-item">
+    <button
+      class="page-link"
+      (click)="onPageNumberClick(currentPageNumber - 1)"
+      [disabled]="currentPageNumber <= 1"
+    >Previous</button>
+  </li>
+  <li class="page-item" *ngFor="let pageNumber of getPageNumbers()">
+    <button class="page-link" (click)="onPageNumberClick(pageNumber)">{{pageNumber}}</button>
+  </li>
+  <li class="page-item">
+    <button
+      class="page-link"
+      (click)="onPageNumberClick(currentPageNumber + 1)"
+      [disabled]="currentPageNumber >= getPageNumbers().length"
+    >Next</button>
+  </li>
+</ul>

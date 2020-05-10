@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "grocery-store-webapp"
+    }
+  },
+  "defaultProject": "grocery-store-webapp",
+  "cli": {
+    "analytics": "6898ed85-949e-4b65-bb83-fc5893797aee"
+  }
 }

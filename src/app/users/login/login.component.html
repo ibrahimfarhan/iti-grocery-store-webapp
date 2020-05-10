@@ -1,1 +1,87 @@
-<p>login works!</p>
+<div class="card">
+  <div class="card-header"></div>
+
+  <div class="card-body">
+    <form
+      #loginForm="ngForm"
+      novalidate
+      autocomplete="off"
+      (ngSubmit)="login()"
+    >
+      <fieldset>
+        <div class="form-group row">
+          <label class="col-md-2 col-form-label" for="userNameId"
+            >User Name</label
+          >
+          <div class="col-md-8">
+            <input
+              ngModel
+              class="form-control"
+              id="userNameId"
+              type="text"
+              placeholder="User Name (required)"
+              required
+              name="userName"
+              #userNameVar="ngModel"
+            />
+            <span class="invalid-feedback"> </span>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-md-2 col-form--label" for="passwordId"
+            >Password</label
+          >
+
+          <div class="col-md-8">
+            <input
+              ngModel
+              class="form-control"
+              id="passwordId"
+              type="password"
+              placeholder="Password (required)"
+              required
+              name="password"
+              #passwordVar="ngModel"
+            />
+            <span class="invalid-feedback"> </span>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4 offset-md-2">
+            <button
+              [disabled] = "!loginForm.valid"
+              class="btn btn-primary mr-3"
+              type="submit"
+              style="width: 80px;"
+            >
+              Log In
+            </button>
+            <button
+              class="btn btn-outline-secondary"
+              type="button"
+              style="width: 80px;"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</div>
+<pre>
+    loginForm Dirty: {{ loginForm.dirty }} 
+    loginForm Touched: {{ loginForm.touched }}
+    loginForm Valid: {{ loginForm.valid }} 
+    loginForm Value: {{ loginForm.value | json }}
+    Username valid: {{userNameVar.valid}}
+    Username touched: {{userNameVar.touched}}
+    Username dirty: {{userNameVar.dirty}}
+    Username value: {{userNameVar.value}}
+    password valid: {{passwordVar.valid}}
+    password touched: {{passwordVar.touched}}
+    password dirty: {{passwordVar.dirty}}
+    password value: {{passwordVar.value}}
+</pre>

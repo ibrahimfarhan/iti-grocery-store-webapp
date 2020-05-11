@@ -19,7 +19,8 @@ import { ProductsRoutingModule } from './products-routing.module';
     ProductsRoutingModule
   ],
   exports:[
-    ProductComponent
+    ProductComponent,
+    ProductsContainerComponent
   ]
 })
 export class ProductsModule { }

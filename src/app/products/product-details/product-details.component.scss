@@ -61,28 +61,6 @@
     display: flex;
 }
 
-.slider__indicators {
-    right: calc(50% - 2.5rem);
-    display: flex;
-    width: 10rem;
-    padding: 2rem;
-    align-items: center;
-    justify-content: space-evenly;
-}
-
-.slider__indicator {
-    display: block;
-    width: .8rem;
-    height: .8rem;
-    border-radius: 50%;
-    background-color: #e4e3e3;
-}
-
-.slider__indicator:hover,
-.slider__indicator.active {
-    background-color: #0088CC;
-}
-
 //// product details
 .product-details {
     display: flex;

@@ -1,1 +1,32 @@
-<p>product-details works!</p>
+<div class="product-details container row ">
+    <section class="product-details__main ">
+        <!-- images slider -->
+        <div class="slider col-3 ">
+            <div class="slider__items">
+                <div class="slider__item active" style="background-image: url('  {{product.imgUrl}}  ' )"></div>
+            </div>
+        </div>
+        <!-- product info -->
+        <div class="product-details__info col-5">
+            <h1>{{product.name}}</h1>
+
+            <div class="product-details__amount">
+                ${{product.price}}
+            </div>
+            <p class="product-details__desc">
+                {{product.description}}
+            </p>
+            <div class="product-details__add">
+                <div class="increment-control">
+                    <a href="#" class="increment-control__action">-</a>
+                    <input type="text" class="form-control" title="Qty" value="1">
+                    <a href="#" class="increment-control__action">+</a>
+                </div>
+                <button href="#" class="btn btn-primary btn-lg">Add to cart</button>
+            </div>
+            <div class="product-details__meta">
+                Categories: <a rel="tag" href="#">Accessories</a>, <a rel="tag" href="#">Bags</a>.
+            </div>
+        </div>
+    </section>
+</div>

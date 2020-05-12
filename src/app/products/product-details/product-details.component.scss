@@ -1,0 +1,139 @@
+.increment-control {
+    display: flex;
+    margin-right: 1rem;
+}
+
+.increment-control__action {
+    font-size: 1.2rem;
+    width: 4.3rem;
+    height: 4.3rem;
+    color: #444;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    font-weight: 700;
+}
+
+.increment-control__action:last-of-type {
+    border-radius: 0 4px 4px 0;
+    border-left-width: 0;
+}
+
+.increment-control__action:first-of-type {
+    border-radius: 4px 0 0 4px;
+    border-right-width: 0;
+}
+
+.increment-control__action:hover {
+    background-color: #F7F7F7;
+}
+
+.increment-control>.form-control {
+    font-weight: 700;
+    width: 3.3rem;
+    height: 4.3rem;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    text-align: center;
+    font-size: 1.4rem;
+}
+
+// slider
+.slider {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.slider__items {
+    width: 100%;
+}
+
+.slider__item {
+    background-size: cover;
+    display: none;
+    width: 100%;
+    padding-bottom: 100%;
+}
+
+.slider__item.active {
+    display: flex;
+}
+
+.slider__indicators {
+    right: calc(50% - 2.5rem);
+    display: flex;
+    width: 10rem;
+    padding: 2rem;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.slider__indicator {
+    display: block;
+    width: .8rem;
+    height: .8rem;
+    border-radius: 50%;
+    background-color: #e4e3e3;
+}
+
+.slider__indicator:hover,
+.slider__indicator.active {
+    background-color: #0088CC;
+}
+
+//// product details
+.product-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.product-details__main {
+    width: 100%;
+    margin-bottom: 3rem;
+    display: flex;
+}
+
+.product-details__info {
+    padding: 0 1.5rem;
+}
+
+.product-details__amount {
+    font-size: 2.8rem;
+    font-weight: 400;
+    color: #444;
+    margin-bottom: 2rem;
+}
+
+.product-details__desc {
+    font-size: 1.4rem;
+    color: #777;
+    font-weight: 400;
+    line-height: 2.6rem;
+}
+
+.product-details__desc p:not(:last-of-type) {
+    margin-bottom: 2rem;
+}
+
+.product-details__add {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2.4rem;
+    margin-top: 2.4rem;
+}
+
+.product-details__meta {
+    font-size: 1.4rem;
+    color: #777;
+}
+
+.product-details__meta a {
+    color: #0088CC;
+}
+
+.product-details .slider {
+    min-width: 54rem;
+    padding: 0 1.5rem;
+}

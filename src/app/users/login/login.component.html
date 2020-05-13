@@ -1,15 +1,20 @@
+<!-- Using Reactive form approach -->
 <div class="card">
-  <div class="card-header"></div>
+  <div class="card-header">
+    Log in!
+  </div>
 
   <div class="card-body">
+    <!-- Login Form -->
     <form
-      #loginForm="ngForm"
       novalidate
+      [formGroup]="loginForm"
       autocomplete="off"
       (ngSubmit)="login()"
     >
       <fieldset>
-        <div class="form-group row">
+        <!-- User name input field -->
+        <div class="form-group mb-2 row">
           <label class="col-md-2 col-form-label" for="userNameId"
             >User Name</label
           >
@@ -20,19 +25,22 @@
               id="userNameId"
               type="text"
               placeholder="User Name (required)"
-              required
-              name="userName"
-              #userNameVar="ngModel"
+              formControlName="userName"
+              [class]="{
+                'is-invalid': displayMessage.userName
+              }"
             />
-            <span class="invalid-feedback"> </span>
+            <span class="invalid-feedback">
+              {{displayMessage.userName}}
+            </span>
           </div>
         </div>
 
-        <div class="form-group row">
-          <label class="col-md-2 col-form--label" for="passwordId"
+        <!-- Password input field -->
+        <div class="form-group mb-2 row">
+          <label class="col-md-2 col-form-label" for="passwordId"
             >Password</label
           >
-
           <div class="col-md-8">
             <input
               ngModel
@@ -40,28 +48,40 @@
               id="passwordId"
               type="password"
               placeholder="Password (required)"
-              required
-              name="password"
-              #passwordVar="ngModel"
+              formControlName="password"
+              [class]="{
+                'is-invalid': displayMessage.password
+                 
+              }"
             />
-            <span class="invalid-feedback"> </span>
+            <span class="invalid-feedback">
+              {{displayMessage.password}}
+            </span>
           </div>
         </div>
 
+        <!-- Form buttons -->
         <div class="row">
           <div class="col-md-4 offset-md-2">
+            <!-- Log in button -->
             <button
-              [disabled] = "!loginForm.valid"
               class="btn btn-primary mr-3"
               type="submit"
-              style="width: 80px;"
+              [title]="
+                loginForm.valid
+                  ? 'Log in'
+                  : 'Disabled until the form data is valid'
+              "
+              [disabled]="!loginForm.valid"
             >
-              Log In
+              Log in
             </button>
+
+            <!-- Cancel button -->
             <button
               class="btn btn-outline-secondary"
               type="button"
-              style="width: 80px;"
+              [routerLink]="['/home']"
             >
               Cancel
             </button>
@@ -76,12 +96,12 @@
     loginForm Touched: {{ loginForm.touched }}
     loginForm Valid: {{ loginForm.valid }} 
     loginForm Value: {{ loginForm.value | json }}
-    Username valid: {{userNameVar.valid}}
-    Username touched: {{userNameVar.touched}}
-    Username dirty: {{userNameVar.dirty}}
-    Username value: {{userNameVar.value}}
-    password valid: {{passwordVar.valid}}
-    password touched: {{passwordVar.touched}}
-    password dirty: {{passwordVar.dirty}}
-    password value: {{passwordVar.value}}
+    Username valid: {{ loginForm.get("userName").valid }}
+    Username touched: {{ loginForm.get("userName").touched }}
+    Username dirty: {{ loginForm.get("userName").dirty }}
+    Username value: {{ loginForm.get("userName").value }}
+    password valid: {{ loginForm.get("password").valid }}
+    password touched: {{ loginForm.get("password").touched }}
+    password dirty: {{ loginForm.get("password").dirty }}
+    password value: {{ loginForm.get("password").value }}
 </pre>

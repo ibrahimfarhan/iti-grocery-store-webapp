@@ -1,1 +1,217 @@
-<p>register works!</p>
+<!-- Using Reactive form approach -->
+<div class="card">
+  <div class="card-header">
+    Register!
+  </div>
+
+  <div class="card-body">
+    <!-- Registration Form -->
+    <form
+      novalidate
+      [formGroup]="registerForm"
+      autocomplete="off"
+      (ngSubmit)="register()"
+    >
+      <fieldset>
+        <!-- First name input field -->
+        <div class="form-group mb-2 row">
+          <label class="col-md-2 col-form-label" for="firstName"
+            >First Name</label
+          >
+          <div class="col-md-8">
+            <input
+              ngModel
+              class="form-control"
+              id="firstName"
+              type="text"
+              placeholder="First Name (required)"
+              formControlName="firstName"
+              [class]="{
+                'is-invalid': displayMessage.firstName
+              }"
+            />
+            <span class="invalid-feedback">
+              {{displayMessage.firstName}}
+            </span>
+          </div>
+        </div>
+
+        <!-- Last name input field -->
+        <div class="form-group mb-2 row">
+          <label class="col-md-2 col-form-label" for="lastName"
+            >Last Name</label
+          >
+          <div class="col-md-8">
+            <input
+              ngModel
+              class="form-control"
+              id="lastName"
+              type="text"
+              placeholder="Last Name (required)"
+              formControlName="lastName"
+              [class]="{
+                'is-invalid':
+                  (registerForm.get('lastName').touched ||
+                    registerForm.get('lastName').dirty) &&
+                  !registerForm.get('lastName').valid
+              }"
+            />
+            <span class="invalid-feedback">
+              <span *ngIf="registerForm.get('lastName').errors?.required">
+                Last name Is required.
+              </span>
+              <span *ngIf="registerForm.get('lastName').errors?.whiteSpace">
+                Last name can not contain whitespace.
+              </span>
+            </span>
+          </div>
+        </div>
+
+        <!-- Email input field -->
+        <div class="form-group mb-2 row">
+          <label class="col-md-2 col-form-label" for="email">Email</label>
+          <div class="col-md-8">
+            <input
+              ngModel
+              class="form-control"
+              id="email"
+              type="email"
+              placeholder="Email (required)"
+              formControlName="email"
+              [class]="{
+                'is-invalid': displayMessage.email
+              }"
+            />
+            <span class="invalid-feedback">
+              {{ displayMessage.email }}
+            </span>
+          </div>
+        </div>
+
+        <!-- Password input field -->
+        <div class="form-group mb-2 row">
+          <label class="col-md-2 col-form-label" for="passwordId"
+            >Password</label
+          >
+          <div class="col-md-8">
+            <input
+              ngModel
+              class="form-control"
+              id="passwordId"
+              type="password"
+              placeholder="Password (required)"
+              required
+              minlength="4"
+              formControlName="password"
+              [class]="{
+                'is-invalid': displayMessage.password
+              }"
+            />
+            <span class="invalid-feedback">
+              {{displayMessage.password}}
+            </span>
+          </div>
+        </div>
+
+        <!-- Check box for order info section -->
+        <div class="form-group row mb-2">
+          <div class="col-md-8">
+            <div class="form-check">
+              <label class="form-check-label">
+                <input
+                  class="form-check-input"
+                  id="orederInfoId"
+                  type="checkbox"
+                  formControlName="orderInfo"
+                />Personal information for order
+              </label>
+            </div>
+          </div>
+        </div>
+        <!-- showing order info section if order info control is true -->
+        <div *ngIf="registerForm.get('orderInfo').value">
+          <!-- Address input field -->
+          <div class="form-group row mb-2">
+            <label class="col-md-2 col-form-label" for="addressId"
+              >Address
+            </label>
+            <div class="col-md-8">
+              <input
+                class="form-control"
+                id="addressId"
+                type="text"
+                placeholder="Your address"
+                formControlName="address"
+              />
+            </div>
+          </div>
+
+          <div class="form-group row mb-2">
+            <label class="col-md-2 col-form-label" for="phoneNumberId"
+              >Phone Number
+            </label>
+            <div class="col-md-8">
+              <input
+                class="form-control"
+                id="phoneNumberId"
+                type="text"
+                placeholder="phone number"
+                formControlName="phoneNumber"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Form buttons -->
+        <div class="row">
+          <div class="col-md-4 offset-md-2">
+            <!-- Register button -->
+            <button
+              class="btn btn-primary mr-3"
+              type="submit"
+              [title]="
+                registerForm.valid
+                  ? 'Register'
+                  : 'Disabled until the form data is valid'
+              "
+              [disabled]="!registerForm.valid"
+            >
+              Register
+            </button>
+
+            <!-- Cancel button -->
+            <button
+              class="btn btn-outline-secondary"
+              type="button"
+              [routerLink]="['/home']"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</div>
+<pre>
+    registerForm Dirty: {{ registerForm.dirty }} 
+    registerForm Touched: {{ registerForm.touched }}
+    registerForm Valid: {{ registerForm.valid }} 
+    registerForm Value: {{ registerForm.value | json }}
+    firstName valid: {{ registerForm.get("firstName").valid }}
+    firstName touched: {{ registerForm.get("firstName").touched }}
+    firstName dirty: {{ registerForm.get("firstName").dirty }}
+    firstName value: {{ registerForm.get("firstName").value }}
+    lastName valid: {{ registerForm.get("lastName").valid }}
+    lastName touched: {{ registerForm.get("lastName").touched }}
+    lastName dirty: {{ registerForm.get("lastName").dirty }}
+    lastName value: {{ registerForm.get("lastName").value }}
+    email valid: {{ registerForm.get("email").valid }}
+    email touched: {{ registerForm.get("email").touched }}
+    email dirty: {{ registerForm.get("email").dirty }}
+    email value: {{ registerForm.get("email").value }}
+    password valid: {{ registerForm.get("password").valid }}
+    password touched: {{ registerForm.get("password").touched }}
+    password dirty: {{ registerForm.get("password").dirty }}
+    password value: {{ registerForm.get("password").value }}
+</pre>

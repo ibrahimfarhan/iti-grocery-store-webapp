@@ -2,11 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { UsersRoutingModule } from './users-routing.module';
-import {FormsModule} from '@angular/forms';
+import { ReactiveFormsModule} from '@angular/forms';
 
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { LogoutComponent } from './logout/logout.component';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -16,7 +18,9 @@ import { LogoutComponent } from './logout/logout.component';
   imports: [
     CommonModule,
     UsersRoutingModule,
-    FormsModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    RouterModule
   ],
   exports: [
     LoginComponent

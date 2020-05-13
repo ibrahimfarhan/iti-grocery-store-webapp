@@ -7,17 +7,18 @@ import { CategoriesListComponent } from './categories-list/categories-list.compo
 import { ProductsContainerComponent } from './products-container/products-container.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { ProductsRoutingModule } from './products-routing.module';
+import { TestNoraComponent } from './test-nora/test-nora.component';
 
 
 
 @NgModule({
   declarations: [ProductComponent, ProductInCartComponent,
     CategoryComponent, CategoriesListComponent,
-    ProductsContainerComponent, ProductDetailsComponent],
+    ProductsContainerComponent, ProductDetailsComponent, TestNoraComponent],
   imports: [
     CommonModule,
     ProductsRoutingModule
   ],
-  exports :[ProductDetailsComponent]
+  exports :[ProductDetailsComponent , TestNoraComponent,ProductInCartComponent]
 })
 export class ProductsModule { }

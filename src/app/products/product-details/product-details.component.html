@@ -1,22 +1,30 @@
-<div class="product-details container row ">
-    <section class="product-details__main ">
-        <!-- images slider -->
-        <div class="slider col-3 ">
-            <div class="slider__items">
-                <div class="slider__item active" style="background-image: url('  {{product.imgUrl}}  ' )"></div>
+<app-test-nora></app-test-nora>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class=" container  ">
+    <div class=" d-flex flex-row mb-4 row">
+        <!-- images productimg -->
+        <div class="productimg col-sm-6">
+            <div class="productimg__item" [style.backgroundImage]="'url('+product.imgUrl+')'">
+
             </div>
+
         </div>
         <!-- product info -->
-        <div class="product-details__info col-5">
+        <div class="product-details__info col-sm-6 ">
             <h1>{{product.name}}</h1>
 
-            <div class="product-details__amount">
+            <div class="mb-5 product-details__amount">
                 ${{product.price}}
             </div>
-            <p class="product-details__desc">
+            <p class="product-details__desc text-muted mb-5">
                 {{product.description}}
             </p>
-            <div class="product-details__add">
+            <div class="d-flex ">
                 <div class="increment-control">
                     <a href="#" class="increment-control__action">-</a>
                     <input type="text" class="form-control" title="Qty" value="1">
@@ -25,8 +33,8 @@
                 <button href="#" class="btn btn-primary btn-lg">Add to cart</button>
             </div>
             <div class="product-details__meta">
-                Categories: <a rel="tag" href="#">Accessories</a>, <a rel="tag" href="#">Bags</a>.
+                Categories: <a rel="tag" href="#">{{categoryName()}}</a>, <a rel="tag" href="#">Bags</a>.
             </div>
         </div>
-    </section>
+    </div>
 </div>

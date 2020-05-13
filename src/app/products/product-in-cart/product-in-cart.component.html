@@ -1,6 +1,11 @@
-<div class="item-small-1">
+<div class="item-small-1 row">
     <!-- item data -->
-    <div class="item-small-1__data">
+    <div class="item-small-1__image-box col-sm-5">
+        <a href="#" class="item-small-1__image image" [style.backgroundImage]="'url('+product.imgUrl+')' ">
+        </a>
+
+    </div>
+    <div class="item-small-1__data col-sm-5">
         <!-- title -->
         <a href="" class="item-small-1__title">{{product.name}}</a>
         <!-- price -->
@@ -8,12 +13,10 @@
             1 X ${{product.price}}
         </span>
     </div>
-    <!-- item image -->
-    <div class="item-small-1__image-box">
-        <a href="#" class="item-small-1__image image" [style.backgroundImage]="'url('+product.imgUrl+')' ">
-        </a>
+    <div class="col-sm-2">
         <a href="# " class="item-small-1__action ">
             <i class="fas fa-times "></i>
         </a>
     </div>
+    <!-- item image -->
 </div>

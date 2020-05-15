@@ -31,7 +31,7 @@
               }"
             />
             <span class="invalid-feedback">
-              {{displayMessage.userName}}
+              {{ displayMessage.userName }}
             </span>
           </div>
         </div>
@@ -51,11 +51,10 @@
               formControlName="password"
               [class]="{
                 'is-invalid': displayMessage.password
-                 
               }"
             />
             <span class="invalid-feedback">
-              {{displayMessage.password}}
+              {{ displayMessage.password }}
             </span>
           </div>
         </div>
@@ -91,7 +90,9 @@
     </form>
   </div>
 </div>
-<pre>
+
+<!-- checking login form state and values -->
+<!-- <pre>
     loginForm Dirty: {{ loginForm.dirty }} 
     loginForm Touched: {{ loginForm.touched }}
     loginForm Valid: {{ loginForm.valid }} 
@@ -104,4 +105,4 @@
     password touched: {{ loginForm.get("password").touched }}
     password dirty: {{ loginForm.get("password").dirty }}
     password value: {{ loginForm.get("password").value }}
-</pre>
+</pre> -->

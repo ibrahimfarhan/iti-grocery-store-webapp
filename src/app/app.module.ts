@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { RouterModule } from '@angular/router';
 import { UsersModule } from './users/users.module';
+import { ErrorInterceptorProvider } from './users/error.interceptor';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,7 @@ import { UsersModule } from './users/users.module';
     UsersModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [ErrorInterceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

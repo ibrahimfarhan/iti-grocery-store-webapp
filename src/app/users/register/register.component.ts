@@ -19,12 +19,12 @@ import { Observable, fromEvent, merge } from 'rxjs';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
-  registerForm: FormGroup;
-  user: User;
-  
-
   @ViewChildren(FormControlName, { read: ElementRef })
   formInputElements: ElementRef[];
+
+  registerForm: FormGroup;
+  user: User;
+
   // Use with the generic validation message class
   displayMessage: { [key: string]: string } = {};
   private validationMessages: { [key: string]: { [key: string]: string } };
@@ -32,7 +32,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(private authService: AuthService, private fb: FormBuilder) {
     this.user = {
-      userName: '',
+      firstName: '',
+      lastName: '',
       password: '',
       email: '',
     };
@@ -105,7 +106,9 @@ export class RegisterComponent implements OnInit {
   ngAfterViewInit(): void {
     // Watch for the blur event from any input element on the form.
     // This is required because the valueChanges does not provide notification on blur
-    const controlBlurs: Observable<any>[] = this.formInputElements.map((formControl: ElementRef) =>
+    const controlBlurs: Observable<
+      any
+    >[] = this.formInputElements.map((formControl: ElementRef) =>
       fromEvent(formControl.nativeElement, 'blur')
     );
 
@@ -119,14 +122,18 @@ export class RegisterComponent implements OnInit {
         );
       });
   }
-  
+
   register() {
-    // console.log(registerForm);
-    // if (registerForm && registerForm.valid) {
-    //   this.user.userName = registerForm.value.userName;
-    //   this.user.password = registerForm.value.password;
-    // }
-    // console.log(this.user);
+    console.log(this.registerForm);
+    if (this.registerForm && this.registerForm.valid) {
+      this.user.firstName = this.registerForm.value.firstName;
+      this.user.lastName = this.registerForm.value.lastName;
+      this.user.password = this.registerForm.value.password;
+      this.user.email = this.registerForm.value.email;
+      this.user.phoneNumber = this.registerForm.value.phoneNumber;
+      this.user.address = this.registerForm.value.address;
+    }
+    console.log(this.user);
     // this.authService.register(this.user).subscribe((response) => {
     //   console.log(response);
     //   console.log('registration successful');

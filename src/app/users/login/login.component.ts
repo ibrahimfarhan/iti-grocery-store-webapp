@@ -7,7 +7,7 @@ import {
   FormControlName,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { User } from '../user';
+import {  LoginUSer } from '../user';
 import { WhiteSpaceValidator } from 'src/app/shared/validators/whitespace.validator';
 import { GenericValidator } from 'src/app/shared/validators/generic-validator-messages';
 import { Observable, fromEvent, merge } from 'rxjs';
@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
   formInputElements: ElementRef[];
 
   loginForm: FormGroup;
-  user: User;
+  user: LoginUSer;
 
 // Use with the generic validation message class
   displayMessage: { [key: string]: string } = {};
@@ -39,7 +39,6 @@ export class LoginComponent implements OnInit {
     this.user = {
       userName: '',
       password: '',
-      email: '',
     };
 
     // Defines all of the validation messages for the form.
@@ -99,9 +98,8 @@ export class LoginComponent implements OnInit {
     // Merge the blur event observable with the valueChanges observable
     // so we only need to subscribe once.
     merge(this.loginForm.valueChanges, ...controlBlurs)
-      .pipe(debounceTime(100))
+      .pipe(debounceTime(1000))
       .subscribe((value) => {
-        console.log(value);
         this.displayMessage = this.genericValidator.processMessages(
           this.loginForm
         );
@@ -112,14 +110,18 @@ export class LoginComponent implements OnInit {
       this.user.userName = this.loginForm.value.userName;
       this.user.password = this.loginForm.value.password;
     }
-    console.log(this.loginForm);
-    console.log('saved' + JSON.stringify(this.loginForm.value));
+    
     console.log(this.user);
     this.authService.login(this.user).subscribe(
-      next => console.log('looged in successfully'),
+      next => {
+        // console.log('looged in successfully');
+        if(this.authService.currentUser !== null){
+          this.router.navigate(['/home']);
+        }
+      },
       error => console.log(error),
     );
-
+    // implementing navigating to a redirect url 
     // if (this.authService.redirectUrl) {
     //   this.router.navigateByUrl(this.authService.redirectUrl);
     // }else {

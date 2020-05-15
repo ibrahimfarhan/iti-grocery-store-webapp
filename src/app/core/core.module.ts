@@ -6,9 +6,17 @@ import { HomeComponent } from './home/home.component';
 import { CategoryInHomeComponent } from './category-in-home/category-in-home.component';
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent, HomeComponent, CategoryInHomeComponent],
+  declarations: [
+    HeaderComponent, 
+    FooterComponent, 
+    HomeComponent, 
+    CategoryInHomeComponent
+  ],
   imports: [
     CommonModule
+  ],
+  exports:[
+    HomeComponent,
   ]
 })
 export class CoreModule { }

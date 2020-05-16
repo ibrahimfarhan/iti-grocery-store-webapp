@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/users/auth.service';
-import { User, retrievedUser } from 'src/app/users/user';
-import { Router } from '@angular/router';
+import { retrievedUser } from 'src/app/users/user';
 
 @Component({
   selector: 'app-header',
@@ -13,25 +11,14 @@ export class HeaderComponent implements OnInit {
   isLogged:boolean;
   userDataSubscription:any;
 
-  constructor(public authService: AuthService, private router:Router) { 
+  constructor() { 
     
   }
 
   ngOnInit(): void {
-
-    
-    this.authService.currentUserSubject.asObservable().subscribe( data => {
-      console.log(data);
-      this.user = data;
-      // console.log(this.user);
-      this.isLogged = this.authService.isLogged();
-    });
-    
+      
   }
 
-  logout(){
-    this.authService.logout();
-    this.router.navigate(['/login']);
-  }
+  
 
 }

@@ -7,16 +7,11 @@ import { AuthService } from './users/auth.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  userToken:any;
-  user:any;
-  constructor(private authService: AuthService){
-
+  
+  constructor(){
   }
-  ngOnInit(): void {
-    const token = localStorage.getItem('authToken');
-    if (token) {
-      this.authService.decodedToken = JSON.parse(atob(token.split('.')[1]));
-    }
+  ngOnInit() {
     
   }
+ 
 }

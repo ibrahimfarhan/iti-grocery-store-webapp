@@ -121,7 +121,7 @@ export class LoginComponent implements OnInit {
       },
       error => console.log(error),
     );
-    // implementing navigating to a redirect url 
+    // implementing navigation to a redirect url 
     // if (this.authService.redirectUrl) {
     //   this.router.navigateByUrl(this.authService.redirectUrl);
     // }else {

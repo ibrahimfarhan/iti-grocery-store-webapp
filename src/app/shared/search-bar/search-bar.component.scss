@@ -1,0 +1,79 @@
+.search-form {
+  display: none;
+  position: absolute;
+  top: 5rem;
+  left: 50%;
+  right: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 1rem gray;
+  z-index: 1;
+  border: 1px solid white;
+  border-radius: 100px;
+  width: max-content;
+  margin-top: 1rem;
+  padding: 0.5rem;
+  background-color: white;
+
+  &__input {
+    border: none;
+    margin: 0 0.5rem;
+    width: 7rem;
+  }
+
+  &__select {
+    appearance: none;
+    background-image: url('../../../assets/images/html-select-arrow.png');
+    background-repeat: no-repeat;
+    background-size: 1rem;
+    background-position: right center;
+    color: black;
+    border: none;
+    min-width: 5rem;
+    max-width: 8rem;
+    padding-right: 1.5rem;
+    cursor: pointer;
+    margin-right: 0.5rem;
+  }
+
+  &__btn {
+    all: unset;
+    width: 2rem;
+    text-align: center;
+    background-color: white;
+    color: black;
+    padding: 0.1rem;
+    cursor: pointer;
+  }
+
+  &__vl {
+    display: inline-block;
+    margin: -1rem 0.5rem -1rem 0;
+    height: 2.8rem;
+    border-left: 1px solid gray;
+  }
+}
+
+.search-form-mini {
+  display: block;
+}
+
+@media (min-width: 576px) {
+  .search-form {
+    &__input {
+      width: max-content;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .search-form-mini {
+    display: none;
+  }
+
+  .search-form {
+    position: inherit;
+    display: block;
+    transform: unset;
+    margin: 0;
+  }
+}

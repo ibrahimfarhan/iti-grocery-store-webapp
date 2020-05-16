@@ -1,1 +1,8 @@
-<p>dropdown-menu works!</p>
+<div class="dropdown">
+  <button class="btn" type="button" (click)="isOpen = !isOpen">
+    <ng-content select=".dropdown-button"></ng-content>
+  </button>
+  <div class="dropdown-menu" [class]="{'show': isOpen}">
+    <ng-content select=".dropdown-items"></ng-content>
+  </div>
+</div>

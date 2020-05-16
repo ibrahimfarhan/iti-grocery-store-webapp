@@ -10,7 +10,7 @@ import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [DropdownMenuComponent, LogoComponent, SearchBarComponent, PaginationComponent],
-  exports: [SharedModule],
+  exports: [LogoComponent, SearchBarComponent, PaginationComponent, DropdownMenuComponent],
   imports: [
     CommonModule,
     FormsModule

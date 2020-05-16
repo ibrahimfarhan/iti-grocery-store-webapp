@@ -24,8 +24,10 @@ import { CategoriesListResolver } from './categories-list-resolver.service';
   ],
   exports: [
     ProductComponent,
-    ProductsContainerComponent
+    ProductsContainerComponent,
+    ProductDetailsComponent,
+    ProductInCartComponent
   ],
-  providers: [CategoryService, CategoriesListResolver]
+  providers: [CategoryService, CategoriesListResolver],
 })
 export class ProductsModule { }

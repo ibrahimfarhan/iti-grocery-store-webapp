@@ -1,0 +1,19 @@
+.category{
+    position: relative;
+    &-item{
+        &-hovered{
+            position: absolute;
+            left: 0;
+            top: 0;
+            visibility: hidden;
+        }
+    }
+    &:hover{
+        .category-item{
+            visibility: hidden;
+        }
+        .category-item-hovered{
+            visibility: visible;
+        }
+    }
+}

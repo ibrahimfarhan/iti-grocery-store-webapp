@@ -1,9 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
+import { UsersRoutingModule } from './users-routing.module';
+import { ReactiveFormsModule} from '@angular/forms';
+
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { LogoutComponent } from './logout/logout.component';
-import { UsersRoutingModule } from './users-routing.module';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
+
 
 
 
@@ -11,7 +17,13 @@ import { UsersRoutingModule } from './users-routing.module';
   declarations: [LoginComponent, RegisterComponent, LogoutComponent],
   imports: [
     CommonModule,
-    UsersRoutingModule
+    UsersRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    RouterModule
+  ],
+  exports: [
+    LoginComponent
   ]
 })
 export class UsersModule { }

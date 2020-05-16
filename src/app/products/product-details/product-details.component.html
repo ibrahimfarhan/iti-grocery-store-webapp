@@ -1,1 +1,40 @@
-<p>product-details works!</p>
+<app-test-nora></app-test-nora>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class=" container  ">
+    <div class=" d-flex flex-row mb-4 row">
+        <!-- images productimg -->
+        <div class="productimg col-sm-6">
+            <div class="productimg__item" [style.backgroundImage]="'url('+product.imgUrl+')'">
+
+            </div>
+
+        </div>
+        <!-- product info -->
+        <div class="product-details__info col-sm-6 ">
+            <h1>{{product.name}}</h1>
+
+            <div class="mb-5 product-details__amount">
+                ${{product.price}}
+            </div>
+            <p class="product-details__desc text-muted mb-5">
+                {{product.description}}
+            </p>
+            <div class="d-flex ">
+                <div class="increment-control">
+                    <a href="#" class="increment-control__action">-</a>
+                    <input type="text" class="form-control" title="Qty" value="1">
+                    <a href="#" class="increment-control__action">+</a>
+                </div>
+                <button href="#" class="btn btn-primary btn-lg">Add to cart</button>
+            </div>
+            <div class="product-details__meta">
+                Categories: <a rel="tag" href="#">{{categoryName()}}</a>, <a rel="tag" href="#">Bags</a>.
+            </div>
+        </div>
+    </div>
+</div>

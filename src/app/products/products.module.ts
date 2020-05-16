@@ -7,6 +7,7 @@ import { CategoriesListComponent } from './categories-list/categories-list.compo
 import { ProductsContainerComponent } from './products-container/products-container.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { ProductsRoutingModule } from './products-routing.module';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -16,7 +17,8 @@ import { ProductsRoutingModule } from './products-routing.module';
     ProductsContainerComponent, ProductDetailsComponent],
   imports: [
     CommonModule,
-    ProductsRoutingModule
+    ProductsRoutingModule,
+    HttpClientModule
   ],
   exports:[
     ProductComponent,

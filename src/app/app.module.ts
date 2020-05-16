@@ -10,7 +10,7 @@ import { ProductsModule } from './products/products.module';
     AppComponent
   ],
   imports: [
-  BrowserModule,
+    BrowserModule,
     AppRoutingModule,
     ProductsModule
   ],

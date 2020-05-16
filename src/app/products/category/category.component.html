@@ -1,1 +1,12 @@
-<p>category works!</p>
+<a 
+  class="list-group-item" 
+  style="cursor: pointer;" 
+  [routerLink]="[category.id]" 
+  routerLinkActive="active"
+  >
+    <div class="row">
+        <div class="col-12 d-flex justify-content-center align-items-center">
+            <h4 class="list-group-item-heading">{{ category.name }}</h4>
+        </div>
+    </div>
+</a>

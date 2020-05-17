@@ -11,6 +11,7 @@ import { ProductsRoutingModule } from './products-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { CategoryService } from './category.service';
 import { CategoriesListResolver } from './categories-list-resolver.service';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { CategoriesListResolver } from './categories-list-resolver.service';
   imports: [
     CommonModule,
     ProductsRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule
   ],
   exports: [
     ProductComponent,

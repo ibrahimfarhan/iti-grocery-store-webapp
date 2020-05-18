@@ -1,0 +1,35 @@
+@import '../../../assets/sass/variables';
+
+.dropdown {
+
+  &__btn {
+    position: relative;
+    z-index: 2;
+  }
+
+  &__menu {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background: $primary-bg-color;
+    z-index: 1000;
+    border-radius: 5px;
+    display: none;
+    box-shadow: 0 0 1rem gray;
+  }
+
+  &__notification {
+    position: absolute;
+    background-color: red;
+    font-size: 0.7rem;
+    top: 0;
+    right: 0;
+    color: white;
+    width: 1rem;
+    height: 1rem;
+    line-height: 0.9rem;
+    text-align: center;
+    border-radius: 300px;
+    z-index: 1;
+  }
+}

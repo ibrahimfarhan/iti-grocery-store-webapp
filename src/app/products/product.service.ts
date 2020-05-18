@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, throwError } from "rxjs";
-import { tap, catchError, map } from "rxjs/operators"
-import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
+import { Observable, of, throwError } from 'rxjs';
+import { tap, catchError, map } from 'rxjs/operators'
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Product } from './product';
 
 @Injectable({
@@ -9,8 +9,12 @@ import { Product } from './product';
 })
 export class ProductService {
 
+  cartProducts: Product[] = [
+    { id: 1, name: 'P1', price: 100, imgUrl: '../assets/images/icon1.png' },
+    { id: 2, name: 'P2', price: 200, imgUrl: '../assets/images/icon1.png' }
+  ];
 
-  private productUrl: string = '../assets/products.json';
+  private productUrl = '../assets/products.json';
 
 
   constructor(private http: HttpClient) { }
@@ -21,6 +25,10 @@ export class ProductService {
       tap(data => console.log('All Products: ' + JSON.stringify(data))),
       catchError(this.HandleError)
     );
+  }
+
+  getCartProducts(): Product[] {
+    return this.cartProducts;
   }
 
   // getProductById(id: number): Observable<Product> {

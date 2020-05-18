@@ -1,9 +1,15 @@
 .item-small-1 {
     display: flex;
-    width: 26rem;
+    min-width: 21rem;
     justify-content: space-between;
     align-items: center;
     padding: .5rem;
+}
+
+@media (min-width: 576px) {
+  .item-small-1 {
+    min-width: 26rem;
+  }
 }
 
 .item-small-1__data {

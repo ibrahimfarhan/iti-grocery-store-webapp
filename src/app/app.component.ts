@@ -9,4 +9,8 @@ import { AuthService } from './users/auth.service';
 })
 export class AppComponent {
   title = 'grocery-store-webapp';
+
+  log(){
+    console.log('aa');
+  }
 }

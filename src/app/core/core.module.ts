@@ -8,6 +8,7 @@ import { UsersModule } from '../users/users.module';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { ProductsModule } from '../products/products.module';
 
 @NgModule({
   declarations: [HeaderComponent, FooterComponent, HomeComponent, CategoryInHomeComponent, ShoppingCartComponent],
@@ -15,7 +16,8 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
     CommonModule,
     UsersModule,
     RouterModule,
-    SharedModule
+    SharedModule,
+    ProductsModule
   ],
   exports: [
     HeaderComponent

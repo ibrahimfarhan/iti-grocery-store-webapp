@@ -1,0 +1,18 @@
+.cart-btn {
+  position: relative;
+
+  &__notification {
+    position: absolute;
+    background-color: red;
+    font-size: 0.7rem;
+    top: -0.5rem;
+    right: -0.5rem;
+    color: white;
+    width: 1rem;
+    height: 1rem;
+    line-height: 0.9rem;
+    text-align: center;
+    border-radius: 300px;
+    z-index: 1;
+  }
+}

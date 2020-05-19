@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 
 /**
  * @example
@@ -7,7 +7,6 @@ import { Component, OnInit } from '@angular/core';
  *    <div class="dropdown-items">
  *      <div>First</div>
  *    </div>
- *    <div class="dropdown-notification">something to display above the button</div>
  *  </div>
  * </app-dropdown-menu>
  * @note
@@ -17,18 +16,27 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-dropdown-menu',
   templateUrl: './dropdown-menu.component.html',
-  styleUrls: ['./dropdown-menu.component.scss']
+  styleUrls: ['./dropdown-menu.component.scss'],
 })
 export class DropdownMenuComponent implements OnInit {
 
   display = 'none';
+  hasBeenClicked = false;
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  toggleDisplay(): void {
+  toggleDisplay(event: MouseEvent): void {
+    this.hasBeenClicked = true;
     this.display = this.display === 'none' ? 'block' : 'none';
   }
 
+  @HostListener('window:click') hide(): void {
+      if (!this.hasBeenClicked) {
+        this.display = 'none';
+      }
+
+      this.hasBeenClicked = false;
+  }
 }

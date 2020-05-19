@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
-import { tap, catchError, map } from 'rxjs/operators'
+import { tap, catchError, map } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Product } from './product';
 
@@ -11,7 +11,7 @@ export class ProductService {
 
   cartProducts: Product[] = [
     { id: 1, name: 'P1', price: 100, imgUrl: '../assets/images/icon1.png' },
-    { id: 2, name: 'P2', price: 200, imgUrl: '../assets/images/icon1.png' }
+    { id: 2, name: 'P2', price: 200, imgUrl: '../assets/images/icon1.png' },
   ];
 
   private productUrl = '../assets/products.json';

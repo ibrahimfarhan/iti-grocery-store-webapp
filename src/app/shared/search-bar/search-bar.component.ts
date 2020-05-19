@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, HostListener, ViewChild, ElementRef } from '@angular/core';
 
 /**
  * @input categoryNames: the names to be put in the HTML select element options.
@@ -16,18 +16,23 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class SearchBarComponent implements OnInit {
 
+  @ViewChild('miniFormBtn') miniFormBtn: ElementRef;
+  @ViewChild('searchForm') searchForm: ElementRef;
   @Input() categoryNames: string[];
-  @Output() searchSubmit: EventEmitter<object>;
+  @Output() searchSubmit: EventEmitter<object> = new EventEmitter<object>();
   searchTerm: string;
   selectedCategoryName = 'all';
+  hasBeenClicked = false;
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  toggleSearchForm(target: any) {
-    target.style.display = target.style.display === 'block' ? null : 'block';
+  toggleSearchForm(e: MouseEvent) {
+    this.searchForm.nativeElement.style.display =
+      this.searchForm.nativeElement.style.display === 'block' ? null : 'block';
+    this.hasBeenClicked = true;
   }
 
   onSubmit(): void {
@@ -37,5 +42,16 @@ export class SearchBarComponent implements OnInit {
       searchTerm,
       selectedCategoryName
     });
+  }
+
+  @HostListener('window:click', ['event']) hideSearchForm() {
+
+    const miniFormBtnDisplay = window.getComputedStyle(this.miniFormBtn.nativeElement).display;
+
+    if (miniFormBtnDisplay === 'block' && !this.hasBeenClicked) {
+      this.searchForm.nativeElement.style.display = null;
+    }
+
+    this.hasBeenClicked = false;
   }
 }

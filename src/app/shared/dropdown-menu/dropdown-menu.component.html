@@ -1,11 +1,8 @@
-<div class="dropdown">
-  <button class="btn dropdown__btn" type="button" (click)="toggleDisplay()">
+<div class="dropdown" (click)="this.hasBeenClicked = true">
+  <button class="btn dropdown__btn" type="button" (click)="toggleDisplay($event)">
     <ng-content select=".dropdown-button"></ng-content>
   </button>
   <div class="dropdown__menu" [style.display]="display">
     <ng-content select=".dropdown-items"></ng-content>
-  </div>
-  <div class="dropdown__notification">
-    <ng-content select=".dropdown-notification"></ng-content>
   </div>
 </div>

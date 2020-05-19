@@ -1,5 +1,5 @@
 <div class="search-form-container"></div>
-<form #searchForm class="search-form" (submit)="onSubmit()">
+<form #searchForm class="search-form" (submit)="onSubmit()" (click)="hasBeenClicked = true">
   <input
     [(ngModel)]="searchTerm"
     name="searchTerm"
@@ -21,4 +21,4 @@
   <div class="search-form__vl"></div>
   <button class="search-form__btn" type="submit"><i class="fa fa-search"></i></button>
 </form>
-<button class="search-form-mini btn" (click)="toggleSearchForm(searchForm)"><i class="fa fa-search"></i></button>
+<button #miniFormBtn class="search-form-mini btn" (click)="toggleSearchForm($event)"><i class="fa fa-search"></i></button>

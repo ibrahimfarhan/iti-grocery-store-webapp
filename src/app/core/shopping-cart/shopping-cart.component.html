@@ -1,8 +1,10 @@
 <app-dropdown-menu>
-  <div class="dropdown-button"><i class="fa fa-shopping-cart"></i></div>
+  <div class="dropdown-button cart-btn">
+    <i class="fa fa-shopping-cart"></i>
+    <div class="cart-btn__notification" *ngIf="this.products?.length">{{this.products?.length}}</div>
+  </div>
   <div class="dropdown-items">
     <app-product-in-cart *ngFor="let product of products" [product]="product">
     </app-product-in-cart>
   </div>
-  <div class="dropdown-notification" *ngIf="this.products?.length">{{this.products?.length}}</div>
 </app-dropdown-menu>

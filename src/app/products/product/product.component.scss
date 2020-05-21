@@ -1,10 +1,12 @@
+@import '../../../assets/sass/variables';
+
 .product-card {
   font-size: 25px;
   padding: 0 20px;
   transition: all 0.4s;
 }
 .product-card:hover {
-  border-color: #81b03f;
+  border-color: $primary-color;
   box-shadow: 0 0px 13px 0px rgba(0, 0, 0, 0.15);
   .product-card__icons {
     transform: scale(1);
@@ -21,7 +23,7 @@
   cursor: pointer;
 }
 .product-card .card-title:hover {
-  color: #81b03f;
+  color: $primary-color;
 }
 .product-card__price {
   color: #999;
@@ -47,8 +49,8 @@
   text-decoration: none;
   border-radius: 50%;
   margin: 0 5px;
-  background-color: #81b03f;
-  color: white;
+  background-color: $primary-color;
+  color: $primary-bg-color;
   opacity: 0.5;
   transition: opacity 0.4s;
 }

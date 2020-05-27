@@ -60,6 +60,16 @@ export class AuthService {
     // shorthand for if statement to return true or false
     return !!token;
   }
+  
+  //check if the current logged in user is an admin by checking the retrieved user role and by checking the role in the token
+  isAdmin(): boolean{
+    //add role property to user interface !!! 
+    if(this.decodedToken){
+
+      // return this.decodedToken['Admin'] && this.currentUser.role === 'Admin';
+    }
+    return false;
+  }
 
   logout() {
     localStorage.removeItem('authToken');

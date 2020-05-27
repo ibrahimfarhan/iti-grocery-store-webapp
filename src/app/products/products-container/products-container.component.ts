@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from '../product';
 import { ProductService } from './../product.service';
 import { ActivatedRoute } from '@angular/router';
+import { AuthService } from './../../users/auth.service';
 
 @Component({
   selector: 'app-products-container',
@@ -14,7 +15,8 @@ export class ProductsContainerComponent implements OnInit {
   errorMessage: string;
 
   constructor(private productService: ProductService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private authService: AuthService) { }
 
   ngOnInit(): void {
     this.route.data.subscribe({
@@ -34,6 +36,6 @@ export class ProductsContainerComponent implements OnInit {
   // checks if the user who loggedin is admin to display edit icon
   isAdmin(): boolean {
     // call auth service
-    return true;
+    return this.authService.isAdmin();
   }
 }

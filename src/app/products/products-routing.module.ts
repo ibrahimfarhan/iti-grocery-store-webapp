@@ -14,7 +14,7 @@ import { ProductsResolverService } from './products-resolver.service';
       {
         path: 'products/:category-name',
         component: ProductsContainerComponent,
-        resolve: {resolvedProducts: ProductsResolverService}
+        resolve: {resolvedProducts: ProductsResolverService}         
       }
     ])
   ]

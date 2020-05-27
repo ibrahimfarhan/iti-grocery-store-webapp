@@ -20,7 +20,8 @@
             <app-category-in-home
                 class="categories-item d-flex justify-content-center p-3" 
                 *ngFor="let cat of category" 
-                [category] = "cat"></app-category-in-home>
+                [category] = "cat"
+                [routerLink]="['/categories',cat.name]"></app-category-in-home>
         </div>
     </div>
 </div>

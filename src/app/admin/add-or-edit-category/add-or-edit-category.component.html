@@ -1,1 +1,51 @@
-<p>add-or-edit-category works!</p>
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            {{title}}
+        </div>
+        <div class="card-body">
+            <form novalidate
+                autocomplete="off"
+                [formGroup]="addOREditCategoryForm">
+    
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label"
+                            for="productNameId">Name</label>
+                    <div class="col-md-8">
+                        <input 
+                            class="form-control"
+                            id="productNameId"
+                            type="text"
+                            placeholder="Name (required)"
+                            formControlName="name"
+                            [class]="{
+                                'is-invalid': displayMessage.name
+                              }"
+                            />
+                        <span class="invalid-feedback">
+                            {{displayMessage.name}}
+                        </span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 offset-md-2">
+                        <button 
+                            class="btn bg-green-light text-white mr-4"
+                            [disabled]="!addOREditCategoryForm.valid"
+                            type="submit"
+                            [title]="addOREditCategoryForm.valid ? 'Save your entered data': 'Disabled until the form data is valid' "
+                            (click)="saveCategory()"
+                        >
+                            Save
+                        </button>
+                        <button class="btn btn-outline-secondary">
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+    
+            </form>
+        </div>
+    </div>
+</div>

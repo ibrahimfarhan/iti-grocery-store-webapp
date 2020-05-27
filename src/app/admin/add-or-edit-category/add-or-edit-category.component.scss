@@ -1,0 +1,11 @@
+@import"../../../assets/sass/variables";
+
+.bg-green-light{
+    background-color: $primary-color;
+}
+
+.btn{
+    &:hover{
+        background-color: #333;
+    }
+}

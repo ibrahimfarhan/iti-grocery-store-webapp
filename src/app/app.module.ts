@@ -9,6 +9,7 @@ import { CoreModule } from './core/core.module';
 import { UsersModule } from './users/users.module';
 import { ErrorInterceptorProvider } from './users/error.interceptor';
 import { SharedModule } from './shared/shared.module';
+import { AdminModule } from './admin/admin.module';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { SharedModule } from './shared/shared.module';
     CoreModule,
     UsersModule,
     FormsModule,
-    SharedModule
+    SharedModule,
+    AdminModule
   ],
   providers: [ErrorInterceptorProvider],
   bootstrap: [AppComponent]

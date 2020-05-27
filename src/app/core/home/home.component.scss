@@ -1,3 +1,5 @@
+@import"../../../assets/sass/variables";
+
 //utilities
 .font-sm{
     font-size: 8px;
@@ -19,10 +21,10 @@
 }
 
 .bg-green-light{
-    background-color: #81b03f;
+    background-color: $primary-color;
 }
 .text-green-light{
-    color:#81b03f;
+    color:$primary-color;
 }
 ///////////////////////
 

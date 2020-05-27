@@ -23,12 +23,12 @@ export class ProductService {
     );
   }
 
-  // getProductById(id: number): Observable<Product> {
-  //   return this.http.get<Product>(this.productUrl + `/${id}`).pipe(
-  //     tap(data => console.log('getProductById: ' + JSON.stringify(data))),
-  //     catchError(this.HandleError)
-  //   );
-  // }
+  getProductById(id: number): Observable<Product> {
+    return this.http.get<Product>(this.productUrl + `/${id}`).pipe(
+      tap(data => console.log('getProductById: ' + JSON.stringify(data))),
+      catchError(this.HandleError)
+    );
+  }
 
   // getProductsByCategory(category: string): Observable<Product[]> {
   //   return this.http.get<Product[]>(this.productUrl + `/${category}`).pipe(
@@ -37,13 +37,13 @@ export class ProductService {
   //   );
   // }
 
-  // addProduct(product: Product): Observable<Product> {
-  //   const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-  //   return this.http.post<Product>(this.productUrl, product, { headers: headers }).pipe(
-  //     tap(data => console.log('addProduct: ' + JSON.stringify(data))),
-  //     catchError(this.HandleError)
-  //   );
-  // }
+  addProduct(product: Product): Observable<Product> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.post<Product>(this.productUrl, product, { headers: headers }).pipe(
+      tap(data => console.log('addProduct: ' + JSON.stringify(data))),
+      catchError(this.HandleError)
+    );
+  }
 
   // deleteProduct(id: number): Observable<Product>{
   //   const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
@@ -53,14 +53,14 @@ export class ProductService {
   //   );
   // }
 
-  // updateProduct(product: Product): Observable<Product> {
-  //   const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-  //   return this.http.put<Product>(this.productUrl, product, { headers: headers }).pipe(
-  //     tap(() => console.log('updateProduct: ' + product.id)),
-  //     map(() => product),
-  //     catchError(this.HandleError)
-  //   );
-  // }
+  updateProduct(product: Product): Observable<Product> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.put<Product>(this.productUrl, product, { headers: headers }).pipe(
+      tap(() => console.log('updateProduct: ' + product.id)),
+      map(() => product),
+      catchError(this.HandleError)
+    );
+  }
 
 
   HandleError(err: HttpErrorResponse) {

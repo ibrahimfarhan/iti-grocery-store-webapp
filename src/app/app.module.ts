@@ -16,12 +16,12 @@ import { SharedModule } from './shared/shared.module';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+    FormsModule,
     ProductsModule,
     CoreModule,
     UsersModule,
-    FormsModule,
-    SharedModule
+    SharedModule,
+    AppRoutingModule,
   ],
   providers: [ErrorInterceptorProvider],
   bootstrap: [AppComponent]

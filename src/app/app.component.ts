@@ -9,4 +9,16 @@ import { AuthService } from './users/auth.service';
 })
 export class AppComponent {
   title = 'grocery-store-webapp';
+  userToken:any;
+  user:any;
+  constructor(private authService: AuthService){
+
+  }
+  ngOnInit(): void {
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      
+    }
+    
+  }
 }

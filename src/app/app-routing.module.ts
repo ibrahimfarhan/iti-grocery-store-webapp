@@ -5,6 +5,7 @@ import { CategoriesListResolver } from './products/categories-list-resolver.serv
 import { HomeComponent } from './core/home/home.component';
 import { ProductDetailsComponent } from './products/product-details/product-details.component';
 
+
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'categories', component: CategoriesListComponent, resolve: {categories: CategoriesListResolver}},
@@ -15,7 +16,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes)
+  ],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

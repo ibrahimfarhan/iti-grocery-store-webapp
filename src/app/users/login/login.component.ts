@@ -7,7 +7,7 @@ import {
   FormControlName,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import {  LoginUSer } from '../user';
+import {   User } from '../user';
 import { WhiteSpaceValidator } from 'src/app/shared/validators/whitespace.validator';
 import { GenericValidator } from 'src/app/shared/validators/generic-validator-messages';
 import { Observable, fromEvent, merge } from 'rxjs';
@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
   formInputElements: ElementRef[];
 
   loginForm: FormGroup;
-  user: LoginUSer;
+  user: User;
 
 // Use with the generic validation message class
   displayMessage: { [key: string]: string } = {};
@@ -37,16 +37,19 @@ export class LoginComponent implements OnInit {
   ) {
     // create the data model define the data passed to back-end server.
     this.user = {
-      userName: '',
+      id: null,
+      firstName: '',
+      lastName: '',
+      email: '',
       password: '',
     };
 
     // Defines all of the validation messages for the form.
     // These could instead be retrieved from a file or database.
     this.validationMessages = {
-      userName: {
-        required: 'User name is required.',
-        whiteSpace: 'User name can not contain white spaces.',
+      email: {
+        required: 'Email is required.',
+        whiteSpace: 'Email can not contain white spaces.',
       },
       password: {
         required: 'Password is required',
@@ -62,7 +65,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     // create the form model that define formGroup and formControls that matchs up with the html form input elements
     this.loginForm = this.fb.group({
-      userName: [
+      email: [
         '',
         [
           Validators.required,
@@ -107,7 +110,7 @@ export class LoginComponent implements OnInit {
   }
   login() {
     if (this.loginForm && this.loginForm.valid) {
-      this.user.userName = this.loginForm.value.userName;
+      this.user.email = this.loginForm.value.email;
       this.user.password = this.loginForm.value.password;
     }
     

@@ -28,9 +28,7 @@
                             "src/assets"
                         ],
                         "styles": [
-                            "src/styles.scss",
-                            "./node_modules/bootstrap/dist/css/bootstrap.min.css",
-                            "./node_modules/@fortawesome/fontawesome-free/css/fontawesome.min.css"
+                            "src/styles.scss"
                         ],
                         "scripts": []
                     },
@@ -91,8 +89,7 @@
                             "src/assets"
                         ],
                         "styles": [
-                            "src/styles.scss",
-                            "./node_modules/bootstrap/dist/css/bootstrap.min.css"
+                            "src/styles.scss"
                         ],
                         "scripts": []
                     }
@@ -126,9 +123,4 @@
         }
       }
     }
-  },
-  "defaultProject": "grocery-store-webapp",
-  "cli": {
-    "analytics": false
-  }
-}
+

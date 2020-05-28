@@ -5,4 +5,5 @@ export interface Product {
   description?: string;
   categoryName?: string;
   imgUrl?: string;
+  categoryId?:number;
 }

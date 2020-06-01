@@ -8,7 +8,7 @@ import { ProductDetailsComponent } from './products/product-details/product-deta
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'categories', component: CategoriesListComponent, resolve: {categories: CategoriesListResolver}},
-  { path: 'product-details', component: ProductDetailsComponent },
+  { path: 'product-details/:id', component: ProductDetailsComponent },
   { path: ' ', redirectTo: 'home', pathMatch: 'full' },
   // Error page 404
   { path: '**', redirectTo: 'home', pathMatch: 'full' },
@@ -19,3 +19,4 @@ const routes: Routes = [
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
+ 

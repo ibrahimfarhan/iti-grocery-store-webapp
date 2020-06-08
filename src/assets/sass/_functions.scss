@@ -1,0 +1,6 @@
+/// function to convert from px to em
+/// @author Hossam Ali
+/// @param {Size in Pixels} $px
+@function ConvertPxToEm($px) {
+    @return ($px / 16);
+}

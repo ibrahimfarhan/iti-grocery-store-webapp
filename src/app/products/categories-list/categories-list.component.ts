@@ -11,6 +11,7 @@ import { ActivatedRoute, Data } from '@angular/router';
 })
 export class CategoriesListComponent implements OnInit, OnDestroy {
   categories: Category[];
+  categoriesExpanded: boolean = false;
 
   // subscription: Subscription;
 
@@ -36,6 +37,16 @@ export class CategoriesListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     // this.subscription.unsubscribe();
+  }
+
+  toggleCategories(): void {
+    let categoriesList = (<HTMLElement>document.getElementsByClassName('categoriesList-wrapper')[0]);
+    if(!this.categoriesExpanded) {
+      categoriesList.style.transform = "translateX(0)";
+    } else {
+      categoriesList.style.transform = "translateX(-66.6%)";
+    }
+    this.categoriesExpanded = !this.categoriesExpanded;
   }
 
 }

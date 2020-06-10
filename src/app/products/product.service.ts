@@ -23,12 +23,12 @@ export class ProductService {
     );
   }
 
-  // getProductById(id: number): Observable<Product> {
-  //   return this.http.get<Product>(this.productUrl + `/${id}`).pipe(
-  //     tap(data => console.log('getProductById: ' + JSON.stringify(data))),
-  //     catchError(this.HandleError)
-  //   );
-  // }
+  getProductById(id: number): Observable<Product> {
+    return this.http.get<Product>(this.productUrl + `/${id}`).pipe(
+      tap(data => console.log('getProductById: ' + JSON.stringify(data))),
+      catchError(this.HandleError)
+    );
+  }
 
   // getProductsByCategory(category: string): Observable<Product[]> {
   //   return this.http.get<Product[]>(this.productUrl + `/${category}`).pipe(

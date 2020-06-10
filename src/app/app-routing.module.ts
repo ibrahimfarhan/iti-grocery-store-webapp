@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CategoriesListComponent } from './products/categories-list/categories-list.component';
-import { CategoriesListResolver } from './products/categories-list-resolver.service';
+import { CategoriesListResolver } from './services/categories-list-resolver.service';
 import { HomeComponent } from './core/home/home.component';
 import { ProductDetailsComponent } from './products/product-details/product-details.component';
 import { ProductsContainerComponent } from './products/products-container/products-container.component';

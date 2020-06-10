@@ -1,5 +1,4 @@
-import { Component, OnInit, ViewChildren, ElementRef } from '@angular/core';
-import { AuthService } from '../auth.service';
+import { Component, OnInit, ViewChildren, ElementRef, AfterViewInit } from '@angular/core';
 import {
   FormGroup,
   FormBuilder,
@@ -7,18 +6,19 @@ import {
   FormControlName,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import {   User } from '../user';
+import {   User } from '../../models/user';
 import { WhiteSpaceValidator } from 'src/app/shared/validators/whitespace.validator';
 import { GenericValidator } from 'src/app/shared/validators/generic-validator-messages';
 import { Observable, fromEvent, merge } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, AfterViewInit {
   @ViewChildren(FormControlName, { read: ElementRef })
   formInputElements: ElementRef[];
 
@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
   displayMessage: { [key: string]: string } = {};
   private validationMessages: { [key: string]: { [key: string]: string } };
   private genericValidator: GenericValidator;  // data structutre to store validation error messages
-  
+
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -73,7 +73,7 @@ export class LoginComponent implements OnInit {
         ],
       ],
       password: [
-        '', 
+        '',
         [
           Validators.required,
           // validate password with white spaces
@@ -83,12 +83,12 @@ export class LoginComponent implements OnInit {
           // Validators.minLength(4),
 
           // validate password to have at least: 1 uppercase letter, 1 lowercase letter, A number, A minimum length of 8.
-          // Validators.pattern('^(?=[^A-Z]*[A-Z])(?=[^a-z]*[a-z])(?=\\D*\\d)[A-Za-z\\d!$%@#£€*?&]{8,}$') 
+          // Validators.pattern('^(?=[^A-Z]*[A-Z])(?=[^a-z]*[a-z])(?=\\D*\\d)[A-Za-z\\d!$%@#£€*?&]{8,}$')
         ]
       ],
     });
 
-  
+
   }
 
   ngAfterViewInit(): void {
@@ -113,18 +113,18 @@ export class LoginComponent implements OnInit {
       this.user.email = this.loginForm.value.email;
       this.user.password = this.loginForm.value.password;
     }
-    
+
     console.log(this.user);
     this.authService.login(this.user).subscribe(
       next => {
         // console.log('looged in successfully');
-        if(this.authService.currentUser !== null){
+        if (this.authService.currentUser !== null){
           this.router.navigate(['/home']);
         }
       },
       error => console.log(error),
     );
-    // implementing navigation to a redirect url 
+    // implementing navigation to a redirect url
     // if (this.authService.redirectUrl) {
     //   this.router.navigateByUrl(this.authService.redirectUrl);
     // }else {

@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Product } from '../product';
-import { Category } from '../category';
-import { ProductService } from './../product.service';
+import { Product } from '../../models/product';
+import { Category } from '../../models/category';
+import { ProductService } from '../../services/product.service';
 import { Subscription, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 

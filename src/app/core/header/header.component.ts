@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/users/user';
-import { AuthService } from 'src/app/users/auth.service';
+import { User } from 'src/app/models/user';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -9,10 +9,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  user:User ;
-  isLogged:boolean;
+  user: User ;
+  isLogged: boolean;
 
-  constructor(public authService: AuthService, private router:Router) { 
+  constructor(public authService: AuthService, private router: Router) {
     this.authService.currentUserSubject.asObservable().subscribe( data => {
       console.log(data);
       this.user = data;
@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-      
+
   }
 
   logout(){

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ProductsContainerComponent } from './products-container/products-container.component';
-import { ProductsResolverService } from './products-resolver.service';
+import { ProductsResolverService } from '../services/products-resolver.service';
 
 
 
@@ -14,7 +14,7 @@ import { ProductsResolverService } from './products-resolver.service';
       {
         path: 'products/:category-name',
         component: ProductsContainerComponent,
-        resolve: {resolvedProducts: ProductsResolverService}         
+        resolve: {resolvedProducts: ProductsResolverService}
       }
     ])
   ],

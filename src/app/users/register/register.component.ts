@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChildren, ElementRef, AfterViewInit } from '@angular/core';
 import {
   FormGroup,
   FormBuilder,
@@ -6,20 +6,20 @@ import {
   AbstractControl,
   FormControlName,
 } from '@angular/forms';
-import { AuthService } from '../auth.service';
-import { User } from '../user';
+import { User } from '../../models/user';
 import { WhiteSpaceValidator } from 'src/app/shared/validators/whitespace.validator';
 import { debounceTime } from 'rxjs/operators';
 import { GenericValidator } from 'src/app/shared/validators/generic-validator-messages';
 import { Observable, fromEvent, merge } from 'rxjs';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, AfterViewInit {
   @ViewChildren(FormControlName, { read: ElementRef })
   formInputElements: ElementRef[];
 

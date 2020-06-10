@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 // import { Subscription } from 'rxjs';
 
-import { Category } from '../category';
+import { Category } from '../../models/category';
 import { ActivatedRoute, Data } from '@angular/router';
 
 @Component({
@@ -18,8 +18,8 @@ export class CategoriesListComponent implements OnInit, OnDestroy {
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    // as long as our categories doesn't change 
-    // at runtime while the route is already loaded 
+    // as long as our categories doesn't change
+    // at runtime while the route is already loaded
     // so using the snapshot only is enough
     // but if the data changes while
     // we are at the same route so we need to subscribe
@@ -27,7 +27,7 @@ export class CategoriesListComponent implements OnInit, OnDestroy {
     // also angular handles the unscubsrition for us
     // but its always a good practice to add it manualy
     this.categories = this.route.snapshot.data['categories'];
-    
+
     // this.subscription = this.route.data.subscribe(
     //   (data: Data) => {
     //     this.categories = data['categories'];

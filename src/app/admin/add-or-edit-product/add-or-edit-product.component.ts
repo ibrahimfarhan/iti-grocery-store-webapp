@@ -1,33 +1,33 @@
-import { Component, OnInit, ViewChildren, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChildren, ElementRef, AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, MinLengthValidator, FormControlName } from '@angular/forms';
 import { Observable, fromEvent, merge } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { GenericValidator } from 'src/app/shared/validators/generic-validator-messages';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProductService } from 'src/app/products/product.service';
-import { Product } from 'src/app/products/product';
+import { ProductService } from 'src/app/services/product.service';
+import { Product } from 'src/app/models/product';
 
 @Component({
   selector: 'app-add-or-edit-product',
   templateUrl: './add-or-edit-product.component.html',
   styleUrls: ['./add-or-edit-product.component.scss']
 })
-export class AddOrEditProductComponent implements OnInit {
+export class AddOrEditProductComponent implements OnInit, AfterViewInit {
   @ViewChildren(FormControlName, { read: ElementRef })
   formInputElements: ElementRef[];
 
-  title:string ="Add Product";
-  product:Product;
+  title = 'Add Product';
+  product: Product;
   displayMessage: { [key: string]: string } = {};
   private validationMessages: { [key: string]: { [key: string]: string } };
   private genericValidator: GenericValidator;  // data structutre to store validation error messages
-  addOREditProductForm : FormGroup
+  addOREditProductForm: FormGroup;
   constructor(
-              private fb: FormBuilder,
-              private activatedRoute: ActivatedRoute,
-              private productService : ProductService,
-              private router:Router
-            ) {
+    private fb: FormBuilder,
+    private activatedRoute: ActivatedRoute,
+    private productService: ProductService,
+    private router: Router
+  ) {
     this.validationMessages = {
       name: {
         required: 'Product name is required.',
@@ -41,20 +41,20 @@ export class AddOrEditProductComponent implements OnInit {
     this.activatedRoute.paramMap.subscribe(
       params => {
         const id = +params.get('id');
-        //get the product by id from the service
+        // get the product by id from the service
         this.getProduct(id);
       }
-    )
+    );
 
-   }
+  }
 
-   getProduct(id:number):void{
-     this.productService.getProductById(id).subscribe({
-       next:product=>this.onProductRetrieved(product),
-     });
-   }
+  getProduct(id: number): void {
+    this.productService.getProductById(id).subscribe({
+      next: product => this.onProductRetrieved(product),
+    });
+  }
 
-   onProductRetrieved(product: Product): void {
+  onProductRetrieved(product: Product): void {
     this.product = product;
 
     console.log('retrived product function');
@@ -71,10 +71,10 @@ export class AddOrEditProductComponent implements OnInit {
   }
   ngOnInit(): void {
     this.addOREditProductForm = this.fb.group({
-      name: ['',[Validators.required , Validators.minLength(3)]],
-      price:['',[Validators.required]],
-      description:[''],
-      categoryName:['']
+      name: ['', [Validators.required, Validators.minLength(3)]],
+      price: ['', [Validators.required]],
+      description: [''],
+      categoryName: ['']
     });
   }
   ngAfterViewInit(): void {
@@ -95,15 +95,15 @@ export class AddOrEditProductComponent implements OnInit {
       });
   }
 
-  saveProduct():void{
-    if(true === true){
-      if(this.product.id === 0){
+  saveProduct(): void {
+    if (true === true) {
+      if (this.product.id === 0) {
         this.productService.addProduct(this.product).subscribe({
-          next:()=> this.router.navigate(['/products'])
+          next: () => this.router.navigate(['/products'])
         });
-      }else{
+      } else {
         this.productService.updateProduct(this.product).subscribe({
-          next:()=>this.router.navigate(['/products'])
+          next: () => this.router.navigate(['/products'])
         });
       }
     }

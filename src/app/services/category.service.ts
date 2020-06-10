@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Category } from './category';
+import { Category } from '../models/category';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { tap, catchError, map } from 'rxjs/operators';
@@ -9,9 +9,9 @@ import { tap, catchError, map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class CategoryService {
-  private categoryUrl: string = '../assets/categories.json';
+  private categoryUrl = '../assets/categories.json';
 
-  constructor(private http : HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   getCategories(): Observable<Category[]> {
     return this.http.get<Category[]>(this.categoryUrl).pipe(
@@ -29,15 +29,15 @@ export class CategoryService {
 
   addCategory(category: Category): Observable<Category> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post<Category>(this.categoryUrl, category, { headers: headers }).pipe(
+    return this.http.post<Category>(this.categoryUrl, category, { headers }).pipe(
       tap(data => console.log('addCategory: ' + JSON.stringify(data))),
       catchError(this.HandleError)
     );
   }
 
-  deleteCategory(id: number): Observable<Category>{
+  deleteCategory(id: number): Observable<Category> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.delete<Category>(this.categoryUrl+`/${id}`, { headers: headers }).pipe(
+    return this.http.delete<Category>(this.categoryUrl + `/${id}`, { headers }).pipe(
       tap(() => console.log('deleteCategory: ' + id)),
       catchError(this.HandleError)
     );
@@ -45,7 +45,7 @@ export class CategoryService {
 
   updateCategory(category: Category): Observable<Category> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.put<Category>(this.categoryUrl, category, { headers: headers }).pipe(
+    return this.http.put<Category>(this.categoryUrl, category, { headers }).pipe(
       tap(() => console.log('updateCategory: ' + category.id)),
       map(() => category),
       catchError(this.HandleError)

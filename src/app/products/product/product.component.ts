@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Product } from '../product';
+import { Product } from '../../models/product';
 import { Router } from '@angular/router';
-import { AuthService } from './../../users/auth.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-product',
@@ -11,26 +11,25 @@ import { AuthService } from './../../users/auth.service';
 export class ProductComponent implements OnInit {
 
   @Input() product: Product;
-  
-  constructor(private router: Router, private authService:AuthService) { }
+
+  constructor(private router: Router, private authService: AuthService) { }
 
   ngOnInit(): void {
   }
 
-  //checks if the user who loggedin is admin to display edit icon
-  isAdmin(): boolean{
-    //call auth service
+  // checks if the user who loggedin is admin to display edit icon
+  isAdmin(): boolean {
+    // call auth service
     return this.authService.isAdmin();
   }
 
-  //navigate to the admin panel to edit product
-  goToAdminEditProduct(): void
-  {
-    this.router.navigate([`/admin/products/${this.product.id}`])
+  // navigate to the admin panel to edit product
+  goToAdminEditProduct(): void {
+    this.router.navigate([`/admin/products/${this.product.id}`]);
   }
 
-  
-  addTocart(): void{
-    //call shopping cart service
+
+  addTocart(): void {
+    // call shopping cart service
   }
 }

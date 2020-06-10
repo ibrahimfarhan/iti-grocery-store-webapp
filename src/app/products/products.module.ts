@@ -9,8 +9,8 @@ import { ProductsContainerComponent } from './products-container/products-contai
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { ProductsRoutingModule } from './products-routing.module';
 import { HttpClientModule } from '@angular/common/http';
-import { CategoryService } from './category.service';
-import { CategoriesListResolver } from './categories-list-resolver.service';
+import { CategoryService } from '../services/category.service';
+import { CategoriesListResolver } from '../services/categories-list-resolver.service';
 import { RouterModule } from '@angular/router';
 
 

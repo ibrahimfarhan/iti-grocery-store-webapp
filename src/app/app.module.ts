@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { ProductsModule } from './products/products.module';
 import { CoreModule } from './core/core.module';
 import { UsersModule } from './users/users.module';
-import { ErrorInterceptorProvider } from './users/error.interceptor';
+import { ErrorInterceptorProvider } from './interceptors/error.interceptor';
 import { SharedModule } from './shared/shared.module';
 import { AdminModule } from './admin/admin.module';
 

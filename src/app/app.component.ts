@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from './users/auth.service';
+import { AuthService } from './services/auth.service';
 
 
 @Component({
@@ -7,11 +7,11 @@ import { AuthService } from './users/auth.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'grocery-store-webapp';
-  userToken:any;
-  user:any;
-  constructor(private authService: AuthService){
+  userToken: any;
+  user: any;
+  constructor(private authService: AuthService) {
 
   }
   ngOnInit(): void {

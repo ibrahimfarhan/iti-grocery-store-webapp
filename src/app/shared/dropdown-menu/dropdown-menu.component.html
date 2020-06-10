@@ -1,8 +1,8 @@
-<div class="dropdown">
-  <button class="btn" type="button" (click)="isOpen = !isOpen">
+<div class="dropdown" [class]="'dropdown--' + menuPosition" (click)="this.hasBeenClicked = true">
+  <button class="btn dropdown__btn" type="button" (click)="toggleDisplay($event)">
     <ng-content select=".dropdown-button"></ng-content>
   </button>
-  <div class="dropdown-menu" [class]="{'show': isOpen}">
+  <div class="dropdown__menu" [style.display]="display">
     <ng-content select=".dropdown-items"></ng-content>
   </div>
 </div>

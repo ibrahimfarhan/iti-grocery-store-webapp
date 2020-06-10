@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, throwError } from "rxjs";
-import { tap, catchError, map } from "rxjs/operators"
-import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
+import { Observable, of, throwError } from 'rxjs';
+import { tap, catchError, map } from 'rxjs/operators';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Product } from './product';
 
 @Injectable({
@@ -9,8 +9,12 @@ import { Product } from './product';
 })
 export class ProductService {
 
+  cartProducts: Product[] = [
+    { id: 1, name: 'something long long', price: 100, imgUrl: '../assets/images/profile.jpg' },
+    { id: 2, name: 'P2', price: 200, imgUrl: '../assets/images/profile.jpg' },
+  ];
 
-  private productUrl: string = '../assets/products.json';
+  private productUrl = '../assets/products.json';
 
 
   constructor(private http: HttpClient) { }
@@ -29,6 +33,16 @@ export class ProductService {
       catchError(this.HandleError)
     );
   }
+  getCartProducts(): Product[] {
+    return this.cartProducts;
+  }
+
+  // getProductById(id: number): Observable<Product> {
+  //   return this.http.get<Product>(this.productUrl + `/${id}`).pipe(
+  //     tap(data => console.log('getProductById: ' + JSON.stringify(data))),
+  //     catchError(this.HandleError)
+  //   );
+  // }
 
   // getProductsByCategory(category: string): Observable<Product[]> {
   //   return this.http.get<Product[]>(this.productUrl + `/${category}`).pipe(

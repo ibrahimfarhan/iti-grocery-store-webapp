@@ -1,5 +1,14 @@
+// Colors
 $primary-color: #81b03f;
 $primary-bg-color: rgba(255, 255, 255, 0.897);
+
+// Responsive design breakpoints
+$landscape: 576px;
+$tablet: 768px;
+$desktop: 992px;
+$large-desktop: 1200px;
+
+// Bootstrap overridden variables
 $spacer: 1rem !default;
 $spacers: () !default;
 $spacers: map-merge(

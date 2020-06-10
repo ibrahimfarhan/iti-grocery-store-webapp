@@ -17,8 +17,8 @@ export class AppComponent {
   ngOnInit(): void {
     const token = localStorage.getItem('authToken');
     if (token) {
-      
+
     }
-    
+
   }
 }

@@ -1,23 +1,40 @@
+@import '../../../assets/sass/variables';
+
 .item-small-1 {
     display: flex;
-    width: 26rem;
+    width: max-content;
+    max-width: 19rem;
+    min-width: 13rem;
     justify-content: space-between;
     align-items: center;
-    padding: .5rem;
+
+    &__edit-icon {
+      height: 1rem;
+    }
 }
 
 .item-small-1__data {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
     color: #999;
+    width: 11rem;
+    margin-left: 1rem;
+
+    * {
+      display: inline-block;
+      vertical-align: middle;
+    }
 }
 
 .item-small-1__title {
     font-weight: 700;
+    text-align: left;
 }
 
 .item-small-1__description {
-    font-size: 1.12rem;
+    font-size: 1rem;
+    margin-left: 0.3rem;
 }
 
 .item-small-1__image-box {
@@ -25,8 +42,8 @@
 }
 
 .item-small-1__image {
-    width: 8rem;
-    height: 8rem;
+    width: 2rem;
+    height: 2rem;
     display: block;
 }
 
@@ -44,4 +61,10 @@
     font-size: 1rem;
     color: #000;
     box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.2);
+}
+
+@media (min-width: $landscape) {
+  .item-small-1 {
+    max-width: 26rem;
+  }
 }

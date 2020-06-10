@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {  User } from './user';
 import { Router } from '@angular/router';
@@ -23,7 +23,7 @@ export class AuthService {
 
   // redirectUrl: string;
 
-  baseUrl: string = 'http://localhost:5000/api/auth/';
+  baseUrl = 'http://localhost:5000/api/auth/';
   decodedToken: any;
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -47,9 +47,9 @@ export class AuthService {
       })
     );
   }
-  getCurrentUser() {
+  getCurrentUser(): Subject<any> {
     this.currentUserSubject.next(this.currentUser);
-    return this.currentUser;
+    return this.currentUserSubject;
   }
   // getDecodedToken(): any{
   //   const token = localStorage.getItem('authToken');
@@ -63,7 +63,7 @@ export class AuthService {
         this.currentUser = Object.assign({}, response);
         this.getCurrentUser();
       })
-      
+
     );
   }
   // check the token to decide whether the user logged in or not
@@ -72,10 +72,10 @@ export class AuthService {
     // shorthand for if statement to return true or false
     return !!token;
   }
-  
+
   //check if the current logged in user is an admin by checking the retrieved user role and by checking the role in the token
   isAdmin(): boolean{
-    //add role property to user interface !!! 
+    //add role property to user interface !!!
     if(this.decodedToken){
 
       // return this.decodedToken['Admin'] && this.currentUser.role === 'Admin';

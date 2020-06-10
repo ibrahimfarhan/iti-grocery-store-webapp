@@ -1,0 +1,15 @@
+<div *ngIf="isLoggedIn" class="user-dropdown">
+  <app-dropdown-menu menuPosition="left">
+    <div class="dropdown-button">
+      <img class="user-dropdown__img" src="../../../assets/images/profile.jpg" />
+    </div>
+    <div class="dropdown-items user-dropdown__menu">
+      <div class="user-dropdown__item">Settings</div>
+      <div class="user-dropdown__item">Log out</div>
+    </div>
+  </app-dropdown-menu>
+</div>
+<div *ngIf="!isLoggedIn" class="auth-btns">
+  <a class="round-edge-btn auth-btns__btn"><strong>Log in</strong></a>
+  <a class="round-edge-btn reverse-colors auth-btns__btn"><strong>Sign up</strong></a>
+</div>

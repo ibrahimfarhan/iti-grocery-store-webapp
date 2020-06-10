@@ -1,8 +1,11 @@
+@import '../../../assets/sass/variables';
+
 .header {
   display: flex;
   height: 6rem;
-  background-color: rgb(141, 206, 141);
+  background-color: $primary-bg-color;
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
+  border-bottom: 1px solid $primary-color;
 }

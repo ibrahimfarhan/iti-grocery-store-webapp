@@ -9,9 +9,10 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { ProductsModule } from '../products/products.module';
+import { UserLinksComponent } from './user-links/user-links.component';
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent, HomeComponent, CategoryInHomeComponent, ShoppingCartComponent],
+  declarations: [HeaderComponent, FooterComponent, HomeComponent, CategoryInHomeComponent, ShoppingCartComponent, UserLinksComponent],
   imports: [
     CommonModule,
     UsersModule,
@@ -20,7 +21,9 @@ import { ProductsModule } from '../products/products.module';
     ProductsModule
   ],
   exports: [
-    HeaderComponent
+    HeaderComponent,
+    UserLinksComponent,
+    ShoppingCartComponent
   ]
 })
 export class CoreModule { }

@@ -16,3 +16,14 @@
     z-index: 1;
   }
 }
+
+.cart-items {
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  *:not(:last-child) {
+    margin-bottom: 0.5rem;
+  }
+}

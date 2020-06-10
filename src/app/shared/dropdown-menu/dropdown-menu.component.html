@@ -1,4 +1,4 @@
-<div class="dropdown" (click)="this.hasBeenClicked = true">
+<div class="dropdown" [class]="'dropdown--' + menuPosition" (click)="this.hasBeenClicked = true">
   <button class="btn dropdown__btn" type="button" (click)="toggleDisplay($event)">
     <ng-content select=".dropdown-button"></ng-content>
   </button>

@@ -1,20 +1,20 @@
 <div class="item-small-1">
     <!-- item data -->
-    <div class="item-small-1__image-box col-sm-5">
+    <div class="item-small-1__image-box">
         <a href="#" class="item-small-1__image image" [style.backgroundImage]="'url('+product.imgUrl+')' ">
         </a>
 
     </div>
-    <div class="item-small-1__data col-sm-5">
+    <div class="item-small-1__data">
         <!-- title -->
-        <a href="" class="item-small-1__title">{{product.name}}</a>
+        <a href="" [title]="product.name" class="item-small-1__title">{{product.name}}</a>
         <!-- price -->
         <span class="item-small-1__description">
             1 X ${{product.price}}
         </span>
     </div>
-    <div class=" justify-content-center  col-sm-2">
-        <a href="# " class="m-3 ">
+    <div>
+        <a href="# " class="m-3 item-small-1__edit-icon">
             <i class="fa fa-edit"></i>
         </a>
     </div>

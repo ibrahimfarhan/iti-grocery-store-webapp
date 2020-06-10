@@ -1,6 +1,8 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, Input } from '@angular/core';
 
 /**
+ * @input menuPosition: a string to determine the position of the menu.
+ * Possible values are: left, middle, right, right is the default;
  * @example
  * <app-dropdown-menu>
  *    <div class="dropdown-button">Button</div>
@@ -20,6 +22,7 @@ import { Component, OnInit, HostListener } from '@angular/core';
 })
 export class DropdownMenuComponent implements OnInit {
 
+  @Input() menuPosition: 'right' | 'left' | 'middle' = 'right';
   display = 'none';
   hasBeenClicked = false;
   constructor() { }

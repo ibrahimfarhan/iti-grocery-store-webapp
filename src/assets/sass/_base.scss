@@ -1,0 +1,7 @@
+a {
+  text-decoration: none;
+
+  &:not([href]){
+    text-decoration: none;
+  }
+}

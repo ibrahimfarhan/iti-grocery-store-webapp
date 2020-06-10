@@ -1,15 +1,29 @@
 @import '../../../assets/sass/variables';
 
 .dropdown {
+  position: relative;
+  max-width: 27rem;
+  width: max-content;
+
+  &--left {
+    .dropdown__menu {
+      right: 0;
+    }
+  }
+
+  &--middle {
+    .dropdown__menu {
+      transform: translateX(-50%);
+    }
+  }
 
   &__btn {
     position: relative;
-    z-index: 1000;
+    z-index: 500;
   }
 
   &__menu {
     position: absolute;
-    right: 0;
     top: 100%;
     background: $primary-bg-color;
     z-index: 1000;
@@ -17,6 +31,7 @@
     display: none;
     box-shadow: 0 0 1rem gray;
     max-height: 27rem;
+    max-width: 27rem;
     overflow-x: hidden;
     overflow-y: auto;
   }

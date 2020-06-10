@@ -1,7 +1,8 @@
 @import './assets/sass/variables';
 @import './assets/sass/functions';
 @import './assets/sass/mixins';
-@import './assets/sass/base';
 
 @import '../node_modules/bootstrap/scss/bootstrap.scss';
 @import '../node_modules/font-awesome/css/font-awesome.min.css';
+
+@import './assets/sass/base';

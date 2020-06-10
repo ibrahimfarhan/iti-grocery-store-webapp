@@ -1,9 +1,9 @@
-<app-dropdown-menu>
+<app-dropdown-menu menuPosition="middle">
   <div class="dropdown-button cart-btn">
     <i class="fa fa-shopping-cart"></i>
     <div class="cart-btn__notification" *ngIf="this.products?.length">{{this.products?.length}}</div>
   </div>
-  <div class="dropdown-items">
+  <div class="dropdown-items cart-items">
     <app-product-in-cart *ngFor="let product of products" [product]="product">
     </app-product-in-cart>
   </div>

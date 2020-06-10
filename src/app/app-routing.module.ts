@@ -4,12 +4,19 @@ import { CategoriesListComponent } from './products/categories-list/categories-l
 import { CategoriesListResolver } from './products/categories-list-resolver.service';
 import { HomeComponent } from './core/home/home.component';
 import { ProductDetailsComponent } from './products/product-details/product-details.component';
+import { ProductsContainerComponent } from './products/products-container/products-container.component';
 
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
-  { path: 'categories', component: CategoriesListComponent, resolve: {categories: CategoriesListResolver}},
-  { path: 'product-details/:id', component: ProductDetailsComponent },
+  {
+    path: 'categories', component: CategoriesListComponent, resolve: {categories: CategoriesListResolver},
+    children: [
+      { path: '', component: ProductsContainerComponent, pathMatch: 'full'},
+      { path: ':d', component: ProductsContainerComponent }
+    ]
+  },
+  { path: 'product-details', component: ProductDetailsComponent },
   { path: ' ', redirectTo: 'home', pathMatch: 'full' },
   // Error page 404
   { path: '**', redirectTo: 'home', pathMatch: 'full' },
@@ -22,4 +29,3 @@ const routes: Routes = [
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
- 

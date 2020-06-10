@@ -1,0 +1,25 @@
+/// Helper for responsive design
+/// @author Hossam Ali
+/// @param {Type of the screen} $type
+@mixin responsive($type) {
+    @if $type == phone {
+        @media screen and (min-width: #{ConvertPxToEm(576)}em) {
+            @content
+          }
+    };
+    @if $type == tablet {
+        @media screen and (min-width: #{ConvertPxToEm(768)}em) {
+            @content
+          }
+    };
+    @if $type == laptop {
+        @media screen and (min-width: #{ConvertPxToEm(992)}em) {
+            @content
+          }
+    };
+    @if $type == desktop {
+        @media screen and (min-width: #{ConvertPxToEm(1200)}em) {
+            @content
+          }
+    };
+}

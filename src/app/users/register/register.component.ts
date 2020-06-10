@@ -12,6 +12,7 @@ import { WhiteSpaceValidator } from 'src/app/shared/validators/whitespace.valida
 import { debounceTime } from 'rxjs/operators';
 import { GenericValidator } from 'src/app/shared/validators/generic-validator-messages';
 import { Observable, fromEvent, merge } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -30,8 +31,13 @@ export class RegisterComponent implements OnInit {
   private validationMessages: { [key: string]: { [key: string]: string } };
   private genericValidator: GenericValidator;
 
-  constructor(private authService: AuthService, private fb: FormBuilder) {
+  constructor(
+    private authService: AuthService,
+    private fb: FormBuilder,
+    private router: Router
+  ) {
     this.user = {
+      id: null,
       firstName: '',
       lastName: '',
       password: '',
@@ -134,9 +140,16 @@ export class RegisterComponent implements OnInit {
       this.user.address = this.registerForm.value.address;
     }
     console.log(this.user);
-    // this.authService.register(this.user).subscribe((response) => {
-    //   console.log(response);
-    //   console.log('registration successful');
-    // }, error => console.log(error));
+    this.authService.register(this.user).subscribe(
+      (next) => console.log('registration successful'),
+      (error) => console.log(error),
+      () => {
+        this.authService.login(this.user).subscribe((next) => {
+          if (this.authService.currentUser !== null) {
+            this.router.navigate(['/home']);
+          }
+        });
+      }
+    );
   }
 }

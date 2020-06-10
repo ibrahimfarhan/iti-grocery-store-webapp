@@ -17,6 +17,7 @@ import { ProductsResolverService } from './products-resolver.service';
         resolve: {resolvedProducts: ProductsResolverService}
       }
     ])
-  ]
+  ],
+  exports: [RouterModule]
 })
 export class ProductsRoutingModule { }

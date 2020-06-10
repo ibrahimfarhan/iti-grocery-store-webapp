@@ -6,4 +6,5 @@ export interface Product {
   categoryName?: string;
   categoryId?: number;
   imgUrl?: string;
+  categoryId?:number;
 }

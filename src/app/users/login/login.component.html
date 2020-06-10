@@ -15,23 +15,23 @@
       <fieldset>
         <!-- User name input field -->
         <div class="form-group mb-2 row">
-          <label class="col-md-2 col-form-label" for="userNameId"
-            >User Name</label
+          <label class="col-md-2 col-form-label" for="email"
+            >Email</label
           >
           <div class="col-md-8">
             <input
               ngModel
               class="form-control"
-              id="userNameId"
+              id="email"
               type="text"
-              placeholder="User Name (required)"
+              placeholder="Email (required)"
               formControlName="userName"
               [class]="{
-                'is-invalid': displayMessage.userName
+                'is-invalid': displayMessage.email
               }"
             />
             <span class="invalid-feedback">
-              {{ displayMessage.userName }}
+              {{ displayMessage.email }}
             </span>
           </div>
         </div>

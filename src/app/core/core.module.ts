@@ -18,7 +18,8 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
     SharedModule
   ],
   exports: [
-    HeaderComponent
+    HeaderComponent,
+    HomeComponent
   ]
 })
 export class CoreModule { }

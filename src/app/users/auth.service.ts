@@ -2,21 +2,21 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { LoginUSer, User, retrievedUser } from './user';
+import {  User } from './user';
 import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  currentUserSubject: BehaviorSubject<retrievedUser> = new BehaviorSubject<
-    retrievedUser
+  currentUserSubject: BehaviorSubject<User> = new BehaviorSubject<
+  User
   >({
     id: null,
-    userName: '',
+    firstName: '',
+    lastName: '',
     email: '',
-    passwordHash: '',
-    passwordSalt: '',
+   password: '',
   });
 
   currentUser: any;
@@ -27,7 +27,7 @@ export class AuthService {
   decodedToken: any;
   constructor(private http: HttpClient, private router: Router) {}
 
-  login(user: LoginUSer) {
+  login(user: any) {
     return this.http.post(this.baseUrl + 'login', user).pipe(
       map((response: any) => {
         const loginResponse = response;
@@ -35,24 +35,36 @@ export class AuthService {
         // console.log(loginResponse);
         if (loginResponse) {
           localStorage.setItem('authToken', loginResponse.token);
-          // method for making a shallow copy of the retrieved user from the server
+          // making a shallow copy of the retrieved user from the server
           this.currentUser = Object.assign({}, loginResponse.user);
           this.getCurrentUser();
 
           this.decodedToken = JSON.parse(
             atob(loginResponse.token.split('.')[1])
           );
-          // console.log(this.decodedToken);
+          console.log(this.decodedToken);
         }
       })
     );
   }
   getCurrentUser() {
     this.currentUserSubject.next(this.currentUser);
+    return this.currentUser;
   }
-
+  // getDecodedToken(): any{
+  //   const token = localStorage.getItem('authToken');
+  //   this.decodedToken = JSON.parse(atob(token.split('.')[1]));
+  //   return this.decodedToken;
+  // }
   register(user: any) {
-    return this.http.post(this.baseUrl + 'register', user);
+    return this.http.post(this.baseUrl + 'register', user).pipe(
+      map((response) => {
+        // the response is the returned user object
+        this.currentUser = Object.assign({}, response);
+        this.getCurrentUser();
+      })
+      
+    );
   }
   // check the token to decide whether the user logged in or not
   isLogged(): boolean {

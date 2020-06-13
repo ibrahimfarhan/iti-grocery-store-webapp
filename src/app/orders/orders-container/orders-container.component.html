@@ -1,1 +1,14 @@
-<p>orders-container works!</p>
+<div class="container">
+    <div class="d-flex flex-wrap justify-content-center">
+        <!-- <div *ngIf="errorMessage"
+        class="alert alert-danger">
+        Error: {{ errorMessage }}
+   </div> -->
+    <!-- <button class="btn add-product mb-2" *ngIf="isAdmin()">Add Product</button> -->
+        <app-order 
+            *ngFor="let item of orders" [order]="item"
+            style="cursor: pointer;"
+            [routerLink]="['/orders',item.id]"
+            class="d-flex justify-content-center p-3"></app-order>
+    </div>
+</div>

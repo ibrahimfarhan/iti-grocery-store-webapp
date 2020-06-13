@@ -7,11 +7,13 @@ import { AddOrEditCategoryComponent } from './add-or-edit-category/add-or-edit-c
 const routes: Routes = [
   {
     path: 'products/:id',
-    component: AddOrEditProductComponent
+    component: AddOrEditProductComponent,
+    outlet:"admin-outlet"
   },
   {
     path: 'categories/:category-name',
-    component: AddOrEditCategoryComponent
+    component: AddOrEditCategoryComponent,
+    outlet:"admin-outlet"
   },
 ];
 

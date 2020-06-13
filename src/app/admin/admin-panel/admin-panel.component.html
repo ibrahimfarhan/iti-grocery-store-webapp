@@ -1,0 +1,46 @@
+<div class="container">
+    <div class="row">
+        <div class="col-4">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a
+                        class="nav-link text-dark"
+                        [routerLink]="['/products']"
+                        (click)="productToggleArrow()"
+                        >Products 
+                        <i class="fa fa-caret-down" [ngClass]="productStatus ? ' fa-caret-up' : ' fa-caret-down'"></i></a>
+            
+                    <div class="hide-items" [ngClass]="productStatus? 'show-items' : 'hide-items' " > 
+                        <ul class="flex-column pl-2 nav">
+                            <li class="nav-item"><a class="nav-link text-dark py-0" [routerLink]="['/products/0']"><i class="fa fa-plus"></i> Add Product</a></li>
+                            <li class="nav-item"><a class="nav-link text-dark py-0" [routerLink]="'/products'"><i class="fa fa-list-ul"></i> List Product</a></li>
+                        </ul>
+                    </div>
+                </li>
+            
+                <li class="nav-item">
+                    <a 
+                        class="nav-link text-dark"
+                        [routerLink]="['/categories']"
+                        (click)="categoryToggleArrow()"
+                        >Categories 
+                        <i class="fa fa-caret-down" [ngClass]="categoryStatus ? ' fa-caret-up' : ' fa-caret-down'"></i></a>
+            
+                    <div class="hide-items" [ngClass]="categoryStatus? 'show-items' : 'hide-items' "> 
+                        <ul class="flex-column pl-2 nav">
+                            <li class="nav-item"><a class="nav-link text-dark py-0" [routerLink]="['/categories/0']"><i class="fa fa-plus"></i> Add Category</a></li>
+                            <li class="nav-item"><a class="nav-link text-dark py-0" [routerLink]="'/categories'"><i class="fa fa-list-ul"></i> List Category</a></li>
+                        </ul>
+                    </div>
+                </li>
+        
+                <li class="nav-item">
+                    <a class="nav-link text-dark" [routerLink]="'/orders'">Orders</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-8">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

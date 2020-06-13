@@ -3,7 +3,7 @@
     <div class="bg-content text-center">
         <h1 class="font-weight-bold">Organic Products</h1>
         <p class="pt-3 pb-3 f-sm font-weight-light text-muted">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-        <a class="btn bg-green-light text-white">
+        <a class="btn bg-green-light text-white" routerLink="/products">
             Order now
             <i class="fa fa-chevron-right font-sm font-weight-light"></i>
             <i class="fa fa-chevron-right font-sm font-weight-light"></i>
@@ -16,10 +16,11 @@
             <span class="text-green-light">Green Agriculture</span>
             <h2 class="font-lg mt-3">Welcome To WebsiteName</h2>  
         </div>
-        <div class="categories-body d-flex flex-wrap justify-content-center">
+        <div class="categories-body d-flex flex-wrap justify-content-center ">
             <app-category-in-home
                 class="categories-item d-flex justify-content-center p-3" 
                 *ngFor="let cat of category" 
+                style="cursor: pointer;"
                 [category] = "cat"
                 [routerLink]="['/categories',cat.name]"></app-category-in-home>
         </div>

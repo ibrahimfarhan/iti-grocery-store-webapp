@@ -12,10 +12,14 @@ import { ProductsResolverService } from '../services/products-resolver.service';
     CommonModule,
     RouterModule.forChild([
       {
+        path:'products',component:ProductsContainerComponent
+      },
+      {
         path: 'products/:category-name',
         component: ProductsContainerComponent,
         resolve: {resolvedProducts: ProductsResolverService}
-      }
+      },
+
     ])
   ],
   exports: [RouterModule]

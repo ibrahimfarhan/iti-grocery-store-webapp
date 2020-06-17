@@ -1,21 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { Order } from './../../models/order';
 
 @Component({
-  selector: 'app-admin-panel',
-  templateUrl: './admin-panel.component.html',
-  styleUrls: ['./admin-panel.component.scss']
+  selector: 'app-admin',
+  templateUrl: './admin.component.html',
+  styleUrls: ['./admin.component.scss']
 })
-export class AdminPanelComponent implements OnInit {
+export class AdminComponent implements OnInit {
 
   productStatus:boolean = false;
   categoryStatus:boolean = false;
-  constructor() {
-   }
+  constructor() { }
 
   ngOnInit(): void {
-
   }
+
   productToggleArrow(){
     this.productStatus = !this.productStatus;       
     console.log(this.productStatus);

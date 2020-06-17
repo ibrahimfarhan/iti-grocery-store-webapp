@@ -1,3 +1,4 @@
+import { AdminComponent } from './admin/admin/admin.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CategoriesListComponent } from './products/categories-list/categories-list.component';
@@ -7,7 +8,6 @@ import { ProductDetailsComponent } from './products/product-details/product-deta
 import { ProductsContainerComponent } from './products/products-container/products-container.component';
 import { AddOrEditProductComponent } from './admin/add-or-edit-product/add-or-edit-product.component';
 import { AddOrEditCategoryComponent } from './admin/add-or-edit-category/add-or-edit-category.component';
-import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { ListingProductsComponent } from './admin/listing-products/listing-products.component';
 import { ListingCategoriesComponent } from './admin/listing-categories/listing-categories.component';
 import { ListingOrdersComponent } from './admin/listing-orders/listing-orders.component';
@@ -27,7 +27,7 @@ const routes: Routes = [
   { path: ' ', redirectTo: 'home', pathMatch: 'full' },
 
   //Admin routings
-  {path: 'admin', component: AdminPanelComponent},
+  {path: 'admin', component: AdminComponent},
   {path: 'admin/products', component: ListingProductsComponent},
   {path:'admin/products/new',component:AddOrEditProductComponent},
   {path:'admin/products/:id/edit', component:AddOrEditProductComponent},

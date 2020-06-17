@@ -7,15 +7,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ListingProductsComponent } from './listing-products/listing-products.component';
 import { ListingCategoriesComponent } from './listing-categories/listing-categories.component';
-import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { ListingOrdersComponent } from './listing-orders/listing-orders.component';
 import { OrderDetailsComponent } from './order-details/order-details.component';
 import { OrderComponent } from './order/order.component';
+import { AdminComponent } from './admin/admin.component';
 
 
 
 @NgModule({
-  declarations: [AddOrEditProductComponent, AddOrEditCategoryComponent, ListingProductsComponent, ListingCategoriesComponent, AdminPanelComponent, ListingOrdersComponent, OrderDetailsComponent, OrderComponent],
+  declarations: [AddOrEditProductComponent, AddOrEditCategoryComponent, ListingProductsComponent, ListingCategoriesComponent, ListingOrdersComponent, OrderDetailsComponent, OrderComponent, AdminComponent],
   imports: [
   CommonModule,
     AdminRoutingModule,
@@ -27,7 +27,7 @@ import { OrderComponent } from './order/order.component';
     AddOrEditCategoryComponent,
     ListingCategoriesComponent,
     ListingProductsComponent,
-    AdminPanelComponent
+    AdminComponent
   ]
 })
 export class AdminModule { }

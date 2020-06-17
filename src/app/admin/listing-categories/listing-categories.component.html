@@ -8,7 +8,7 @@
       </thead>
 
       <tbody>
-          <tr *ngFor = "let cat of Categories" [routerLink]="['/categories',cat.id]" style="cursor: pointer;">
+          <tr *ngFor = "let cat of Categories" [routerLink]="['/admin/categories',cat.id,'edit']" style="cursor: pointer;">
               <td>{{cat.id}}</td>
               <td>{{cat.name}}</td>
           </tr>

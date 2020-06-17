@@ -11,10 +11,10 @@
       </thead>
 
       <tbody>
-          <tr *ngFor = "let product of products" [routerLink]="['/products',product.id]" style="cursor: pointer;">
+          <tr *ngFor = "let product of products" [routerLink]="['/admin/products',product.id,'edit']" style="cursor: pointer;">
               <td>{{product.id}}</td>
               <td>{{product.name}}</td>
-              <td>{{product.price}}</td>
+              <td>{{product.price|currency:"EGP":"symbol"}}</td>
               <td>{{product.categoryName}}</td>
           </tr>
       </tbody>

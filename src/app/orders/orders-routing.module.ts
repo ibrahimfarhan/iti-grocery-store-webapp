@@ -9,7 +9,7 @@ const routes: Routes = [
     path: 'orders', component: OrdersContainerComponent,
     children: [
       { path: '', component: OrdersContainerComponent, pathMatch: 'full'},
-      { path: ':d', component: OrderDetailsComponent }
+      { path: ':id', component: OrderDetailsComponent }
     ]
   },
 ];

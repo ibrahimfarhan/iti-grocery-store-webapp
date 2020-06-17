@@ -10,7 +10,6 @@ import { UsersModule } from './users/users.module';
 import { ErrorInterceptorProvider } from './interceptors/error.interceptor';
 import { SharedModule } from './shared/shared.module';
 import { AdminModule } from './admin/admin.module';
-import { OrdersModule } from './orders/orders.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +22,6 @@ import { OrdersModule } from './orders/orders.module';
     UsersModule,
     SharedModule,
     AdminModule,
-    OrdersModule,
     FormsModule,
     AppRoutingModule
 

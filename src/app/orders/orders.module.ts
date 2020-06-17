@@ -3,13 +3,12 @@ import { CommonModule } from '@angular/common';
 import { OrdersContainerComponent } from './orders-container/orders-container.component';
 import { OrderComponent } from './order/order.component';
 import { OrdersRoutingModule } from './orders-routing.module';
-import { OrderDetailsComponent } from './order-details/order-details.component';
 import { RouterModule } from '@angular/router';
 
 
 
 @NgModule({
-  declarations: [OrderComponent, OrdersContainerComponent, OrderDetailsComponent],
+  declarations: [OrderComponent, OrdersContainerComponent],
   imports: [
     CommonModule,
     OrdersRoutingModule,
@@ -18,7 +17,6 @@ import { RouterModule } from '@angular/router';
   exports: [
     OrderComponent,
     OrdersContainerComponent,
-    OrderDetailsComponent
   ]
 })
 export class OrdersModule { }

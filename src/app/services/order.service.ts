@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { Order } from './../models/order';
-import { tap, catchError } from 'rxjs/operators';
+import { tap, catchError, map } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 
 @Injectable({
@@ -22,10 +22,15 @@ export class OrderService {
     )
   }
 
+  // getOrderById(id: number): Observable<Order> {
+  //   return this.http.get<Order>(this.orderUrl + `/${id}`).pipe(
+  //     tap(data => console.log('getOrderById: ' + JSON.stringify(data))),
+  //     catchError(this.HandleError)
+  //   );
+  // }
   getOrderById(id: number): Observable<Order> {
-    return this.http.get<Order>(this.orderUrl + `/${id}`).pipe(
-      tap(data => console.log('getOrderById: ' + JSON.stringify(data))),
-      catchError(this.HandleError)
+    return this.getOrders().pipe(
+      map((orders:Order[]) => orders.find(o => o.id === id.toString()))
     );
   }
 

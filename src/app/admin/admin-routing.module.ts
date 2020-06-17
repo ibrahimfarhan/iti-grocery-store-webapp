@@ -5,14 +5,14 @@ import { AddOrEditProductComponent } from './add-or-edit-product/add-or-edit-pro
 import { AddOrEditCategoryComponent } from './add-or-edit-category/add-or-edit-category.component';
 
 const routes: Routes = [
-  {
-    path: 'products/:id',
-    component: AddOrEditProductComponent
-  },
-  {
-    path: 'categories/:category-name',
-    component: AddOrEditCategoryComponent
-  },
+  // {
+  //   path: 'products/:id',
+  //   component: AddOrEditProductComponent
+  // },
+  // {
+  //   path: 'categories/:category-name',
+  //   component: AddOrEditCategoryComponent
+  // },
 ];
 
 

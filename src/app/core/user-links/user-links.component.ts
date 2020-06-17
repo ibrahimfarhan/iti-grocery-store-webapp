@@ -14,6 +14,6 @@ export class UserLinksComponent implements OnInit {
 
   ngOnInit(): void {
     // Transform this into an observable subscription
-    this.isLoggedIn = !this.authService.isLogged();
+    this.isLoggedIn = this.authService.isLogged();
   }
 }

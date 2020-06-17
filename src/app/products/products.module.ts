@@ -12,12 +12,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { CategoryService } from '../services/category.service';
 import { CategoriesListResolver } from '../services/categories-list-resolver.service';
 import { RouterModule } from '@angular/router';
+import { ProductsPageComponent } from './products-page/products-page.component';
 
 
 @NgModule({
   declarations: [ProductComponent, ProductInCartComponent,
     CategoryComponent, CategoriesListComponent,
-    ProductsContainerComponent, ProductDetailsComponent],
+    ProductsContainerComponent, ProductDetailsComponent, ProductsPageComponent],
   imports: [
     CommonModule,
     ProductsRoutingModule,

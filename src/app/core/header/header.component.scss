@@ -6,8 +6,14 @@
   background-color: $primary-bg-color;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
+  padding: 1rem 1.7rem;
   border-bottom: 1px solid $primary-color;
+
+  &__right {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 }
 
 .navbar-nav {
@@ -20,3 +26,17 @@
 .nav-link{
   color: black;
 }
+
+app-shopping-cart {
+  display: flex;
+  align-items: center;
+  margin-right: 2rem;
+  padding-top: 8px;
+}
+
+app-user-links {
+  display: flex;
+  align-items: center;
+}
+
+

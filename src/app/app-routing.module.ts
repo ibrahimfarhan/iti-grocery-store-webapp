@@ -27,15 +27,19 @@ const routes: Routes = [
   { path: ' ', redirectTo: 'home', pathMatch: 'full' },
 
   //Admin routings
-  {path: 'admin', component: AdminComponent},
-  {path: 'admin/products', component: ListingProductsComponent},
-  {path:'admin/products/new',component:AddOrEditProductComponent},
-  {path:'admin/products/:id/edit', component:AddOrEditProductComponent},
-  {path:'admin/categories',component:ListingCategoriesComponent},
-  {path:'admin/categories/new',component:AddOrEditCategoryComponent},
-  {path:'admin/categories/:id/edit',component:AddOrEditCategoryComponent},
-  {path:'admin/orders', component:ListingOrdersComponent},
-  {path: 'admin/orders/:id',component:OrderDetailsComponent},
+  {
+    path: 'admin', component: AdminComponent,
+    children: [
+      {path: 'products', component: ListingProductsComponent},
+      {path: 'products/new',component:AddOrEditProductComponent},
+      {path: 'products/:id/edit', component:AddOrEditProductComponent},
+      {path: 'categories',component:ListingCategoriesComponent},
+      {path: 'categories/new',component:AddOrEditCategoryComponent},
+      {path: 'categories/:id/edit',component:AddOrEditCategoryComponent},
+      {path: 'orders', component:ListingOrdersComponent},
+      {path: 'orders/:id',component:OrderDetailsComponent},
+    ]
+  },
   // // Error page 404
   { path: '**', redirectTo: 'home', pathMatch: 'full' }
 ];

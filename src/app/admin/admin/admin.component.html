@@ -1,45 +1,69 @@
-<div class="container">
+<div class="container-fluid">
     <div class="row">
-        <div class="col-4">
+        <div class="col-2 p-4 side-bar">
             <ul class="nav flex-column">
-                <li class="nav-item">
+
+                <li class="nav-item p-2">
                     <a
-                        class="nav-link text-dark"
+                        class="nav-link text-light"
                         [routerLink]="['/admin/products']"
-                        (click)="productToggleArrow()"
-                        >Products 
-                        <i class="fa fa-caret-down" [ngClass]="productStatus ? ' fa-caret-up' : ' fa-caret-down'"></i></a>
-            
-                    <div class="hide-items" [ngClass]="productStatus? 'show-items' : 'hide-items' " > 
+                        (click)="toggleSubMenu(productsSubMenu); productMenuStatus = !productMenuStatus"
+                        >
+                        Products
+                        <i class="fa fa-caret-down" [ngClass]="productMenuStatus ? 'fa-caret-up' : 'fa-caret-down'"></i>
+                    </a>
+                    <div class="sub-link collapsed" #productsSubMenu>
                         <ul class="flex-column pl-2 nav">
-                            <li class="nav-item"><a class="nav-link text-dark py-0" [routerLink]="['/admin/products/new']"><i class="fa fa-plus"></i> Add Product</a></li>
-                            <li class="nav-item"><a class="nav-link text-dark py-0" [routerLink]="'/admin/products'"><i class="fa fa-list-ul"></i> List Product</a></li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light p-2" [routerLink]="['/admin/products/new']">
+                                    <i class="fa fa-plus"></i>
+                                     Add Product
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light p-2" [routerLink]="'/admin/products'">
+                                    <i class="fa fa-list-ul"></i> 
+                                    List Product
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </li>
-            
-                <li class="nav-item">
-                    <a 
-                        class="nav-link text-dark"
+
+                <li class="nav-item p-2">
+                    <a
+                        class="nav-link text-light"
                         [routerLink]="['/admin/categories']"
-                        (click)="categoryToggleArrow()"
-                        >Categories 
-                        <i class="fa fa-caret-down" [ngClass]="categoryStatus ? ' fa-caret-up' : ' fa-caret-down'"></i></a>
-            
-                    <div class="hide-items" [ngClass]="categoryStatus? 'show-items' : 'hide-items' "> 
+                        (click)="toggleSubMenu(categoriesSubMenu); categoryMenuStatus = !categoryMenuStatus"
+                        >
+                        Categories 
+                        <i class="fa fa-caret-down" [ngClass]="categoryMenuStatus ? 'fa-caret-up' : 'fa-caret-down'"></i>
+                    </a>
+                    <div class="sub-link collapsed" #categoriesSubMenu>
                         <ul class="flex-column pl-2 nav">
-                            <li class="nav-item"><a class="nav-link text-dark py-0" [routerLink]="['/admin/categories/new']"><i class="fa fa-plus"></i> Add Category</a></li>
-                            <li class="nav-item"><a class="nav-link text-dark py-0" [routerLink]="'/admin/categories'"><i class="fa fa-list-ul"></i> List Category</a></li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light p-2" [routerLink]="['/admin/categories/new']">
+                                    <i class="fa fa-plus"></i>
+                                     Add Category
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light p-2" [routerLink]="'/admin/categories'">
+                                    <i class="fa fa-list-ul"></i>
+                                     List Category
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </li>
         
-                <li class="nav-item">
-                    <a class="nav-link text-dark" [routerLink]="'/admin/orders'">Orders</a>
+                <li class="nav-item p-2">
+                    <a class="nav-link text-light" [routerLink]="'/admin/orders'">Orders</a>
                 </li>
+
             </ul>
         </div>
-        <div class="col-8">
+        <div class="col-10 p-4">
             <router-outlet></router-outlet>
         </div>
     </div>

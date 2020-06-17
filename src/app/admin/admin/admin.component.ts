@@ -7,21 +7,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminComponent implements OnInit {
 
-  productStatus:boolean = false;
-  categoryStatus:boolean = false;
+  productMenuStatus: boolean = false;
+  categoryMenuStatus: boolean = false;
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  productToggleArrow(){
-    this.productStatus = !this.productStatus;       
-    console.log(this.productStatus);
+  toggleSubMenu(subMenu: HTMLElement) {
+    if(subMenu.classList.contains('collapsed')) {
+      subMenu.style.maxHeight = subMenu.scrollHeight + 'px';
+      subMenu.classList.remove("collapsed");
+    }
+    else{
+      subMenu.style.maxHeight = '0px';
+      subMenu.classList.add("collapsed");
+    }
   }
-
-  categoryToggleArrow(){
-    this.categoryStatus = !this.categoryStatus;       
-    console.log(this.categoryStatus);
-  }
-
 }

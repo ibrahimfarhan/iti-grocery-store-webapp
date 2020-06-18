@@ -4,8 +4,6 @@ import { RouterModule } from '@angular/router';
 import { ProductsContainerComponent } from './products-container/products-container.component';
 import { ProductsResolverService } from '../services/products-resolver.service';
 
-
-
 @NgModule({
   declarations: [],
   imports: [

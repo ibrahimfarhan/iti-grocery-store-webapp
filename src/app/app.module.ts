@@ -17,14 +17,10 @@ import { AdminModule } from './admin/admin.module';
   ],
   imports: [
     BrowserModule,
-    ProductsModule,
     CoreModule,
-    UsersModule,
     SharedModule,
-    AdminModule,
     FormsModule,
     AppRoutingModule
-
   ],
   providers: [ErrorInterceptorProvider],
   bootstrap: [AppComponent]

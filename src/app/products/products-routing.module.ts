@@ -1,21 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { ProductsContainerComponent } from './products-container/products-container.component';
 import { ProductsResolverService } from '../services/products-resolver.service';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { ProductsPageComponent } from './products-page/products-page.component';
 
-const productsRoutes = [
+const productsRoutes: Routes = [
   {
-    path: '',
-    component: ProductsPageComponent,
+    path: 'products', component: ProductsPageComponent,
     children: [
-      {
-        path: 'a',
-        component: ProductsContainerComponent,
-        resolve: {resolvedProducts: ProductsResolverService}
-      },
+      { path: '', pathMatch: 'full', redirectTo: '' },
+      { path: 'category/:category-name', component: ProductsContainerComponent },
+      { path: 'product/:id', component: ProductDetailsComponent },
     ]
   },
 ];

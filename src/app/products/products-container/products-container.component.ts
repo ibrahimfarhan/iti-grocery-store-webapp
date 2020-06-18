@@ -29,7 +29,7 @@ export class ProductsContainerComponent implements OnInit {
   {
     // if it's != null
     if (!retrievedProducts){
-      this.errorMessage = 'There is no category found with this name';
+      this.errorMessage = 'There are no products found for this category';
     }
     this.products = retrievedProducts;
   }

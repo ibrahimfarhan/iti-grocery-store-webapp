@@ -53,7 +53,7 @@ export class ProductService {
 
   addProduct(product: Product): Observable<Product> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post<Product>(this.productUrl, product, { headers: headers }).pipe(
+    return this.http.post<Product>(this.productUrl, product, { headers }).pipe(
       tap(data => console.log('addProduct: ' + JSON.stringify(data))),
       catchError(this.HandleError)
     );

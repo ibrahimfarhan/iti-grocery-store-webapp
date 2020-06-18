@@ -10,7 +10,7 @@ import { ListingCategoriesComponent } from './listing-categories/listing-categor
 import { ListingOrdersComponent } from './listing-orders/listing-orders.component';
 import { OrderDetailsComponent } from './order-details/order-details.component';
 import { OrderComponent } from './order/order.component';
-import { AdminComponent } from './admin/admin.component';
+import { AdminComponent } from './admin.component';
 
 
 

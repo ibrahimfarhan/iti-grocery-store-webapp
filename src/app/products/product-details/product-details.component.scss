@@ -53,6 +53,12 @@
     padding-bottom: 100%;
 }
 
+.productimg__sitem {
+    background-size: cover;
+    width: 20%;
+    padding-bottom: 50%;
+}
+
 .product-details__info {
     padding: 0 1.5rem;
 }
@@ -85,11 +91,10 @@
     color: #8dce8d;
 }
 
-.product-details .productimg {
-    min-width: 54rem;
-    padding: 0 1.5rem;
-}
-
+// .product-details .productimg {
+//     min-width: 54rem;
+//     padding: 0 1.5rem;
+// }
 .add {
     background-color: #8dce8d;
 }

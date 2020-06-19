@@ -1,1 +1,21 @@
-<p>order works!</p>
+<div class="card order-details mb-2" [ngClass]="{
+    'border-success':order.status === 1,
+    'border-danger':order.status === 2  
+  }" >
+    <div class="card-header bg-transparent" [ngClass]="{
+        'border-success':order.status === 1,
+        'border-danger':order.status === 2  
+      }" >
+        <h5 >#order-code </h5>
+    </div>
+    <div class="card-body"> 
+        <app-order-item *ngFor="let item of order.orderItems" [orderItem]="item"></app-order-item>
+       
+        <p><Strong>Total Price: {{order.totalPrice}}$ </Strong></p>
+        <div [ngSwitch]='order.status'>
+            <p *ngSwitchCase='1' class='text-success'><Strong>status: Deliverd</Strong></p>
+            <p *ngSwitchCase='2' class='text-danger'><Strong>status: Canceled</Strong></p>
+
+        </div>
+    </div>
+</div> 

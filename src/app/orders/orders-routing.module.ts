@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { OrderDetailsComponent } from './order-details/order-details.component';
 import { Routes, RouterModule } from '@angular/router';
+
 import { OrdersContainerComponent } from './orders-container/orders-container.component';
+import { OrderDetailsComponent } from './../admin/order-details/order-details.component';
 
 const routes: Routes = [
   {

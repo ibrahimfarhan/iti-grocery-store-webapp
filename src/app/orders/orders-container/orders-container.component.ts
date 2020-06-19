@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Order } from 'src/app/models/order';
+import { OrderService } from './../../services/order.service';
 
 @Component({
   selector: 'app-orders-container',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrdersContainerComponent implements OnInit {
 
-  constructor() { }
+  orders: Order[];
+
+  constructor(private orderService: OrderService) { }
 
   ngOnInit(): void {
+   this.orders = this.orderService.tempOrders;
   }
 
 }

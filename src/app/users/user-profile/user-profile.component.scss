@@ -1,0 +1,34 @@
+@import '../../../assets/sass/variables';
+.card-title{
+    color: $primary-color;
+}
+.btn{
+    background-color: $primary-color;
+    color:$primary-bg-color;
+}
+
+.account-details{
+    position: relative;
+    img{
+        border-radius: 50%;
+        border: $primary-color solid;
+        position: absolute;
+        right:35px;
+        top:50%;
+        transform: translateY(-40%);
+        width: 150px;
+    }
+} 
+
+
+
+@media only screen and (max-width: 480px) {
+  img {
+    position: unset !important;
+    right:unset !important;
+    top:unset !important;
+    transform: unset !important;
+    margin-bottom: 5px;
+  }
+
+}

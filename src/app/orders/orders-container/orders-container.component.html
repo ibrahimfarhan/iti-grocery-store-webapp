@@ -1,1 +1,13 @@
-<p>orders-container works!</p>
+<div class="card orders mt-5">
+    <div class="card-header ">
+        <h5 class="card-title">Orders</h5>
+    </div>
+    <div class="card-body">
+        <app-order *ngFor="let item of orders" [order]="item"></app-order>
+        <div *ngIf="!orders" class="text-center">
+            <h3>You have no orders yet !!!</h3>
+            <p>Go make your first order now.</p>
+        </div>
+        
+    </div>
+</div>

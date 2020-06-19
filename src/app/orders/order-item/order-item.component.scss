@@ -1,0 +1,22 @@
+.order-details__product{
+    position: relative;
+    }
+    img{
+        position: absolute;
+        right:0px;
+        top:50%;
+        transform: translateY(-55%);
+        width: 150px;
+    }
+
+
+@media only screen and (max-width: 480px) {
+    img {
+      position: unset !important;
+      right:unset !important;
+      top:unset !important;
+      transform: unset !important;
+      margin-bottom: 5px;
+    }
+  
+  }

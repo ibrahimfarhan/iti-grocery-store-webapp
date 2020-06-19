@@ -10,8 +10,8 @@ import { Product } from '../models/product';
 export class ProductService {
 
   cartProducts: Product[] = [
-    { id: 1, name: 'something long long', price: 100, imgUrl: '../assets/images/profile.jpg' },
-    { id: 2, name: 'P2', price: 200, imgUrl: '../assets/images/profile.jpg' },
+    { id: 1, name: 'something long long', price: 100, imgUrl: ['../assets/images/profile.jpg'] },
+    { id: 2, name: 'P2', price: 200, imgUrl: ['../assets/images/profile.jpg'] },
   ];
 
   private productUrl = '../assets/products.json';

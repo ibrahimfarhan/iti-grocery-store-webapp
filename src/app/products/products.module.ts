@@ -9,8 +9,6 @@ import { ProductsContainerComponent } from './products-container/products-contai
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { ProductsRoutingModule } from './products-routing.module';
 import { HttpClientModule } from '@angular/common/http';
-import { CategoryService } from '../services/category.service';
-import { CategoriesListResolver } from '../services/categories-list-resolver.service';
 import { RouterModule } from '@angular/router';
 import { ProductsPageComponent } from './products-page/products-page.component';
 
@@ -30,7 +28,6 @@ import { ProductsPageComponent } from './products-page/products-page.component';
     ProductsContainerComponent,
     ProductDetailsComponent,
     ProductInCartComponent
-  ],
-  providers: [CategoryService, CategoriesListResolver],
+  ]
 })
 export class ProductsModule { }

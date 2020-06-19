@@ -1,0 +1,14 @@
+.side-bar {
+  background-color: darkcyan;
+}
+
+.nav-item a {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.sub-link {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s;
+}

@@ -27,10 +27,16 @@ export class ProductService {
     );
   }
 
+  // getProductById(id: number): Observable<Product> {
+  //   return this.http.get<Product>(this.productUrl + `/${id}`).pipe(
+  //     tap(data => console.log('getProductById: ' + JSON.stringify(data))),
+  //     catchError(this.HandleError)
+  //   );
+  // }
+
   getProductById(id: number): Observable<Product> {
-    return this.http.get<Product>(this.productUrl + `/${id}`).pipe(
-      tap(data => console.log('getProductById: ' + JSON.stringify(data))),
-      catchError(this.HandleError)
+    return this.getProducts().pipe(
+      map((products:Product[]) => products.find(p => p.id === id))
     );
   }
   getCartProducts(): Product[] {

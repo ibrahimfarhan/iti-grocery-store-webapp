@@ -7,5 +7,10 @@ export interface Order {
   userId: number;
   address?:string;
   orderItems: orderItem[];
+  // id: string;
+  // status: string;
+  // totalPrice:number;
+  // address:string;
+  // userId:number;
 }
 

@@ -5,6 +5,7 @@ import { OrderComponent } from './order/order.component';
 import { OrdersRoutingModule } from './orders-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { OrderItemComponent } from './order-item/order-item.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -13,8 +14,12 @@ import { OrderItemComponent } from './order-item/order-item.component';
   imports: [
     CommonModule,
     OrdersRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule
   ],
-  exports:[OrderComponent,OrdersContainerComponent]
+  exports: [
+    OrderComponent,
+    OrdersContainerComponent,
+  ]
 })
 export class OrdersModule { }

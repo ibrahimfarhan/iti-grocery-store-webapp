@@ -1,0 +1,18 @@
+<div class="table-responsive">
+    <table class="table table-hover table-striped">
+    <thead>
+        <tr>
+          <th>Id</th>
+          <th>Name</th>
+        </tr>
+      </thead>
+
+      <tbody>
+          <tr *ngFor = "let cat of Categories" [routerLink]="['/admin/categories',cat.id,'edit']" style="cursor: pointer;">
+              <td>{{cat.id}}</td>
+              <td>{{cat.name}}</td>
+          </tr>
+      </tbody>
+    
+    </table>
+</div>

@@ -10,8 +10,8 @@ import { Product } from '../models/product';
 export class ProductService {
 
   cartProducts: Product[] = [
-    { id: 1, name: 'something long long', price: 100, imgUrl: '../assets/images/profile.jpg' },
-    { id: 2, name: 'P2', price: 200, imgUrl: '../assets/images/profile.jpg' },
+    { id: 1, name: 'something long long', price: 100, imgUrl: ['../assets/images/profile.jpg'] },
+    { id: 2, name: 'P2', price: 200, imgUrl: ['../assets/images/profile.jpg'] },
   ];
 
   private productUrl = '../assets/products.json';
@@ -27,10 +27,16 @@ export class ProductService {
     );
   }
 
+  // getProductById(id: number): Observable<Product> {
+  //   return this.http.get<Product>(this.productUrl + `/${id}`).pipe(
+  //     tap(data => console.log('getProductById: ' + JSON.stringify(data))),
+  //     catchError(this.HandleError)
+  //   );
+  // }
+
   getProductById(id: number): Observable<Product> {
-    return this.http.get<Product>(this.productUrl + `/${id}`).pipe(
-      tap(data => console.log('getProductById: ' + JSON.stringify(data))),
-      catchError(this.HandleError)
+    return this.getProducts().pipe(
+      map((products:Product[]) => products.find(p => p.id === id))
     );
   }
   getCartProducts(): Product[] {
@@ -53,7 +59,7 @@ export class ProductService {
 
   addProduct(product: Product): Observable<Product> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post<Product>(this.productUrl, product, { headers: headers }).pipe(
+    return this.http.post<Product>(this.productUrl, product, { headers }).pipe(
       tap(data => console.log('addProduct: ' + JSON.stringify(data))),
       catchError(this.HandleError)
     );

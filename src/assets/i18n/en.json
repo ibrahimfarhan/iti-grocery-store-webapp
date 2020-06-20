@@ -1,0 +1,9 @@
+{
+    "productD": {
+        "select": "select language",
+        "name": "Product Name",
+        "Price": "Price",
+        "cate": "Categories",
+        "addbtn": "Add to card"
+    }
+}

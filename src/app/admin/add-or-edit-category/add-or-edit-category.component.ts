@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChildren, ElementRef, AfterViewInit } from '@angular/core';
-import { FormControlName, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormControlName, FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { GenericValidator } from 'src/app/shared/validators/generic-validator-messages';
-import { Observable, fromEvent, merge } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Observable, fromEvent, merge, Subscription } from 'rxjs';
+import { debounceTime, catchError } from 'rxjs/operators';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { CategoryService } from 'src/app/services/category.service';
 import { Category } from '../../models/category';
 
@@ -13,11 +13,16 @@ import { Category } from '../../models/category';
   styleUrls: ['./add-or-edit-category.component.scss']
 })
 export class AddOrEditCategoryComponent implements OnInit, AfterViewInit {
+
   @ViewChildren(FormControlName, { read: ElementRef })
   formInputElements: ElementRef[];
 
   title = 'Add Category';
+  id:number;
   category: Category;
+  editMode: boolean = false;
+  subscription: Subscription;
+
   displayMessage: { [key: string]: string } = {};
   private validationMessages: { [key: string]: { [key: string]: string } };
   private genericValidator: GenericValidator;  // data structutre to store validation error messages
@@ -27,8 +32,8 @@ export class AddOrEditCategoryComponent implements OnInit, AfterViewInit {
     private fb: FormBuilder,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private categoryService: CategoryService
-  ) {
+    private categoryService: CategoryService,
+    ) {
     this.validationMessages = {
       name: {
         required: 'Product name is required.',
@@ -36,39 +41,16 @@ export class AddOrEditCategoryComponent implements OnInit, AfterViewInit {
       },
     };
     this.genericValidator = new GenericValidator(this.validationMessages);
-    this.activatedRoute.paramMap.subscribe(
-      params => {
-        const id = +params.get('id');
-        // get the product by id from the service
-        this.getCategory(id);
+  }
+
+  ngOnInit(): void {
+    this.subscription = this.activatedRoute.params.subscribe(
+      (params: Params) => {
+        this.id = +params['id'];
+        this.editMode = params['id'] != null;
+        this.initForm();
       }
     );
-  }
-  getCategory(id: number): void {
-    this.categoryService.getCategoryById(id).subscribe({
-      next: product => this.onCategoryRetrieved(product),
-    });
-  }
-
-  onCategoryRetrieved(category: Category): void {
-    this.category = category;
-
-    console.log('retrived category function');
-    if (!this.category) {
-      this.title = 'No category found';
-    } else {
-      if (this.category.id === 0) {
-        this.title = 'Add Category';
-      } else {
-        this.title = `Edit Category: ${this.category.name}`;
-      }
-    }
-
-  }
-  ngOnInit(): void {
-    this.addOREditCategoryForm = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(3)]]
-    });
   }
 
   ngAfterViewInit(): void {
@@ -89,18 +71,59 @@ export class AddOrEditCategoryComponent implements OnInit, AfterViewInit {
       });
   }
 
+
+  private initForm() {
+    if (this.editMode) {
+      console.log(`form intialization`);
+      this.categoryService.getCategoryById(this.id).subscribe({
+        next: category => {
+          this.category = category;
+          this.title = `Edit Category: ${this.category.name}`;
+
+          //lama 3mlt new formGroup brdo gab nafs error wtf!
+
+          // this.addOREditCategoryForm = new FormGroup({
+          //   name:new FormControl(this.category.name)
+          // });
+          this.addOREditCategoryForm = this.fb.group({
+            name: [this.category.name, [Validators.required, Validators.minLength(3)]]
+          });
+        }
+      });
+    }else{
+      // this.addOREditCategoryForm = new FormGroup({
+      //   name:new FormControl()
+      // });
+      this.title = 'Add Category';
+      this.addOREditCategoryForm = this.fb.group({
+        name: ['', [Validators.required, Validators.minLength(3)]]
+      });
+    }
+  }
   saveCategory(): void {
-    if (true === true) {
-      if (this.category.id === 0) {
-        this.categoryService.addCategory(this.category).subscribe({
-          next: () => this.router.navigate(['/categories'])
-        });
-      } else {
-        this.categoryService.updateCategory(this.category).subscribe({
-          next: () => this.router.navigate(['/categories'])
-        });
+      if (this.addOREditCategoryForm.valid) {
+        if (this.addOREditCategoryForm.dirty) {
+          const category = {...this.category, ...this.addOREditCategoryForm.value}
+          if(!this.editMode){
+            this.categoryService.addCategory(category).subscribe({
+              next: () => {
+                this.addOREditCategoryForm.reset();
+                this.router.navigate(['/admin/categories']);
+              }
+            });
+          } else {
+          this.categoryService.updateCategory(category).subscribe({
+            next: () => {
+              this.addOREditCategoryForm.reset();
+              this.router.navigate(['/admin/categories']);
+            }
+          });
+        }
       }
     }
   }
 
+  onCancel() {
+    this.router.navigate(['/admin/categories']);
+  }
 }

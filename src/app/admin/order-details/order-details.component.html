@@ -1,0 +1,86 @@
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            {{title}}
+        </div>
+        <div class="card-body">
+            <form 
+                autocomplete="off"
+                [formGroup]="orderDetailsForm"
+                >
+    
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label"
+                            for="UserId">UserId</label>
+                    <div class="col-md-8">
+                        <input 
+                            class="form-control"
+                            id="UserId"
+                            type="text"
+                            placeholder="UserId (required)"
+                            formControlName="userId"
+                           
+                            />
+                        
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label"
+                            for="totalPrice">Total Price</label>
+                    <div class="col-md-8">
+                        <input 
+                            class="form-control"
+                            id="totalPrice"
+                            type="text"
+                            placeholder="Total Price (required)"
+                            formControlName="totalPrice"
+                           
+                            />
+                        
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label"
+                            for="address">Address</label>
+                    <div class="col-md-8">
+                        <input 
+                            class="form-control"
+                            id="address"
+                            type="text"
+                            placeholder="Address (required)"
+                            formControlName="address"
+                           
+                            />
+                        
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label"
+                            for="status">Status</label>
+                    <div class="col-md-8">
+                        <input 
+                            class="form-control"
+                            id="status"
+                            type="text"
+                            placeholder="Status (required)"
+                            formControlName="status"
+                           
+                            />
+                        
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 offset-md-2">
+                        <button 
+                            class="btn btn-outline-secondary"
+                            (click)=onBack()>
+                            Back
+                        </button>
+                    </div>
+                </div>
+    
+            </form>
+        </div>
+    </div>
+</div>

@@ -6,7 +6,8 @@
         <div class="card-body">
             <form novalidate
                 autocomplete="off"
-                [formGroup]="addOREditProductForm">
+                [formGroup]="addOREditProductForm"
+                (ngSubmit)="saveProduct()">
     
                 <div class="form-group row">
                     <label class="col-md-2 col-form-label"
@@ -89,13 +90,12 @@
                             [disabled]="!addOREditProductForm.valid"
                             type="submit"
                             [title]="addOREditProductForm.valid ? 'Save your entered data': 'Disabled until the form data is valid' "
-                            (click)="saveProduct()"
                         >
                             Save
                         </button>
                         <button 
                             class="btn btn-outline-secondary"
-                            [routerLink]="['/home']"    
+                            (click)="onCancel()"
                         >
                             Cancel
                         </button>

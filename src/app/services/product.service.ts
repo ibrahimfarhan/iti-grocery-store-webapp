@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { tap, catchError, map } from 'rxjs/operators';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+
 import { Product } from '../models/product';
 
 @Injectable({
@@ -16,9 +17,7 @@ export class ProductService {
 
   private productUrl = '../assets/products.json';
 
-
   constructor(private http: HttpClient) { }
-
 
   getProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(this.productUrl).pipe(
@@ -36,9 +35,10 @@ export class ProductService {
 
   getProductById(id: number): Observable<Product> {
     return this.getProducts().pipe(
-      map((products:Product[]) => products.find(p => p.id === id))
+      map((products: Product[]) => products.find(p => p.id === id))
     );
   }
+
   getCartProducts(): Product[] {
     return this.cartProducts;
   }
@@ -81,7 +81,6 @@ export class ProductService {
       catchError(this.HandleError)
     );
   }
-
 
   HandleError(err: HttpErrorResponse) {
     // console and throw error

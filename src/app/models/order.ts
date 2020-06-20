@@ -3,11 +3,11 @@ import { orderItem } from './orderItem';
 export interface Order {
   // id: number;
   totalPrice?: number;
-  status:number;
-  address?:string;
+  status: number;
+  address?: string;
   userId: number;
   orderItems: orderItem[];
-  
+
   // Nehal's Code
   id: string;
   // totalPrice:number;
@@ -15,4 +15,3 @@ export interface Order {
   // address:string;
   // userId:number;
 }
-

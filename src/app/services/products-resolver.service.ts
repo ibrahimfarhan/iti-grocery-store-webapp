@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Resolve } from '@angular/router';
+import { Observable } from 'rxjs';
+
 import { Product } from '../models/product';
 import { ProductService } from './product.service';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class ProductsResolverService implements Resolve<Product[]>{
 
   constructor(private productService: ProductService) { }
 
-  resolve(route: import("@angular/router").ActivatedRouteSnapshot, state: import("@angular/router").RouterStateSnapshot): Observable<Product[]>{
+  resolve(route: import("@angular/router").ActivatedRouteSnapshot, state: import("@angular/router").RouterStateSnapshot): Observable<Product[]> {
     const categoryName = route.paramMap.get('category-name').toLocaleLowerCase();
 
     console.log(categoryName)
@@ -21,8 +22,7 @@ export class ProductsResolverService implements Resolve<Product[]>{
     else {
       //check if categoryName is an existing category
       //access category service
-      if(true)
-      {
+      if (true) {
         //return null if it's not a category
       }
       // return this.productService.getProductsByCategory(categoryName);

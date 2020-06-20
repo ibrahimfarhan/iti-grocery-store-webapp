@@ -13,5 +13,12 @@ export const CONFIG = {
             orderDetails: { name: 'orders/:id', route: '/orders/:id'}
         }
     },
-
+    products: {
+        name: 'products', route: '/products',
+        children: {
+            productsList: { name: 'products', route: '/products' },
+            productsByCategory: { name: ':categoy-name', route: '/products/:categoy-name'},
+            productDetails: { name: 'product/:id', route: '/products/product/:id'}
+        }
+    }
 };

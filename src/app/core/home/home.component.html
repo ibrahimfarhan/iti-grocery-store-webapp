@@ -1,13 +1,40 @@
-<div class="categories pt-5 pb-5">
+<!-- <div class="categories pt-5 pb-5">
     <div class="container">
         <div class="categories-header  text-center  pb-6">
             <h2 class="font-lg mt-3">Welcome To Site Name</h2>
         </div>
         <div class="categories-body d-flex flex-wrap justify-content-center">
-            <app-category-in-home
-            class="categories-item d-flex justify-content-center p-3"
-            *ngFor="let cat of categories"
-            [category] = "cat"></app-category-in-home>
+            <app-category-in-home 
+                class="categories-item d-flex justify-content-center p-3"
+                *ngFor="let cat of categories" [category]="cat">
+            </app-category-in-home>
+        </div>
+    </div>
+</div> -->
+
+<!-- <img src="./../../../assets/images/bg-slide-01.jpg"> -->
+<div class="bg d-flex align-items-center">
+    <div class="bg-content text-center">
+        <h1 class="font-weight-bold">Organic Products</h1>
+        <p class="pt-3 pb-3 f-sm font-weight-light text-muted">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+        <a class="btn bg-green-light text-white">
+            Order now
+            <i class="fa fa-chevron-right font-sm font-weight-light"></i>
+            <i class="fa fa-chevron-right font-sm font-weight-light"></i>
+        </a>
     </div>
 </div>
+<div class="categories pt-10 pb-8">
+    <div class="container">
+        <div class="categories-header  text-center  pb-6">
+            <span class="text-green-light">Green Agriculture</span>
+            <h2 class="font-lg mt-3">Welcome To WebsiteName</h2>  
+        </div>
+        <div class="categories-body d-flex flex-wrap justify-content-center">
+            <app-category-in-home 
+                class="categories-item d-flex justify-content-center p-3"
+                *ngFor="let cat of categories" [category]="cat">
+            </app-category-in-home>
+        </div>
+    </div>
 </div>

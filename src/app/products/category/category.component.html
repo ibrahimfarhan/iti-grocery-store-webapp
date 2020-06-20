@@ -1,10 +1,10 @@
 <div class="row p-2 justify-content-center">
-    <div class="col-4" *ngIf="false">
+    <div class="col-4" *ngIf="this.authService.isAdmin()">
         <a
           style="cursor: pointer;"
-          [routerLink]="['/products/category/' + category.name]"
+          [routerLink]="['/admin/categories/' + this.category.id + '/edit']"
           >
-          Bla
+          <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
         </a>
     </div>
     <div class="col-8">

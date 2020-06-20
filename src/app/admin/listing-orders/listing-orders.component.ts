@@ -19,7 +19,7 @@ export class ListingOrdersComponent implements OnInit {
     });
 
     this.signalRService.orderReceived.subscribe((order:any) => {
-      this.orders.push(order)
+      this.orders.unshift(order)
     })
   }
 

@@ -1,12 +1,13 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr';
+import { Order } from '../models/order';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SignalRService {
   private hubConnection: HubConnection;
-  orderReceived = new EventEmitter<any>();
+  orderReceived = new EventEmitter<Order>();
 
   constructor() { 
     this.buildConnection();
@@ -32,9 +33,15 @@ export class SignalRService {
   };
 
   private registerOrders(){
-    this.hubConnection.on("OrderReceived",(data)=>{
-    console.log(data);
-    this.orderReceived.emit(data);
+    this.hubConnection.on("OrderReceived",(order: Order)=>{
+    console.log(order);
+    this.orderReceived.emit(order);
     });
   }
+
+  public userAddedOrder(order: Order){
+    if(this.hubConnection){
+      this.hubConnection.invoke("AddOrderToAdminPanel",order)
+    }
+  } 
 }

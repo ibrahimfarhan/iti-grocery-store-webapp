@@ -1,5 +1,6 @@
 .category{
     position: relative;
+    cursor: pointer;
     &-item{
         &-hovered{
             position: absolute;

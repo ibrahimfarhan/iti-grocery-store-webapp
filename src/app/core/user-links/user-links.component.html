@@ -10,6 +10,6 @@
   </app-dropdown-menu>
 </div>
 <div *ngIf="!isLoggedIn" class="auth-btns">
-  <a class="round-edge-btn auth-btns__btn"><strong>Log in</strong></a>
-  <a class="round-edge-btn reverse-colors auth-btns__btn"><strong>Sign up</strong></a>
+  <a [routerLink]="['/login']" class="round-edge-btn auth-btns__btn"><strong>Log in</strong></a>
+  <a [routerLink]="['/register']" class="round-edge-btn reverse-colors auth-btns__btn"><strong>Sign up</strong></a>
 </div>

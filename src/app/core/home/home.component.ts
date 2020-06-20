@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Category } from '../../models/category';
+import { CategoryService } from 'src/app/services/category.service';
 
 @Component({
   selector: 'app-home',
@@ -8,21 +9,11 @@ import { Category } from '../../models/category';
 })
 export class HomeComponent implements OnInit {
 
-  category: Category[] = [
-    { id: 1, name: 'category1' },
-    { id: 2, name: 'category2' },
-    { id: 3, name: 'category3' },
-    { id: 4, name: 'category4' },
-    { id: 5, name: 'category5' },
-    { id: 6, name: 'category6' },
-    { id: 7, name: 'category7' },
-    // {id:8,name:"category8"},
-    // {id:9,name:"category9"},
-    // {id:10,name:"category10"},
-  ];
-  constructor() { }
+  categories: Category[];
+
+  constructor(private categoryService: CategoryService) { }
 
   ngOnInit(): void {
+    this.categoryService.getCategories().subscribe(c => this.categories = c);
   }
-
 }

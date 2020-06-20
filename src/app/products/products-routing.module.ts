@@ -8,7 +8,6 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
 import { ProductsResolverService } from '../services/products-resolver.service';
 import { CONFIG } from '../shared/configs';
 
-
 const routes: Routes = [
   {
     path: CONFIG.products.name, component: ProductsComponent,

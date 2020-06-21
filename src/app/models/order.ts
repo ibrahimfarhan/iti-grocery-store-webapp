@@ -1,18 +1,17 @@
 import { orderItem } from './orderItem';
 
 export interface Order {
-  // id: number;
+  id: number;
   totalPrice?: number;
   status:number;
   address?:string;
-  userId: number;
+  userId: string;
   orderItems: orderItem[];
   
   // Nehal's Code
-  id: string;
+  // id: string;
   // totalPrice:number;
   // status: string;
   // address:string;
   // userId:number;
 }
-

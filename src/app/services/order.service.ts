@@ -30,7 +30,8 @@ export class OrderService {
   // }
   getOrderById(id: number): Observable<Order> {
     return this.getOrders().pipe(
-      map((orders:Order[]) => orders.find(o => o.id === id.toString()))
+      // map((orders:Order[]) => orders.find(o => o.id === id.toString()))
+      map((orders:Order[]) => orders.find(o => o.id === id))
     );
   }
 

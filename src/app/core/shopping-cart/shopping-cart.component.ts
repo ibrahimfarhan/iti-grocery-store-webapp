@@ -23,7 +23,7 @@ export class ShoppingCartComponent implements OnInit {
     //ordering logic
 
     //simulation for new order( for testing only )
-    let order: Order ={id:"10x500",totalPrice:50,userId:5,status:1,orderItems:null} 
+    let order: Order ={id:1,totalPrice:50,userId:"5",status:1,orderItems:null} 
 
 
     this.signalRService.userAddedOrder(order);

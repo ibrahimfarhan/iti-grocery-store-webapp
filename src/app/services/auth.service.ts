@@ -26,7 +26,6 @@ export class AuthService {
   redirectUrl: string;
 
   decodedToken: any;
-
   constructor(private http: HttpClient, private router: Router) { }
 
   login(user: any) {
@@ -65,7 +64,6 @@ export class AuthService {
         this.currentUser = Object.assign({}, response) as User;
         this.currentUserSubject.next(this.currentUser);
       })
-
     );
   }
   // check the token to decide whether the user logged in or not

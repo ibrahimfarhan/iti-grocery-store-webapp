@@ -1,15 +1,14 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ProductsModule } from './products/products.module';
 import { CoreModule } from './core/core.module';
-import { UsersModule } from './users/users.module';
-import { ErrorInterceptorProvider } from './interceptors/error.interceptor';
 import { SharedModule } from './shared/shared.module';
-import { AdminModule } from './admin/admin.module';
+import { ErrorInterceptorProvider } from './interceptors/error.interceptor';
 
 @NgModule({
   declarations: [
@@ -17,12 +16,12 @@ import { AdminModule } from './admin/admin.module';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
     CoreModule,
-    UsersModule,
     SharedModule,
     FormsModule,
-    AdminModule,
-    AppRoutingModule,
+    AppRoutingModule
   ],
   providers: [ErrorInterceptorProvider],
   bootstrap: [AppComponent]

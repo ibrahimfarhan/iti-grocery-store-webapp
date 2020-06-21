@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
+
 import { Category } from '../../models/category';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-category',
@@ -9,7 +11,7 @@ import { Category } from '../../models/category';
 export class CategoryComponent implements OnInit {
   @Input() category: Category;
 
-  constructor() { }
+  constructor(public authService: AuthService) { }
 
   ngOnInit(): void {
   }

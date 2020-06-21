@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from './services/auth.service';
 
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -8,17 +8,16 @@ import { AuthService } from './services/auth.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+
   title = 'grocery-store-webapp';
   userToken: any;
   user: any;
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService) { }
 
-  }
   ngOnInit(): void {
     const token = localStorage.getItem('authToken');
     if (token) {
-
     }
-
   }
+
 }

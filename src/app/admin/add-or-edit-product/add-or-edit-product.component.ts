@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChildren, ElementRef, AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, MinLengthValidator, FormControlName } from '@angular/forms';
-import { Observable, fromEvent, merge } from 'rxjs';
+import { Observable, merge, Subscription, fromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { GenericValidator } from 'src/app/shared/validators/generic-validator-messages';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, Params } from '@angular/router';
 import { ProductService } from 'src/app/services/product.service';
 import { Product } from 'src/app/models/product';
 
@@ -18,15 +18,19 @@ export class AddOrEditProductComponent implements OnInit, AfterViewInit {
 
   title = 'Add Product';
   product: Product;
+  id:number;
+  editMode:boolean = false;
+  subscription: Subscription;
+
   displayMessage: { [key: string]: string } = {};
   private validationMessages: { [key: string]: { [key: string]: string } };
   private genericValidator: GenericValidator;  // data structutre to store validation error messages
   addOREditProductForm: FormGroup;
   constructor(
     private fb: FormBuilder,
+    private router: Router,
     private activatedRoute: ActivatedRoute,
     private productService: ProductService,
-    private router: Router
   ) {
     this.validationMessages = {
       name: {
@@ -38,44 +42,23 @@ export class AddOrEditProductComponent implements OnInit, AfterViewInit {
       },
     };
     this.genericValidator = new GenericValidator(this.validationMessages);
-    this.activatedRoute.paramMap.subscribe(
-      params => {
-        const id = +params.get('id');
-        // get the product by id from the service
-        this.getProduct(id);
+    
+  }
+  
+  ngOnInit(): void {
+    this.subscription = this.activatedRoute.params.subscribe(
+      (params: Params) => {
+        this.id = +params['id'];
+        this.editMode = params['id'] != null;
+        this.initForm();
       }
     );
-
-  }
-
-  getProduct(id: number): void {
-    this.productService.getProductById(id).subscribe({
-      next: product => this.onProductRetrieved(product),
-    });
-  }
-
-  onProductRetrieved(product: Product): void {
-    this.product = product;
-
-    console.log('retrived product function');
-    if (!this.product) {
-      this.title = 'No product found';
-    } else {
-      if (this.product.id === 0) {
-        this.title = 'Add Product';
-      } else {
-        this.title = `Edit Product: ${this.product.name}`;
-      }
-    }
-
-  }
-  ngOnInit(): void {
-    this.addOREditProductForm = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(3)]],
-      price: ['', [Validators.required]],
-      description: [''],
-      categoryName: ['']
-    });
+    // this.addOREditProductForm = this.fb.group({
+    //   name: ['', [Validators.required, Validators.minLength(3)]],
+    //   price: ['', [Validators.required]],
+    //   description: [''],
+    //   categoryName: ['']
+    // });
   }
   ngAfterViewInit(): void {
     // Watch for the blur event from any input element on the form.
@@ -95,18 +78,65 @@ export class AddOrEditProductComponent implements OnInit, AfterViewInit {
       });
   }
 
+  private initForm() {
+    if (this.editMode) {
+      console.log(`form intialization`);
+      this.productService.getProductById(this.id).subscribe({
+        next: product => {
+          this.product = product;
+          this.title = `Edit Product: ${this.product.name}`;
+
+          //lama 3mlt new formGroup brdo gab nafs error wtf!
+
+          // this.addOREditCategoryForm = new FormGroup({
+          //   name:new FormControl(this.category.name)
+          // });
+          this.addOREditProductForm = this.fb.group({
+            name: [this.product.name, [Validators.required, Validators.minLength(3)]],
+            price: [this.product.price, [Validators.required]],
+            description: [this.product.description],
+            categoryName: [this.product.categoryName]
+          });
+        }
+      });
+    }else{
+      // this.addOREditCategoryForm = new FormGroup({
+      //   name:new FormControl()
+      // });
+      this.title = 'Add Product';
+      this.addOREditProductForm = this.fb.group({
+        name: ['', [Validators.required, Validators.minLength(3)]],
+        price: ['', [Validators.required]],
+        description: [''],
+        categoryName: ['']
+      });
+    }
+  }
   saveProduct(): void {
-    if (true === true) {
-      if (this.product.id === 0) {
-        this.productService.addProduct(this.product).subscribe({
-          next: () => this.router.navigate(['/products'])
-        });
-      } else {
-        this.productService.updateProduct(this.product).subscribe({
-          next: () => this.router.navigate(['/products'])
+    if (this.addOREditProductForm.valid) {
+      if (this.addOREditProductForm.dirty) {
+        const product = {...this.product, ...this.addOREditProductForm.value}
+        if(!this.editMode){
+          this.productService.addProduct(product).subscribe({
+            next: () => {
+              this.addOREditProductForm.reset();
+              this.router.navigate(['admin/products']);
+            }
+          });
+        } else {
+        this.productService.updateProduct(product).subscribe({
+          next: () => {
+            this.addOREditProductForm.reset();
+            this.router.navigate(['admin/products']);
+          }
         });
       }
     }
   }
+}
+
+onCancel() {
+  this.router.navigate(['admin/products']);
+}
 
 }

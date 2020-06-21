@@ -11,6 +11,7 @@
 
 //   constructor(private productService: ProductService) { }
 
+// tslint:disable-next-line: max-line-length
 //   resolve(route: import("@angular/router").ActivatedRouteSnapshot, state: import("@angular/router").RouterStateSnapshot): Observable<Product[]>{
 //     const categoryName = route.paramMap.get('category-name').toLocaleLowerCase();
 

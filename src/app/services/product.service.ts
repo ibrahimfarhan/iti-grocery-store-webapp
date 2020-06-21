@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, throwError, Subject, BehaviorSubject } from 'rxjs';
 import { tap, catchError, map } from 'rxjs/operators';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+
 import { Product } from '../models/product';
 import { apiRoutes } from '../models/constants';
 import { CartProduct } from '../models/cartProduct';
 import { ActivatedRoute } from '@angular/router';
 import { ProductSearch } from '../models/productSearch';
+import { HttpErrorResponse, HttpHeaders, HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +16,8 @@ export class ProductService {
 
   // TODO: Remove static data.
   cartProducts: CartProduct[] = [
-    { id: 1, name: 'something long long', price: 100, imgUrl: '../assets/images/profile.jpg', quantity: 1 },
-    { id: 2, name: 'P2', price: 200, imgUrl: '../assets/images/profile.jpg', quantity: 1 },
+    { id: 1, name: 'something long long', price: 100, imgUrl: ['../assets/images/profile.jpg'], quantity: 1 },
+    { id: 2, name: 'P2', price: 200, imgUrl: ['../assets/images/profile.jpg'], quantity: 1 },
   ];
 
   cartProductsSubject = new BehaviorSubject<CartProduct[]>(null);
@@ -43,6 +44,13 @@ export class ProductService {
   getProductsByCategory(categoryName: string): void {
     this.getProductsSubject(apiRoutes.getProducts + `/${categoryName}`);
   }
+
+  // getProductById(id: number): Observable<Product> {
+  //   return this.http.get<Product>(this.productUrl + `/${id}`).pipe(
+  //     tap(data => console.log('getProductById: ' + JSON.stringify(data))),
+  //     catchError(this.HandleError)
+  //   );
+  // }
 
   getProductById(id: number): Observable<Product> {
     return this.http.get<Product>(apiRoutes.getProducts + `${id}`).pipe(catchError(this.handleError));

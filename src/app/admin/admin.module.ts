@@ -5,20 +5,29 @@ import { AddOrEditCategoryComponent } from './add-or-edit-category/add-or-edit-c
 import { AdminRoutingModule } from './admin-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { ListingProductsComponent } from './listing-products/listing-products.component';
+import { ListingCategoriesComponent } from './listing-categories/listing-categories.component';
+import { ListingOrdersComponent } from './listing-orders/listing-orders.component';
+import { OrderDetailsComponent } from './order-details/order-details.component';
+import { OrderComponent } from './order/order.component';
+import { AdminComponent } from './admin.component';
 
 
 
 @NgModule({
-  declarations: [AddOrEditProductComponent, AddOrEditCategoryComponent],
+  declarations: [AddOrEditProductComponent, AddOrEditCategoryComponent, ListingProductsComponent, ListingCategoriesComponent, ListingOrdersComponent, OrderDetailsComponent, OrderComponent, AdminComponent],
   imports: [
   CommonModule,
     AdminRoutingModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
   ],
   exports:[
     AddOrEditProductComponent,
-    AddOrEditCategoryComponent
+    AddOrEditCategoryComponent,
+    ListingCategoriesComponent,
+    ListingProductsComponent,
+    AdminComponent
   ]
 })
 export class AdminModule { }

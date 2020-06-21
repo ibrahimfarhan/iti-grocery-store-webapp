@@ -15,13 +15,14 @@ export class AdminComponent implements OnInit {
   }
 
   toggleSubMenu(subMenu: HTMLElement) {
-    if(subMenu.classList.contains('collapsed')) {
+    if (subMenu.classList.contains('collapsed')) {
       subMenu.style.maxHeight = subMenu.scrollHeight + 'px';
       subMenu.classList.remove("collapsed");
     }
-    else{
+    else {
       subMenu.style.maxHeight = '0px';
       subMenu.classList.add("collapsed");
     }
   }
+
 }

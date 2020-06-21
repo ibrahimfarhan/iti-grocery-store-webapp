@@ -41,6 +41,6 @@ export class ProductsContainerComponent implements OnInit {
   // checks if the user who loggedin is admin to display edit icon
   isAdmin(): boolean {
     // call auth service
-    return !this.authService.isAdmin();
+    return this.authService.isAdmin();
   }
 }

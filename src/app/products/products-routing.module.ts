@@ -5,7 +5,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { ProductsComponent } from './products.component';
 import { ProductsContainerComponent } from './products-container/products-container.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
-import { ProductsResolverService } from '../services/products-resolver.service';
 import { CONFIG } from '../shared/configs';
 
 const routes: Routes = [

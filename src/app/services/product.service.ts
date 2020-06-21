@@ -3,7 +3,7 @@ import { Observable, of, throwError, Subject, BehaviorSubject } from 'rxjs';
 import { tap, catchError, map } from 'rxjs/operators';
 
 import { Product } from '../models/product';
-import { apiRoutes } from '../models/constants';
+import { apiRoutes } from '../shared/configs/api-routes';
 import { CartProduct } from '../models/cartProduct';
 import { ActivatedRoute } from '@angular/router';
 import { ProductSearch } from '../models/productSearch';

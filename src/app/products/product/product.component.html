@@ -8,10 +8,10 @@
     <div class="card-body text-center">
       <a class="card-title">{{product.name}}</a>
       <p class="product-card__price">{{product.price}}$</p>
-      <div class="product-card__icons">
-        <a href="#" class="product-card__icon" data-toggle="tooltip" data-placement="bottom" title="Edit" (click)="goToAdminEditProduct()" *ngIf="isAdmin()"><i class="fa fa-pencil-square-o"></i></a>
-        <a href="#" class="product-card__icon" data-toggle="tooltip" data-placement="bottom" title="Add to Cart" (click)="addTocart()"><i class="fa fa-shopping-cart"></i></a>
-        <a href="#" class="product-card__icon"><i class="fa fa-heart-o"></i></a>
+      <div *ngIf="isAdmin()" class="product-card__icons">
+        <a class="product-card__icon" data-toggle="tooltip" data-placement="bottom" title="Edit" (click)="goToAdminEditProduct()" *ngIf="isAdmin()"><i class="fa fa-pencil-square-o"></i></a>
+        <a class="product-card__icon" data-toggle="tooltip" data-placement="bottom" title="Add to Cart" (click)="addTocart()"><i class="fa fa-shopping-cart"></i></a>
+        <a class="product-card__icon"><i class="fa fa-heart-o"></i></a>
       </div>
     </div>
   </div>

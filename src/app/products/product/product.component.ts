@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Product } from '../../models/product';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-product',
@@ -12,7 +13,7 @@ export class ProductComponent implements OnInit {
 
   @Input() product: Product;
 
-  constructor(private router: Router, private authService: AuthService) { }
+  constructor(private router: Router, private authService: AuthService, private productService: ProductService) { }
 
   ngOnInit(): void {
   }
@@ -28,8 +29,7 @@ export class ProductComponent implements OnInit {
     this.router.navigate([`/admin/products/${this.product.id}`]);
   }
 
-
   addTocart(): void {
-    // call shopping cart service
+    this.productService.addCartProduct({...this.product, quantity: 1});
   }
 }

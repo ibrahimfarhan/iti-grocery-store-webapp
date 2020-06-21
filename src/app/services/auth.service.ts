@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from '../models/user';
 import { Router } from '@angular/router';
-import { apiRoutes } from '../models/constants';
+import { apiRoutes } from '../shared/configs/api-routes';
 import { UserRole } from '../models/userRole';
 
 @Injectable({

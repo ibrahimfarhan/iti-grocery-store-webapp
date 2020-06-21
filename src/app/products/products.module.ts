@@ -13,6 +13,7 @@ import { CategoryService } from '../services/category.service';
 import { CategoriesListResolver } from '../services/categories-list-resolver.service';
 import { RouterModule } from '@angular/router';
 import { ProductsPageComponent } from './products-page/products-page.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { ProductsPageComponent } from './products-page/products-page.component';
     CommonModule,
     ProductsRoutingModule,
     HttpClientModule,
-    RouterModule
+    RouterModule,
+    FormsModule
   ],
   exports: [
     ProductComponent,

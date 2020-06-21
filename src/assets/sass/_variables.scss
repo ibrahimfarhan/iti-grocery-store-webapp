@@ -10,6 +10,7 @@ $desktop: 992px;
 $large-desktop: 1200px;
 
 // Bootstrap overridden variables
+$primary: $primary-color !default;
 $spacer: 1rem !default;
 $spacers: () !default;
 $spacers: map-merge(

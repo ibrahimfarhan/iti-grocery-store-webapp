@@ -2,33 +2,35 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
-import {  User } from '../models/user';
+import { User } from '../models/user';
 import { Router } from '@angular/router';
+import { apiRoutes } from '../models/constants';
+import { UserRole } from '../models/userRole';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   currentUserSubject: BehaviorSubject<User> = new BehaviorSubject<
-  User
+    User
   >({
     id: null,
     firstName: '',
     lastName: '',
     email: '',
-   password: '',
+    password: '',
   });
 
-  currentUser: any;
+  currentUser: User;
 
-  // redirectUrl: string;
+  redirectUrl: string;
 
-  baseUrl = 'http://localhost:5000/api/auth/';
   decodedToken: any;
-  constructor(private http: HttpClient, private router: Router) {}
+
+  constructor(private http: HttpClient, private router: Router) { }
 
   login(user: any) {
-    return this.http.post(this.baseUrl + 'login', user).pipe(
+    return this.http.post(apiRoutes.login, user).pipe(
       map((response: any) => {
         const loginResponse = response;
         // the log in api response from server is an object contains two keys, token and logged user object
@@ -47,8 +49,8 @@ export class AuthService {
       })
     );
   }
-  getCurrentUser(): Subject<any> {
-    this.currentUserSubject.next(this.currentUser);
+
+  getCurrentUser(): BehaviorSubject<any> {
     return this.currentUserSubject;
   }
   // getDecodedToken(): any{
@@ -57,11 +59,11 @@ export class AuthService {
   //   return this.decodedToken;
   // }
   register(user: any) {
-    return this.http.post(this.baseUrl + 'register', user).pipe(
+    return this.http.post(apiRoutes.register, user).pipe(
       map((response) => {
         // the response is the returned user object
-        this.currentUser = Object.assign({}, response);
-        this.getCurrentUser();
+        this.currentUser = Object.assign({}, response) as User;
+        this.currentUserSubject.next(this.currentUser);
       })
 
     );
@@ -73,17 +75,13 @@ export class AuthService {
     return !!token;
   }
 
-  //check if the current logged in user is an admin by checking the retrieved user role and by checking the role in the token
-  isAdmin(): boolean{
-    //add role property to user interface !!!
-    if(this.decodedToken){
-
-      // return this.decodedToken['Admin'] && this.currentUser.role === 'Admin';
-    }
-    return false;
+  // check if the current logged in user is an admin by checking the retrieved user role and by checking the role in the token
+  isAdmin(): boolean {
+    return this.currentUser && this.currentUser.role === UserRole.Admin;
   }
 
   logout() {
+    this.http.post(apiRoutes.logout, this.currentUser);
     localStorage.removeItem('authToken');
     console.log('logged out');
     this.currentUserSubject.next(this.currentUser);

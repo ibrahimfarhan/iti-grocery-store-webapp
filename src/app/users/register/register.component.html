@@ -113,23 +113,7 @@
           </div>
         </div>
 
-        <!-- Check box for order info section -->
-        <div class="form-group row mb-2">
-          <div class="col-md-8">
-            <div class="form-check">
-              <label class="form-check-label">
-                <input
-                  class="form-check-input"
-                  id="orederInfoId"
-                  type="checkbox"
-                  formControlName="orderInfo"
-                />Personal information for order
-              </label>
-            </div>
-          </div>
-        </div>
-        <!-- showing order info section if order info control is true -->
-        <div *ngIf="registerForm.get('orderInfo').value">
+        <div>
           <!-- Address input field -->
           <div class="form-group row mb-2">
             <label class="col-md-2 col-form-label" for="addressId"
@@ -196,9 +180,9 @@
 
 <!-- Register Form state and value test. -->
 <!-- <pre>
-    registerForm Dirty: {{ registerForm.dirty }} 
+    registerForm Dirty: {{ registerForm.dirty }}
     registerForm Touched: {{ registerForm.touched }}
-    registerForm Valid: {{ registerForm.valid }} 
+    registerForm Valid: {{ registerForm.valid }}
     registerForm Value: {{ registerForm.value | json }}
     firstName valid: {{ registerForm.get("firstName").valid }}
     firstName touched: {{ registerForm.get("firstName").touched }}

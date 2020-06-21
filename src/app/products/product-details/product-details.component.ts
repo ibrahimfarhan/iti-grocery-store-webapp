@@ -1,11 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {TranslateService} from '@ngx-translate/core'
+import { TranslateService } from '@ngx-translate/core'
+import { Subscription } from 'rxjs';
+
 import { Product } from '../../models/product';
 import { Category } from '../../models/category';
 import { ProductService } from '../../services/product.service';
-import { Subscription, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-product-details',
@@ -17,29 +17,38 @@ export class ProductDetailsComponent implements OnInit {
   subscription: Subscription;
   category: Category[];
   x: any;
- // imgslider: string[]
-  imageObject = [{
-    image: 'assets/img/products/product1.jpeg',
-    thumbImage: 'assets/img/products/product1.jpeg',   
-    title: 'one'}
-    , { image: 'assets/img/products/product-1.jpg',
-    thumbImage: 'assets/img/products/product-1.jpg',   
-    title: 'two'}
-    ,{ image: 'assets/img/products/product-grey-9.jpg',
-    thumbImage: 'assets/img/products/product-grey-9.jpg',   
-    title: 'three'}
-    ,{ image: 'assets/img/products/product-grey-9.jpg',
-    thumbImage: 'assets/img/products/product-grey-9.jpg',   
-    title: 'three'}
-    ,{ image: 'assets/img/products/product-grey-9.jpg',
-    thumbImage: 'assets/img/products/product-grey-9.jpg',   
-    title: 'three'}
-]
+  // imgslider: string[]
+  imageObject = [
+    {
+      image: 'assets/img/products/product1.jpeg',
+      thumbImage: 'assets/img/products/product1.jpeg',
+      title: 'one'
+    },
+    {
+      image: 'assets/img/products/product-1.jpg',
+      thumbImage: 'assets/img/products/product-1.jpg',
+      title: 'two'
+    },
+    {
+      image: 'assets/img/products/product-grey-9.jpg',
+      thumbImage: 'assets/img/products/product-grey-9.jpg',
+      title: 'three'
+    },
+    {
+      image: 'assets/img/products/product-grey-9.jpg',
+      thumbImage: 'assets/img/products/product-grey-9.jpg',
+      title: 'three'
+    },
+    {
+      image: 'assets/img/products/product-grey-9.jpg',
+      thumbImage: 'assets/img/products/product-grey-9.jpg',
+      title: 'three'
+    }
+  ]
   // wait to test
-    
-  constructor(public translate:TranslateService ,private route: ActivatedRoute,
-    private products: ProductService ) 
-  {
+
+  constructor(public translate: TranslateService, private route: ActivatedRoute,
+    private products: ProductService) {
     translate.addLangs(['en', 'ar']);
     translate.setDefaultLang('en');
   }
@@ -49,19 +58,19 @@ export class ProductDetailsComponent implements OnInit {
     // 'assets/img/products/product-1.jpg',
     // 'assets/img/products/product-grey-9.jpg',
     // 'assets/img/products/product-grey-6.jpg']}
-   // this.imgslider=this.product.imgUrl
-   // wait to test
+    // this.imgslider=this.product.imgUrl
+    // wait to test
     this.route.params.subscribe((params) => {
       this.x = +params['id'];
       this.products.getProductById(this.product.id).subscribe({
         next: (product) => (this.product = product),
       });
-    });  
-    console.log(this.x) 
+    });
+    console.log(this.x)
   }
 
   categoryName() {
     console.log(this.x)
     console.log('cate name');
-  }  
+  }
 }

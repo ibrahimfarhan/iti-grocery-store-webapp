@@ -13,13 +13,13 @@ export class UserProfileGuard implements CanActivate {
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot)
     : Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-    console.log(next.params['id']);
+    console.log(next.params.id);
     let userId;
     this.authService.currentUserSubject.asObservable().subscribe(data => {
       userId = data.id;
     });
 
-    if (!(this.authService.isLogged && next.params['id'] == userId)) {
+    if (!(this.authService.isLogged && next.params.id === userId)) {
       this.router.navigate(['/home']);
       return false;
     }

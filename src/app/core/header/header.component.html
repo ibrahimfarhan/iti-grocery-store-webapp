@@ -1,29 +1,8 @@
 <header class="header">
   <app-logo [src]="'./assets/images/logo.png'"></app-logo>
-  <app-search-bar [categoryNames]="['Cat 1', 'Cat 2']"></app-search-bar>
+  <app-search-bar [categoryNames]="categories" (searchSubmit)="handleSearch($event)"></app-search-bar>
   <div class="header__right">
     <app-shopping-cart></app-shopping-cart>
     <app-user-links></app-user-links>
   </div>
-
-  <!-- <ul *ngIf="!isLogged" class="navbar-nav">
-    <li class="nav-item">
-      <a class="nav-link" [routerLink]="['/login']"  routerLinkActive = "active" >Login</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" [routerLink]="['/register']"  routerLinkActive = "active" >Register</a>
-    </li>
-  </ul>
-
-  <div *ngIf="isLogged" class="dropdown ">
-    <a class="dropdown-toggle text-light" >
-      Welcome {{user.firstName | titlecase}}
-    </a>
-
-    <div class="dropdown-menu" >
-      <a class="dropdown-item" href="#"> <i class=" fa fa-user"></i> Edit Profile</a>
-      <div class="dropdown-divider" ></div>
-      <a class="dropdown-item" href="#"><i class=" fa fa-sign-out"></i>Logout</a>
-    </div>
-  </div> -->
 </header>

@@ -77,13 +77,13 @@ export class LoginComponent implements OnInit, AfterViewInit {
         [
           Validators.required,
           // validate password with white spaces
-          // WhiteSpaceValidator.checkWhiteSpace,
+          WhiteSpaceValidator.checkWhiteSpace,
 
           // validate password with minumum length 4 characters
-          // Validators.minLength(4),
+          Validators.minLength(4),
 
           // validate password to have at least: 1 uppercase letter, 1 lowercase letter, A number, A minimum length of 8.
-          // Validators.pattern('^(?=[^A-Z]*[A-Z])(?=[^a-z]*[a-z])(?=\\D*\\d)[A-Za-z\\d!$%@#£€*?&]{8,}$')
+          Validators.pattern('^(?=[^A-Z]*[A-Z])(?=[^a-z]*[a-z])(?=\\D*\\d)[A-Za-z\\d!$%@#£€*?&]{8,}$')
         ]
       ],
     });
@@ -108,13 +108,13 @@ export class LoginComponent implements OnInit, AfterViewInit {
         );
       });
   }
+
   login() {
     if (this.loginForm && this.loginForm.valid) {
       this.user.email = this.loginForm.value.email;
       this.user.password = this.loginForm.value.password;
     }
 
-    console.log(this.user);
     this.authService.login(this.user).subscribe(
       next => {
         // console.log('looged in successfully');
@@ -125,10 +125,10 @@ export class LoginComponent implements OnInit, AfterViewInit {
       error => console.log(error),
     );
     // implementing navigation to a redirect url
-    // if (this.authService.redirectUrl) {
-    //   this.router.navigateByUrl(this.authService.redirectUrl);
-    // }else {
-    //   this.router.navigate(['/home'])
-    // }
+    if (this.authService.redirectUrl) {
+      this.router.navigateByUrl(this.authService.redirectUrl);
+    }else {
+      this.router.navigate(['/home']);
+    }
   }
 }

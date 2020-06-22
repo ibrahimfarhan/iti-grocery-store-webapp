@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { Product } from '../../models/product';
 import { AuthService } from 'src/app/services/auth.service';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-product',
@@ -13,7 +14,7 @@ export class ProductComponent implements OnInit {
 
   @Input() product: Product;
 
-  constructor(private router: Router, private authService: AuthService) { }
+  constructor(private router: Router, private authService: AuthService, private productService: ProductService) { }
 
   ngOnInit(): void { }
 
@@ -29,7 +30,7 @@ export class ProductComponent implements OnInit {
   }
 
   addTocart(): void {
-    // call shopping cart service
+    this.productService.addCartProduct({...this.product, quantity: 1});
   }
 
 }

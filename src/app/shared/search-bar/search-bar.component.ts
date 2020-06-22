@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, HostListener, ViewChild, ElementRef } from '@angular/core';
+import { ProductSearch } from 'src/app/models/productSearch';
 
 /**
  * @input categoryNames: the names to be put in the HTML select element options.
@@ -19,7 +20,7 @@ export class SearchBarComponent implements OnInit {
   @ViewChild('miniFormBtn') miniFormBtn: ElementRef;
   @ViewChild('searchForm') searchForm: ElementRef;
   @Input() categoryNames: string[];
-  @Output() searchSubmit: EventEmitter<object> = new EventEmitter<object>();
+  @Output() searchSubmit: EventEmitter<ProductSearch> = new EventEmitter<ProductSearch>();
   searchTerm: string;
   selectedCategoryName = 'all';
   hasBeenClicked = false;

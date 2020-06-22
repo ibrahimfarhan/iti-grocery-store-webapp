@@ -17,7 +17,7 @@ export const CONFIG = {
         name: 'products', route: '/products',
         children: {
             productsList: { name: 'products', route: '/products' },
-            productsByCategory: { name: ':categoy-name', route: '/products/:categoy-name'},
+            productsByCategory: { name: ':category-name', route: '/products/:category-name'},
             productDetails: { name: 'product/:id', route: '/products/product/:id'}
         }
     }

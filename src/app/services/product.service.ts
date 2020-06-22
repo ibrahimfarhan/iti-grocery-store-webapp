@@ -1,29 +1,48 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Observable, of, throwError } from 'rxjs';
+import { Observable, of, throwError, Subject, BehaviorSubject } from 'rxjs';
 import { tap, catchError, map } from 'rxjs/operators';
 
 import { Product } from '../models/product';
+import { apiRoutes } from '../shared/configs/api-routes';
+import { CartProduct } from '../models/cartProduct';
+import { ActivatedRoute } from '@angular/router';
+import { ProductSearch } from '../models/productSearch';
+import { HttpErrorResponse, HttpHeaders, HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
-  cartProducts: Product[] = [
-    { id: 1, name: 'something long long', price: 100, imgUrl: ['../assets/images/profile.jpg'] },
-    { id: 2, name: 'P2', price: 200, imgUrl: ['../assets/images/profile.jpg'] },
+  // TODO: Remove static data.
+  cartProducts: CartProduct[] = [
+    { id: 1, name: 'something long long', price: 100, imgUrl: ['../assets/images/profile.jpg'], quantity: 1 },
+    { id: 2, name: 'P2', price: 200, imgUrl: ['../assets/images/profile.jpg'], quantity: 1 },
   ];
 
-  private productUrl = '../assets/products.json';
+  cartProductsSubject = new BehaviorSubject<CartProduct[]>(null);
+  productsSubject = new BehaviorSubject<Product[]>(null);
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private route: ActivatedRoute) { }
 
-  getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.productUrl).pipe(
-      tap(data => console.log('All Products: ' + JSON.stringify(data))),
-      catchError(this.HandleError)
-    );
+  // Products CRUD operations
+
+  getProductsSubject(apiRoute?: string): BehaviorSubject<Product[]> {
+    const route = apiRoute ? apiRoute : apiRoutes.getProducts;
+    this.http.get<Product[]>(route).pipe(
+      catchError(this.handleError)
+    ).subscribe(data => this.productsSubject.next(data));
+
+    return this.productsSubject;
+  }
+
+  getProductsBySearchBar(productSearch: ProductSearch): void {
+    this.getProductsSubject(apiRoutes.getProducts +
+      `?product-name=${productSearch.searchTerm}&category-name=${productSearch.selectedCategoryName}`);
+  }
+
+  getProductsByCategory(categoryName: string): void {
+    this.getProductsSubject(apiRoutes.getProducts + `/${categoryName}`);
   }
 
   // getProductById(id: number): Observable<Product> {
@@ -34,55 +53,81 @@ export class ProductService {
   // }
 
   getProductById(id: number): Observable<Product> {
-    return this.getProducts().pipe(
-      map((products: Product[]) => products.find(p => p.id === id))
-    );
+    return this.http.get<Product>(apiRoutes.getProducts + `${id}`).pipe(catchError(this.handleError));
   }
 
-  getCartProducts(): Product[] {
-    return this.cartProducts;
+  // Cart products CRUD operations
+
+  // TODO: get cart products from database.
+  getCartProducts(): BehaviorSubject<CartProduct[]> {
+    // const cartProducts$ = this.http.get<CartProduct[]>(apiRoutes.getCartProducts).
+    //   pipe(catchError(this.HandleError));
+    const cartProducts$ = of(this.cartProducts);
+    cartProducts$.subscribe(data => this.cartProductsSubject.next(data));
+    return this.cartProductsSubject;
   }
 
-  // getProductById(id: number): Observable<Product> {
-  //   return this.http.get<Product>(this.productUrl + `/${id}`).pipe(
-  //     tap(data => console.log('getProductById: ' + JSON.stringify(data))),
-  //     catchError(this.HandleError)
-  //   );
-  // }
+  addCartProduct(product: CartProduct): void {
+    this.http.post<boolean>(apiRoutes.addCartProduct, product).
+      pipe(catchError(this.handleError)).
+      subscribe(success => {
+        if (success) {
+          this.cartProducts.push(product);
+          this.cartProductsSubject.next(this.cartProducts);
+        }
+      });
+  }
 
-  // getProductsByCategory(category: string): Observable<Product[]> {
-  //   return this.http.get<Product[]>(this.productUrl + `/${category}`).pipe(
-  //     tap(data => console.log('getProductsByCategory: ' + JSON.stringify(data))),
-  //     catchError(this.HandleError)
-  //   );
-  // }
+  editCartProduct(product: CartProduct): void {
+    const editedIndex = this.cartProducts.findIndex(p => p.id === product.id);
+    this.cartProducts[editedIndex] = product;
+    this.cartProductsSubject.next(this.cartProducts);
+    // this.http.post<boolean>(apiRoutes.editCartProduct, product).
+    //   pipe(catchError(this.HandleError)).
+    //   subscribe(success => {
+    //     if (success) {
+    //       const editedIndex = this.cartProducts.findIndex(p => p.id === product.id);
+    //       this.cartProducts[editedIndex] = product;
+    //       this.cartProductsSubject.next(this.cartProducts);
+    //     }
+    //   });
+  }
 
-  addProduct(product: Product): Observable<Product> {
+  removeCartProduct(id: number): void {
+    this.http.post<boolean>(apiRoutes.deleteCartProduct, { id }).
+      pipe(catchError(this.handleError)).
+      subscribe(success => {
+        if (success) {
+          this.cartProducts = this.cartProducts.filter(p => p.id !== id);
+          this.cartProductsSubject.next(this.cartProducts);
+        }
+      });
+  }
+
+  // Admin panel products CRUD operations
+
+  addProduct(product: Product): Observable<boolean> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post<Product>(this.productUrl, product, { headers }).pipe(
-      tap(data => console.log('addProduct: ' + JSON.stringify(data))),
-      catchError(this.HandleError)
+    return this.http.post<boolean>(apiRoutes.addProduct , product, { headers }).pipe(
+      catchError(this.handleError)
     );
   }
 
-  // deleteProduct(id: number): Observable<Product>{
-  //   const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-  //   return this.http.delete<Product>(this.productUrl+`/${id}`, { headers: headers }).pipe(
-  //     tap(() => console.log('deleteProduct: ' + id)),
-  //     catchError(this.HandleError)
-  //   );
-  // }
-
-  updateProduct(product: Product): Observable<Product> {
+  deleteProduct(id: number): Observable<boolean>{
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.put<Product>(this.productUrl, product, { headers: headers }).pipe(
-      tap(() => console.log('updateProduct: ' + product.id)),
-      map(() => product),
-      catchError(this.HandleError)
+    return this.http.post<boolean>(apiRoutes.deleteProduct, { id }, { headers }).pipe(
+      catchError(this.handleError)
     );
   }
 
-  HandleError(err: HttpErrorResponse) {
+  updateProduct(product: Product): Observable<boolean> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.put<boolean>(apiRoutes.editProduct , product, { headers }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  handleError(err: HttpErrorResponse) {
     // console and throw error
     let errorMessage: string;
     if (err.error instanceof ErrorEvent) {

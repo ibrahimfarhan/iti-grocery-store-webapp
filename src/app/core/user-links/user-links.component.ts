@@ -19,7 +19,7 @@ export class UserLinksComponent implements OnInit {
   constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.isLoggedIn = !this.authService.isLogged();
+    this.isLoggedIn = this.authService.isLogged();
     this.userSub = this.authService.getCurrentUser().asObservable().subscribe(u => {
       this.currentUser = u;
       this.isAdmin = this.currentUser && this.currentUser.role === UserRole.Admin;

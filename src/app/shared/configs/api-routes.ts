@@ -1,7 +1,7 @@
 export const apiRoutes = {
-  login: '/api/login',
-  register: '/api/register',
-  logout: '/api/logout',
+  login: '/api/user/login',
+  register: '/api/user/register',
+  logout: '/api/user/logout',
 
   getProducts: '/api/products',
 

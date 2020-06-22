@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from '../models/user';
@@ -11,15 +11,7 @@ import { UserRole } from '../models/userRole';
   providedIn: 'root',
 })
 export class AuthService {
-  currentUserSubject: BehaviorSubject<User> = new BehaviorSubject<
-    User
-  >({
-    id: null,
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-  });
+  currentUserSubject: BehaviorSubject<User> = new BehaviorSubject<User>(null);
 
   currentUser: User;
 
@@ -57,14 +49,18 @@ export class AuthService {
   //   this.decodedToken = JSON.parse(atob(token.split('.')[1]));
   //   return this.decodedToken;
   // }
-  register(user: any) {
-    return this.http.post(apiRoutes.register, user).pipe(
-      map((response) => {
-        // the response is the returned user object
-        this.currentUser = Object.assign({}, response) as User;
-        this.currentUserSubject.next(this.currentUser);
-      })
-    );
+  register(user: User) {
+    return this.http.post<HttpResponse<any>>(apiRoutes.register, user).
+    subscribe(res => {
+        if (res.ok) {
+          this.currentUser = res.body as User;
+          this.currentUserSubject.next(this.currentUser);
+        }
+
+        else {
+          // TODO: Show an error message
+        }
+      });
   }
   // check the token to decide whether the user logged in or not
   isLogged(): boolean {

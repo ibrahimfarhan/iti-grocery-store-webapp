@@ -1,17 +1,16 @@
 <div class="container">
-    
+
     <div class="card account-details mt-5 ">
         <div class="card-header ">
             <h5 class="card-title">Account Details</h5>
         </div>
         <div class="card-body">
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIoAAACKCAMAAABCWSJWAAAAMFBMVEXk5ueutLfh4+Sor7Ln6eq1ur3d4OHEyMqrsbXX2tvJzc/a3d65vsHM0NKxt7rQ09XLCNiwAAADMUlEQVR4nO2aXZOrIAxABcKHgvj//+0F2962u1YSatDZ4Tzt9GXPhBBIcBg6nU6n0+l0Op1Op9P5QwDAYBIy/3GmxyAXq3XM6DCN+ZeTRObglBMPnBJ2PCM2YKx7avzXEXP7yEzit8gqo8emLjDGbZGMCrKhzPRZZF2lZoEBu2uSZZZGLqFkkhapjQvCJMVl5ncpr849Luz5ArNCmaS4GGYXgxRJKoHXBDRaRTjLGRbYLyg/UJJTBZsoNxjDQgtKCotnU5EkkURgC8tCW58EV7ZQts8NNzGFxVNNhNA8KrDQkjajWEwGQJ2DP1R4Tmggiwi20kLePwmeg2isUYkc2xlmeqokDIcK8s70juOo/ZUqI4tKhUm6V/51lQst0HXS9jqb+UIlbpDXKfxXOg4D3YSpda7JW65WqOJCGZnuthCpJmzXbKA3HyxVJXOhlozaqLIcQA9oK8Q5YaEdiYotU1aXy4x6BhjxYdGcItllQo8FPfuIEtmuthgiS9wImavOvqMRg3XelH1SjEuLsfodu5+7zR4+hnwwfngjWxdHt3yaGkBuvRyuEYlzQ4+bzBjUxjOmsk1D8pCRVjv39rgb5rMevkH6OTyudtEu5qwn75tN/hDAey+HM78EyP9bSmOyifHGSDmc4QMgx9mGoGMUbiWtkA7BTkuKT6t1AjDLFIRSm7vZpd+1XTx7dFIwvNVip77dfJyIYZSMwYFUS+JGMflQdEVYeGID4K0j9kFOhfHw0MDgQ2lZNmWcXo6VgSXUDFdWVJyOk9n9RAQTGjEfczAB7ga5L3PI9zV1g8lfqPDtdwHgv1ubJ058d7Wj9uu7qC/mCilLqvfNFk7UdmlgEF0GkbpFAvz3IXiqekZKo05xofdqMHKIiIpRB/hDE/YVRewcDXkuiofWO8Lxe+fVhVB4Dyr2H4l4E/qomIZD113JmCh3F+RAt+aLDLILLiyGeXlWFdx8rOIFqgLMQxFfcXsFU3RbZEoG8dTKcR5v4ZaiSt3DdgXF2gJtklZgPg5rkrSrSulUrHrtr6Owhw694hcovKG1SxUhdGE7N1QpvPzKqNpROJ5lQ/ZNOp1Op9Npxj/NmCcYJSpF4QAAAABJRU5ErkJggg=="  alt="" srcset="">
+            <img [src]="user.imgUrl"  alt="user profile image" srcset="">
             <p class="card-text"><strong>First Name: </strong>{{user.firstName}}</p>
             <p class="card-text"><strong>Last Name: </strong>{{user.lastName}}</p>
             <p class="card-text"><strong>Email: </strong>{{user.email}}</p>
             <p class="card-text" *ngIf='user.phoneNumber'><strong>Phone Number: </strong>{{user.phoneNumber}}</p>
             <p class="card-text" *ngIf='user.address'><strong>Address: </strong>{{user.address}}</p>
-            <a href="#" class="btn " (click)="editProfile()">Edit</a>
         </div>
     </div>
 

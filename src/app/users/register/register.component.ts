@@ -24,7 +24,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
   formInputElements: ElementRef[];
 
   registerForm: FormGroup;
-  user: User;
+  user: any;
 
   // Use with the generic validation message class
   displayMessage: { [key: string]: string } = {};
@@ -36,14 +36,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     private fb: FormBuilder,
     private router: Router
   ) {
-    this.user = {
-      id: null,
-      firstName: '',
-      lastName: '',
-      password: '',
-      email: '',
-    };
-
+    this.user = {};
     // Defines all of the validation messages for the form.
     // These could instead be retrieved from a file or database.
     this.validationMessages = {
@@ -130,26 +123,18 @@ export class RegisterComponent implements OnInit, AfterViewInit {
   }
 
   register() {
-    console.log(this.registerForm);
+
     if (this.registerForm && this.registerForm.valid) {
+
       this.user.firstName = this.registerForm.value.firstName;
       this.user.lastName = this.registerForm.value.lastName;
       this.user.password = this.registerForm.value.password;
       this.user.email = this.registerForm.value.email;
       this.user.phoneNumber = this.registerForm.value.phoneNumber;
       this.user.address = this.registerForm.value.address;
+
+      this.authService.register(this.user);
     }
-    console.log(this.user);
-    this.authService.register(this.user).subscribe(
-      (next) => console.log('registration successful'),
-      (error) => console.log(error),
-      () => {
-        this.authService.login(this.user).subscribe((next) => {
-          if (this.authService.currentUser !== null) {
-            this.router.navigate(['/home']);
-          }
-        });
-      }
-    );
+
   }
 }

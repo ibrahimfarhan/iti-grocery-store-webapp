@@ -19,11 +19,12 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit, AfterViewInit {
+
   @ViewChildren(FormControlName, { read: ElementRef })
   formInputElements: ElementRef[];
 
   loginForm: FormGroup;
-  user: User;
+  user: any;
 
 // Use with the generic validation message class
   displayMessage: { [key: string]: string } = {};
@@ -36,13 +37,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
     private fb: FormBuilder
   ) {
     // create the data model define the data passed to back-end server.
-    this.user = {
-      id: null,
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: '',
-    };
+    this.user = {};
 
     // Defines all of the validation messages for the form.
     // These could instead be retrieved from a file or database.
@@ -110,25 +105,12 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   login() {
+
     if (this.loginForm && this.loginForm.valid) {
       this.user.email = this.loginForm.value.email;
       this.user.password = this.loginForm.value.password;
-    }
 
-    this.authService.login(this.user).subscribe(
-      next => {
-        // console.log('looged in successfully');
-        if (this.authService.currentUser !== null){
-          this.router.navigate(['/home']);
-        }
-      },
-      error => console.log(error),
-    );
-    // implementing navigation to a redirect url
-    if (this.authService.redirectUrl) {
-      this.router.navigateByUrl(this.authService.redirectUrl);
-    }else {
-      this.router.navigate(['/home']);
+      this.authService.login(this.user);
     }
   }
 }

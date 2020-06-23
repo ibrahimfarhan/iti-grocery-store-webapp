@@ -4,74 +4,59 @@ import { Observable, throwError } from 'rxjs';
 import { tap, catchError, map } from 'rxjs/operators';
 
 import { Category } from '../models/category';
+import { apiRoutes } from '../shared/configs/api-routes';
+import { ErrorService } from './error.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoryService {
-  private categoryUrl = '../assets/categories.json';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private errorService: ErrorService) { }
 
   getCategories(): Observable<Category[]> {
-    return this.http.get<Category[]>(this.categoryUrl).pipe(
-      catchError(this.HandleError)
+
+    return this.http.get<Category[]>(apiRoutes.getCategories).pipe(
+      catchError(this.handleError)
     );
   }
 
-  // getCategoryById(id: number): Observable<Category> {
-  //   return this.http.get<Category>(this.categoryUrl + `/${id}`).pipe(
-  //     tap(data => console.log('getCategoryById: ' + JSON.stringify(data))),
-  //     catchError(this.HandleError)
-  //   );
-  // }
-
-  //lama est5dmt eli fo2 da msh rady ygeeb l category msh 3rfa leh 
-  //bs eli t7t da shghal 3ady w 3amal kda brdo m3 l products wel orders
-
   getCategoryById(id: number): Observable<Category> {
+
     return this.getCategories().pipe(
       map((categories: Category[]) => categories.find(c => c.id === id))
     );
   }
 
   addCategory(category: Category): Observable<Category> {
+
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post<Category>(this.categoryUrl, category, { headers }).pipe(
+    return this.http.post<Category>(apiRoutes.addCategory, category, { headers }).pipe(
       tap(data => console.log('addCategory: ' + JSON.stringify(data))),
-      catchError(this.HandleError)
+      catchError(this.handleError)
     );
   }
 
   deleteCategory(id: number): Observable<Category> {
+
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.delete<Category>(this.categoryUrl + `/${id}`, { headers }).pipe(
-      tap(() => console.log('deleteCategory: ' + id)),
-      catchError(this.HandleError)
+    return this.http.post<Category>(apiRoutes.deleteCategory, { id } , { headers }).pipe(
+      catchError(this.handleError)
     );
   }
 
   updateCategory(category: Category): Observable<Category> {
+
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.put<Category>(this.categoryUrl, category, { headers }).pipe(
-      tap(() => console.log('updateCategory: ' + category.id)),
-      map(() => category),
-      catchError(this.HandleError)
+    return this.http.post<Category>(apiRoutes.editCategory, category, { headers }).pipe(
+      catchError(this.handleError)
     );
   }
 
-  HandleError(err: HttpErrorResponse) {
-    // console and throw error
-    let errorMessage: string;
-    if (err.error instanceof ErrorEvent) {
-      // A client-side or network error occurred. Handle it accordingly.
-      errorMessage = `An error occurred: ${err.error.message}`;
-    } else {
-      // The backend returned an unsuccessful response code.
-      // The response body may contain clues as to what went wrong,
-      errorMessage = `Backend returned code ${err.status}: ${err.message}`;
-    }
-    console.error(err);
-    return throwError(errorMessage);
+  handleError(err: HttpErrorResponse) {
+
+    this.errorService.errorMessageSubject.next(err.error);
+
+    return throwError(err.error);
   }
 }

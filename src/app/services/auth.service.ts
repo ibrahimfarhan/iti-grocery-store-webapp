@@ -56,6 +56,7 @@ export class AuthService {
         if (res.ok) {
           this.currentUser = res.body as User;
           this.currentUserSubject.next(this.currentUser);
+          localStorage.setItem(AUTH_TOKEN, this.currentUser.token);
           this.router.navigate(['home']);
           this.isLoggedInSubject.next(true);
         }
@@ -105,6 +106,7 @@ export class AuthService {
     this.currentUser = null;
     this.isLoggedInSubject.next(false);
     this.currentUserSubject.next(null);
+    this.router.navigate(['/home']);
   }
 
   handleError = (err: HttpErrorResponse) => {

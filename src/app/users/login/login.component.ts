@@ -78,7 +78,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
           Validators.minLength(4),
 
           // validate password to have at least: 1 uppercase letter, 1 lowercase letter, A number, A minimum length of 8.
-          Validators.pattern('^(?=[^A-Z]*[A-Z])(?=[^a-z]*[a-z])(?=\\D*\\d)[A-Za-z\\d!$%@#£€*?&]{8,}$')
+          Validators.pattern('^(?=[^A-Z]*[A-Z])(?=[^a-z]*[a-z])(?=\\D*\\d)[A-Za-z\\d!$%@#£€*?&]{4,}$')
         ]
       ],
     });

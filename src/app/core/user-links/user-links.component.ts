@@ -23,8 +23,8 @@ export class UserLinksComponent implements OnInit {
     this.authService.isLoggedIn().subscribe(i => this.isLoggedIn = i);
     this.userSub = this.authService.getCurrentUserSubject().subscribe(u => {
       this.currentUser = u;
-      this.isAdmin = this.currentUser && this.currentUser.roles.includes(UserRole.Admin);
     });
+    this.authService.isAdmin().subscribe(i => this.isAdmin = i);
   }
 
   onLogoutClick(): void {

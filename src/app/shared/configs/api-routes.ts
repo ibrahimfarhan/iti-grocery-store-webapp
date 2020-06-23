@@ -19,7 +19,8 @@ const routes = {
   deleteProduct: '/api/products/delete',
   editProduct: '/api/products/edit',
 
-  getCurrentUser: '/api/user'
+  getCurrentUser: '/api/user',
+  signalrR: '/orderHub'
 };
 
 for (const key in routes) {

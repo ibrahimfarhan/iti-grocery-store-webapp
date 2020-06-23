@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AuthService } from './services/auth.service';
+import { AUTH_TOKEN } from './shared/configs/constants';
 
 @Component({
   selector: 'app-root',
@@ -15,9 +16,10 @@ export class AppComponent implements OnInit {
   constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
-    const token = localStorage.getItem('authToken');
+
+    const token = localStorage.getItem(AUTH_TOKEN);
     if (token) {
+      this.authService.fetchCurrentUser();
     }
   }
-
 }

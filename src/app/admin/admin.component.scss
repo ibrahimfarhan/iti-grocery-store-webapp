@@ -1,10 +1,40 @@
+@import './../../assets/sass/mixins';
+@import './../../assets/sass/functions';
+
+//from 0 to 575
 .side-bar {
-  background-color: darkcyan;
+  background-color: black;
+  position: fixed;
+  display: inline-block;
+  padding: 2em 1em;
+  width: fit-content;
+  height: 100%;
+  font-size: 0.7rem;
+  z-index: 1;
+  overflow: hidden;
+  transform: translateX(-75%);
+  transition: all 0.5s;
+}
+.display{
+  position: absolute;
+  left: 10%;
+  font-size: 0.8rem;
+  display: inline-block;
 }
 
 .nav-item a {
   font-size: 1.2em;
   font-weight: bold;
+  color: white;
+  &:hover{
+    color: #aaa;
+  }
+}
+
+.nav-link{
+  &:hover{
+    color: #222;
+  }
 }
 
 .sub-link {
@@ -12,3 +42,32 @@
     overflow: hidden;
     transition: max-height 0.5s;
 }
+
+.toggle-sidebar {
+  display: inline-block;
+  margin-top: 1.5rem;
+}
+@include responsive(tablet) {
+  .side-bar {
+    width: auto;
+    transform: translateX(0);
+    background-color: white;
+
+    .toggle-sidebar {
+      display: none;
+    }
+    .nav-item a {
+      color: black;
+      &:hover{
+        color: #444;
+      }
+    }
+  }
+}
+
+@media(min-width:768px){
+  .display{
+    left: 22%;
+  }
+}
+

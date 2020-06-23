@@ -9,6 +9,7 @@ export class AdminComponent implements OnInit {
 
   productMenuStatus: boolean = false;
   categoryMenuStatus: boolean = false;
+  sideBarExpanded = false;
   constructor() { }
 
   ngOnInit(): void {
@@ -23,5 +24,15 @@ export class AdminComponent implements OnInit {
       subMenu.style.maxHeight = '0px';
       subMenu.classList.add("collapsed");
     }
+  }
+
+  toggleSideBar(): void {
+    const sideBar = (document.getElementsByClassName('side-bar')[0] as HTMLElement);
+    if (!this.sideBarExpanded) {
+      sideBar.style.transform = 'translateX(0)';
+    } else {
+      sideBar.style.transform = 'translateX(-75%)';
+    }
+    this.sideBarExpanded = !this.sideBarExpanded;
   }
 }

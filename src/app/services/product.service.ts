@@ -7,7 +7,7 @@ import { apiRoutes } from '../shared/configs/api-routes';
 import { CartProduct } from '../models/cart-product';
 import { ActivatedRoute } from '@angular/router';
 import { ProductSearch } from '../models/product-search';
-import { HttpErrorResponse, HttpHeaders, HttpClient } from '@angular/common/http';
+import { HttpErrorResponse, HttpHeaders, HttpClient, HttpResponse } from '@angular/common/http';
 import { ErrorService } from './error.service';
 
 @Injectable({
@@ -63,16 +63,23 @@ export class ProductService {
 
     const cartProducts$ = this.http.get<CartProduct[]>(apiRoutes.getCartProducts).
       pipe(catchError(this.handleError));
-    cartProducts$.subscribe(data => this.cartProductsSubject.next(data));
+    cartProducts$.subscribe(data => {
+      this.cartProducts = data;
+      this.cartProductsSubject.next(this.cartProducts);
+    });
     return this.cartProductsSubject;
   }
 
   addCartProduct(product: CartProduct): void {
 
-    this.http.post<boolean>(apiRoutes.addCartProduct, product).
+    const ids = this.cartProducts.map(p => p.productId);
+
+    if (ids.includes(product.productId)) { return; }
+
+    this.http.post<HttpResponse<any>>(apiRoutes.addCartProduct, product.productId, { observe: 'response'}).
       pipe(catchError(this.handleError)).
-      subscribe(success => {
-        if (success) {
+      subscribe(res => {
+        if (res.ok) {
           this.cartProducts.push(product);
           this.cartProductsSubject.next(this.cartProducts);
         }
@@ -81,24 +88,24 @@ export class ProductService {
 
   editCartProduct(product: CartProduct): void {
 
-    this.http.post<boolean>(apiRoutes.editCartProduct, product).
+    this.http.post<HttpResponse<any>>(apiRoutes.editCartProduct, product, { observe: 'response'}).
       pipe(catchError(this.handleError)).
-      subscribe(success => {
-        if (success) {
-          const editedIndex = this.cartProducts.findIndex(p => p.id === product.id);
+      subscribe(res => {
+        if (res.ok) {
+          const editedIndex = this.cartProducts.findIndex(p => p.productId === product.productId);
           this.cartProducts[editedIndex] = product;
           this.cartProductsSubject.next(this.cartProducts);
         }
       });
   }
 
-  removeCartProduct(id: number): void {
+  removeCartProduct(product: CartProduct): void {
 
-    this.http.post<boolean>(apiRoutes.deleteCartProduct, { id }).
+    this.http.post<HttpResponse<any>>(apiRoutes.deleteCartProduct, product, { observe: 'response'}).
       pipe(catchError(this.handleError)).
-      subscribe(success => {
-        if (success) {
-          this.cartProducts = this.cartProducts.filter(p => p.id !== id);
+      subscribe(res => {
+        if (res.ok) {
+          this.cartProducts = this.cartProducts.filter(p => p.productId !== product.productId);
           this.cartProductsSubject.next(this.cartProducts);
         }
       });
@@ -109,24 +116,24 @@ export class ProductService {
   addProduct(product: Product): Observable<boolean> {
 
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post<boolean>(apiRoutes.addProduct , product, { headers }).pipe(
-      catchError(this.handleError)
+    return this.http.post<HttpResponse<any>>(apiRoutes.addProduct , product, { headers, observe: 'response' }).pipe(
+      catchError(this.handleError), map(res => res.ok)
     );
   }
 
   deleteProduct(id: number): Observable<boolean>{
 
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post<boolean>(apiRoutes.deleteProduct, { id }, { headers }).pipe(
-      catchError(this.handleError)
+    return this.http.post<boolean>(apiRoutes.deleteProduct, { id }, { headers, observe: 'response' }).pipe(
+      catchError(this.handleError), map(res => res.ok)
     );
   }
 
   updateProduct(product: Product): Observable<boolean> {
 
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.put<boolean>(apiRoutes.editProduct , product, { headers }).pipe(
-      catchError(this.handleError)
+    return this.http.put<boolean>(apiRoutes.editProduct , product, { headers, observe: 'response' }).pipe(
+      catchError(this.handleError), map(res => res.ok)
     );
   }
 

@@ -21,7 +21,7 @@ export class CategoriesListComponent implements OnInit {
   constructor(private categoryService: CategoryService) { }
 
   ngOnInit(): void {
-    this.categoryService.getCategories().pipe(tap(d => console.log(d))).subscribe(c => this.categories = [null, ...c]);
+    this.categoryService.getCategories().subscribe(c => this.categories = [null, ...c]);
   }
 
   toggleCategories(): void {

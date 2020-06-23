@@ -94,17 +94,17 @@ export class AuthService {
     return this.isLoggedInSubject;
   }
 
-  isAdmin(): boolean {
+  isAdmin(): Observable<boolean> {
 
-    return this.currentUser && this.currentUser.roles.includes(UserRole.Admin);
+    return this.currentUserSubject.pipe(map(u => u && u.roles.includes(UserRole.Admin)));
   }
 
   logout() {
 
     localStorage.removeItem(AUTH_TOKEN);
     this.currentUser = null;
-    this.currentUserSubject = new BehaviorSubject<User>(null);
     this.isLoggedInSubject.next(false);
+    this.currentUserSubject.next(null);
   }
 
   handleError = (err: HttpErrorResponse) => {

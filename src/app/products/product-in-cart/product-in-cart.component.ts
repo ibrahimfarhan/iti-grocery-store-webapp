@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Product } from '../../models/product';
 import { ProductService } from 'src/app/services/product.service';
-import { CartProduct } from 'src/app/models/cartProduct';
+import { CartProduct } from 'src/app/models/cart-product';
 
 @Component({
   selector: 'app-product-in-cart',
@@ -18,7 +18,7 @@ export class ProductInCartComponent implements OnInit {
   }
 
   removeCartProduct(): void {
-    this.productService.removeCartProduct(this.product.id);
+    this.productService.removeCartProduct({...this.product, quantity: 1});
   }
 
   onQuantityChange(quantityInput: HTMLInputElement): void {

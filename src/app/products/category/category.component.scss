@@ -15,8 +15,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            border-left: 0.1rem solid #c7c7c7;
-            border-bottom: 0.1rem solid #c7c7c7;
+            // border-left: 0.1rem solid #c7c7c7;
+            // border-bottom: 0.1rem solid #c7c7c7;
             transform-origin: bottom left;
             transform: scale(0);
             transition: all 0.5s;
@@ -28,8 +28,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            border-top: 0.1rem solid #c7c7c7;
-            border-right: 0.1rem solid #c7c7c7;
+            // border-top: 0.1rem solid #c7c7c7;
+            // border-right: 0.1rem solid #c7c7c7;
             transform-origin: top right;
             transform: scale(0);
             transition: all 0.5s;
@@ -54,6 +54,6 @@
         left: 0;
         width: 100%;
         height: 100%;
-        border: 0.1rem solid $primary-color;
+        // border: 0.1rem solid $primary-color;
     }
 }

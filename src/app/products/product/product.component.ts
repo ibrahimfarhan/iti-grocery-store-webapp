@@ -12,24 +12,31 @@ import { ProductService } from 'src/app/services/product.service';
 export class ProductComponent implements OnInit {
 
   @Input() product: Product;
+  isAdmin: boolean;
 
-  constructor(private router: Router, private authService: AuthService, private productService: ProductService) { }
+  constructor(private router: Router, private authService: AuthService,
+              private productService: ProductService) { }
 
   ngOnInit(): void {
-  }
 
-  // checks if the user who loggedin is admin to display edit icon
-  isAdmin(): boolean {
-    // call auth service
-    return this.authService.isAdmin();
+    this.authService.isAdmin().subscribe(i => this.isAdmin = i);
   }
 
   // navigate to the admin panel to edit product
   goToAdminEditProduct(): void {
+
     this.router.navigate([`/admin/products/${this.product.id}`]);
   }
 
   addTocart(): void {
-    this.productService.addCartProduct({...this.product, quantity: 1});
+
+    this.productService.addCartProduct({
+      productId: this.product.id,
+      name: this.product.name,
+      quantity: 1,
+      discount: this.product.discount,
+      price: this.product.price,
+      imgUrl: this.product.imgUrl
+    });
   }
 }

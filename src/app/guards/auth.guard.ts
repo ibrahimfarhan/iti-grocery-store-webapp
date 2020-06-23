@@ -8,14 +8,18 @@ import { AuthService } from '../services/auth.service';
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
+
+  isLoggedIn = false;
+
   constructor(private authService: AuthService, private router: Router) { }
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot)
     : Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    // if the user already logged in
-    if (this.authService.isLogged()) {
-      // write a message that you already logged in so you can't login or register again
-      // this.router.navigateByUrl[''];
+
+    this.authService.isLoggedIn().subscribe(i => this.isLoggedIn = i);
+
+    if (this.isLoggedIn) {
+
       return false;
     }
 

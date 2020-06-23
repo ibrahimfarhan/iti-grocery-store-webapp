@@ -1,7 +1,7 @@
 <div class="item-small-1">
   <!-- item data -->
   <div class="item-small-1__image-box">
-    <a href="#" class="item-small-1__image image" [style.backgroundImage]="'url('+product.imgUrl+')' ">
+    <a href="#" class="item-small-1__image image" [style.backgroundImage]="'url('+(product.imgUrl? product.imgUrl[0] : '' )+')' ">
     </a>
 
   </div>

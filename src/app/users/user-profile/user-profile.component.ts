@@ -10,21 +10,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./user-profile.component.scss']
 })
 export class UserProfileComponent implements OnInit {
-  user: User;
-  orders:Order[];
 
-  constructor(private authService: AuthService,private router:Router) { }
+  user: User;
+  orders: Order[];
+
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
-    this.authService.currentUserSubject.asObservable().subscribe( data => {
-      console.log(data);
-      this.user = data;
+    this.authService.getCurrentUserSubject().asObservable().subscribe(u => {
+      this.user = u;
     });
   }
-  editProfile()
-  {
-    //route to edit path
-    // this.router.navigate([''])
-  }
-
 }

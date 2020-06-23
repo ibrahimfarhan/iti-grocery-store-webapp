@@ -11,6 +11,7 @@ import { SharedModule } from '../shared/shared.module';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { ProductsModule } from '../products/products.module';
 import { UserLinksComponent } from './user-links/user-links.component';
+import { ErrorService } from '../services/error.service';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,6 @@ import { UserLinksComponent } from './user-links/user-links.component';
     HomeComponent,
     UserLinksComponent,
     ShoppingCartComponent
-  ]
+  ],
 })
 export class CoreModule { }

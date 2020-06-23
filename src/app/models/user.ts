@@ -1,9 +1,15 @@
-import { UserRole } from './userRole';
+import { UserRole } from './user-role';
 
 export interface User {
+  id: string;
+  token?: string;
   fullName: string;
   email: string;
-  role?: UserRole;
+  roles?: UserRole[];
   address?: string;
   phoneNumber?: number;
+  password?: string;
+  firstName?: string;
+  lastName?: string;
+  imgUrl?: string;
 }

@@ -4,6 +4,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Category } from '../../models/category';
 import { ActivatedRoute, Data } from '@angular/router';
 import { CategoryService } from 'src/app/services/category.service';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-categories-list',
@@ -11,6 +12,7 @@ import { CategoryService } from 'src/app/services/category.service';
   styleUrls: ['./categories-list.component.scss']
 })
 export class CategoriesListComponent implements OnInit {
+
   categories: Category[];
   categoriesExpanded = false;
 
@@ -19,7 +21,7 @@ export class CategoriesListComponent implements OnInit {
   constructor(private categoryService: CategoryService) { }
 
   ngOnInit(): void {
-    this.categoryService.getCategories().subscribe(c => this.categories = c);
+    this.categoryService.getCategories().pipe(tap(d => console.log(d))).subscribe(c => this.categories = [null, ...c]);
   }
 
   toggleCategories(): void {

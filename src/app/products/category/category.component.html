@@ -1,8 +1,8 @@
 <div class="row p-2 justify-content-center">
-    <div class="col-4" *ngIf="this.authService.isAdmin()">
-        <a
+    <div class="col-4" *ngIf="this.isAdmin">
+        <a *ngIf="category"
           style="cursor: pointer;"
-          [routerLink]="['/admin/categories/' + this.category.id + '/edit']"
+          [routerLink]="['/admin/categories/' + this.category.id.toString() + '/edit']"
           >
           <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
         </a>
@@ -11,12 +11,12 @@
         <a
           class="category-link"
           style="cursor: pointer;"
-          [routerLink]="['/products/' + category.name]"
+          [routerLink]="['/products/' + (category ? category.name : 'all')]"
           routerLinkActive="active-category"
           >
-            <div class="d-flex justify-content-around ">
-                <h5>{{ category.name }}</h5>
-                <i class="fa fa-long-arrow-right " aria-hidden="true"></i>
+            <div class="d-flex justify-content-around">
+                <h5>{{ category ? category.name : 'All Products' }}</h5>
+                <h5>></h5>
             </div>
         </a>
     </div>

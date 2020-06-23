@@ -15,6 +15,7 @@ import { ProductsContainerComponent } from './products-container/products-contai
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { ProductsRoutingModule } from './products-routing.module';
 import { ProductsComponent } from './products.component';
+import { ErrorService } from '../services/error.service';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,7 @@ import { ProductsComponent } from './products.component';
     ProductDetailsComponent,
     ProductInCartComponent,
     ProductsComponent
-  ]
+  ],
 })
 export class ProductsModule { }
 export function facthttp(http: HttpClient) {

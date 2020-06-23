@@ -4,6 +4,7 @@ import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/co
 import { Category } from '../../models/category';
 import { ActivatedRoute, Data } from '@angular/router';
 import { CategoryService } from 'src/app/services/category.service';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-categories-list',
@@ -11,6 +12,7 @@ import { CategoryService } from 'src/app/services/category.service';
   styleUrls: ['./categories-list.component.scss']
 })
 export class CategoriesListComponent implements OnInit {
+
   @ViewChild ('sidebarCategories') sidebarCategories: ElementRef;
   categories: Category[];
   categoriesExpanded = false;
@@ -21,7 +23,7 @@ export class CategoriesListComponent implements OnInit {
   constructor(private categoryService: CategoryService) { }
 
   ngOnInit(): void {
-    this.categoryService.getCategories().subscribe(c => this.categories = c);
+    this.categoryService.getCategories().subscribe(c => this.categories = [null, ...c]);
   }
 
   toggleCategories(): void {

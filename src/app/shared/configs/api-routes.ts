@@ -1,4 +1,4 @@
-const apiRoutes1 = {
+const routes = {
   login: '/api/user/login',
   register: '/api/user/register',
 
@@ -22,10 +22,10 @@ const apiRoutes1 = {
   getCurrentUser: '/api/user'
 };
 
-for (const key in apiRoutes1) {
-  if (apiRoutes1.hasOwnProperty(key)) {
-    apiRoutes1[key] = `http://localhost:5000${apiRoutes1[key]}`;
+for (const key in routes) {
+  if (routes.hasOwnProperty(key)) {
+    routes[key] = `http://localhost:5000${routes[key]}`;
   }
 }
 
-export const apiRoutes = apiRoutes1;
+export const apiRoutes = routes;

@@ -1,91 +1,116 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
-import {  User } from '../models/user';
+import { HttpClient, HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { BehaviorSubject, Observable, Subject, throwError } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
+import { User } from '../models/user';
 import { Router } from '@angular/router';
+import { apiRoutes } from '../shared/configs/api-routes';
+import { UserRole } from '../models/user-role';
+import { ErrorService } from './error.service';
+import { AUTH_TOKEN } from '../shared/configs/constants';
+import { ProductService } from './product.service';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class AuthService {
-  currentUserSubject: BehaviorSubject<User> = new BehaviorSubject<
-  User
-  >({
-    id: null,
-    firstName: '',
-    lastName: '',
-    email: '',
-   password: '',
-  });
 
-  currentUser: any;
+  private currentUserSubject: BehaviorSubject<User> = new BehaviorSubject<User>(null);
+  private isLoggedInSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  currentUser: User;
+  redirectUrl: string;
 
-  // redirectUrl: string;
+  constructor(private http: HttpClient, private router: Router, private errorService: ErrorService) { }
 
-  baseUrl = 'http://localhost:5000/api/auth/';
-  decodedToken: any;
-  constructor(private http: HttpClient, private router: Router) {}
+  getCurrentUserSubject(): BehaviorSubject<any> {
 
-  login(user: any) {
-    return this.http.post(this.baseUrl + 'login', user).pipe(
-      map((response: any) => {
-        const loginResponse = response;
-        // the log in api response from server is an object contains two keys, token and logged user object
-        // console.log(loginResponse);
-        if (loginResponse) {
-          localStorage.setItem('authToken', loginResponse.token);
-          // making a shallow copy of the retrieved user from the server
-          this.currentUser = Object.assign({}, loginResponse.user);
-          this.getCurrentUser();
-
-          this.decodedToken = JSON.parse(
-            atob(loginResponse.token.split('.')[1])
-          );
-          console.log(this.decodedToken);
-        }
-      })
-    );
-  }
-  getCurrentUser(): Subject<any> {
-    this.currentUserSubject.next(this.currentUser);
+    this.fetchCurrentUser();
     return this.currentUserSubject;
   }
-  // getDecodedToken(): any{
-  //   const token = localStorage.getItem('authToken');
-  //   this.decodedToken = JSON.parse(atob(token.split('.')[1]));
-  //   return this.decodedToken;
-  // }
-  register(user: any) {
-    return this.http.post(this.baseUrl + 'register', user).pipe(
-      map((response) => {
-        // the response is the returned user object
-        this.currentUser = Object.assign({}, response);
-        this.getCurrentUser();
-      })
 
-    );
-  }
-  // check the token to decide whether the user logged in or not
-  isLogged(): boolean {
-    const token = localStorage.getItem('authToken');
-    // shorthand for if statement to return true or false
-    return !!token;
+  fetchCurrentUser(): void {
+
+    this.http.get<any>(apiRoutes.getCurrentUser, {observe: 'response'}).pipe(catchError(this.handleError)).
+      subscribe(res => {
+
+        if (res.ok && res.body) {
+          this.currentUser = res.body as User;
+          this.currentUserSubject.next(this.currentUser);
+          this.isLoggedInSubject.next(true);
+        }
+
+        else {
+          this.errorService.errorMessageSubject.next(res.body);
+          localStorage.removeItem(AUTH_TOKEN);
+          this.isLoggedInSubject.next(false);
+        }
+      });
   }
 
-  //check if the current logged in user is an admin by checking the retrieved user role and by checking the role in the token
-  isAdmin(): boolean{
-    //add role property to user interface !!!
-    if(this.decodedToken){
+  register(user: User) {
 
-      // return this.decodedToken['Admin'] && this.currentUser.role === 'Admin';
-    }
-    return false;
+    this.http.post<any>(apiRoutes.register, user, {observe: 'response'}).
+      pipe(catchError(this.handleError)).
+      subscribe(res => {
+
+        if (res.ok) {
+          this.currentUser = res.body as User;
+          this.currentUserSubject.next(this.currentUser);
+          this.router.navigate(['home']);
+          this.isLoggedInSubject.next(true);
+        }
+
+        else {
+          this.errorService.errorMessageSubject.next(res.body as string);
+        }
+      });
+  }
+
+  login(user: any) {
+
+    return this.http.post<any>(apiRoutes.login, user, { observe: 'response'}).
+      pipe(catchError(this.handleError)).
+      subscribe(res => {
+
+        if (res.ok) {
+
+          this.currentUser = res.body as User;
+          this.currentUserSubject.next(this.currentUser);
+          localStorage.setItem(AUTH_TOKEN, this.currentUser.token);
+
+          this.redirectUrl = this.redirectUrl ? this.redirectUrl : 'home';
+          this.router.navigate([this.redirectUrl]);
+          this.isLoggedInSubject.next(true);
+        }
+
+        else {
+          this.errorService.errorMessageSubject.next(res.body as string);
+        }
+      });
+  }
+
+  isLoggedIn(): BehaviorSubject<boolean> {
+
+    return this.isLoggedInSubject;
+  }
+
+  isAdmin(): Observable<boolean> {
+
+    return this.currentUserSubject.pipe(map(u => u && u.roles.includes(UserRole.Admin)));
   }
 
   logout() {
-    localStorage.removeItem('authToken');
-    console.log('logged out');
-    this.currentUserSubject.next(this.currentUser);
+
+    localStorage.removeItem(AUTH_TOKEN);
+    this.currentUser = null;
+    this.isLoggedInSubject.next(false);
+    this.currentUserSubject.next(null);
+  }
+
+  handleError = (err: HttpErrorResponse) => {
+
+    this.errorService.errorMessageSubject.next(err.error);
+
+    return throwError(err.error);
   }
 }

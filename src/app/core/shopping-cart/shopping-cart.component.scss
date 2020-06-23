@@ -1,3 +1,5 @@
+@import '../../../assets/sass/variables';
+
 .cart-btn {
   position: relative;
 
@@ -25,5 +27,9 @@
 
   *:not(:last-child) {
     margin-bottom: 0.5rem;
+  }
+
+  button{
+    background-color: $primary-color;
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 
-import { orderItem } from './../../models/orderItem';
+import { orderItem } from '../../models/order-item';
 import { Product } from 'src/app/models/product';
 import { ProductService } from './../../services/product.service';
 
@@ -18,7 +18,7 @@ export class OrderItemComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: import("@angular/core").SimpleChanges): void {
     //for testing only
-    this.product = { 
+    this.product = {
       id: 1, name: 'product', price: 10, imgUrl: ["https://i.pinimg.com/originals/5b/33/29/5b3329d43efc1792543ab088265ec68c.png"]
      }
 
@@ -28,7 +28,7 @@ export class OrderItemComponent implements OnInit, OnChanges {
     // });
 
     this.orderItem.price = this.getPrice();
-    
+
   }
 
   ngOnInit(): void {

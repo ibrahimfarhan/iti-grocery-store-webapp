@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Product } from '../../models/product';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-product',
@@ -11,25 +12,31 @@ import { AuthService } from 'src/app/services/auth.service';
 export class ProductComponent implements OnInit {
 
   @Input() product: Product;
+  isAdmin: boolean;
 
-  constructor(private router: Router, private authService: AuthService) { }
+  constructor(private router: Router, private authService: AuthService,
+              private productService: ProductService) { }
 
   ngOnInit(): void {
-  }
 
-  // checks if the user who loggedin is admin to display edit icon
-  isAdmin(): boolean {
-    // call auth service
-    return this.authService.isAdmin();
+    this.authService.isAdmin().subscribe(i => this.isAdmin = i);
   }
 
   // navigate to the admin panel to edit product
   goToAdminEditProduct(): void {
+
     this.router.navigate([`/admin/products/${this.product.id}`]);
   }
 
-
   addTocart(): void {
-    // call shopping cart service
+
+    this.productService.addCartProduct({
+      productId: this.product.id,
+      name: this.product.name,
+      quantity: 1,
+      discount: this.product.discount,
+      price: this.product.price,
+      imgUrl: this.product.imgUrl
+    });
   }
 }

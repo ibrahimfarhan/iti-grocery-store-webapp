@@ -53,6 +53,7 @@
   color: $primary-bg-color;
   opacity: 0.5;
   transition: opacity 0.4s;
+  cursor: pointer;
 }
 .product-card__icon:hover {
   opacity: 1;

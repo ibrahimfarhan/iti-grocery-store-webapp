@@ -1,41 +1,42 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Product } from '../../models/product';
 import { ProductService } from '../../services/product.service';
-import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { Subscription } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { map } from 'rxjs/operators';
+import { UserRole } from 'src/app/models/user-role';
 
 @Component({
   selector: 'app-products-container',
   templateUrl: './products-container.component.html',
   styleUrls: ['./products-container.component.scss'],
 })
-export class ProductsContainerComponent implements OnInit {
+export class ProductsContainerComponent implements OnInit, OnDestroy {
 
   products: Product[];
-  errorMessage: string;
+  productsSub: Subscription;
+  isAdmin: boolean;
 
   constructor(private productService: ProductService,
               private route: ActivatedRoute,
               private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.route.data.subscribe({
-      next: data => this.onProductRetrieved(data.resolvedProducts) ,
-      error: msg =>  this.errorMessage = msg
+
+    this.route.params.subscribe(p => {
+      if (p && p['category-name']) {
+        this.productService.getProductsByCategory(p['category-name']);
+      }
     });
+
+    this.productsSub = this.productService.getProductsSubject().subscribe(prods => this.products = prods);
+
+    this.authService.getCurrentUserSubject().pipe(map(u => u && u.roles.includes(UserRole.Admin))).
+    subscribe(i => this.isAdmin = i);
   }
 
-  onProductRetrieved(retrievedProducts: Product[]): void
-  {
-    // if it's != null
-    if (!retrievedProducts){
-      this.errorMessage = 'There are no products found for this category';
-    }
-    this.products = retrievedProducts;
-  }
-  // checks if the user who loggedin is admin to display edit icon
-  isAdmin(): boolean {
-    // call auth service
-    return this.authService.isAdmin();
+  ngOnDestroy(): void {
+    this.productsSub.unsubscribe();
   }
 }

@@ -1,13 +1,13 @@
-<div class="categories pt-5 pb-5">
+<div class="categories">
     <div class="container">
         <div class="categories-header  text-center  pb-6">
-            <h2 class="font-lg mt-3">Welcome To Site Name</h2>
+            <h2 class="font-lg mt-3">Welcome To Store Name</h2>
         </div>
         <div class="categories-body d-flex flex-wrap justify-content-center">
             <app-category-in-home
-            class="categories-item d-flex justify-content-center p-3"
-            *ngFor="let cat of categories"
-            [category] = "cat"></app-category-in-home>
+                class="categories-item d-flex justify-content-center p-3"
+                *ngFor="let cat of categories" [category]="cat">
+            </app-category-in-home>
+        </div>
     </div>
-</div>
 </div>

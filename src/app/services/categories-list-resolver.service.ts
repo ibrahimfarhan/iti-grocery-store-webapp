@@ -11,8 +11,8 @@ import { CategoryService } from './category.service';
 export class CategoriesListResolver implements Resolve<Category[]> {
     constructor(private categoryService: CategoryService) { }
 
-    resolve(route: ActivatedRouteSnapshot, routerState: RouterStateSnapshot): Observable<Category[]>
-        | Promise<Category[]> | Category[] {
+    resolve(route: ActivatedRouteSnapshot, routerState: RouterStateSnapshot)
+        : Observable<Category[]> | Promise<Category[]> | Category[] {
         return this.categoryService.getCategories();
     }
 }

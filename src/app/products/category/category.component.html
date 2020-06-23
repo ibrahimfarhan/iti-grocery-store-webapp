@@ -1,21 +1,21 @@
 <div class="row p-2 justify-content-center">
-    <div class="col-4" *ngIf="false">
-        <a
+    <div class="col-4" *ngIf="this.isAdmin">
+        <a *ngIf="category"
           style="cursor: pointer;"
-          [routerLink]="['/products/category/' + category.name]"
+          [routerLink]="['/admin/categories/' + this.category.id.toString() + '/edit']"
           >
-          Bla
+          <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
         </a>
     </div>
     <div class="col-8">
         <a
           class="category-link"
           style="cursor: pointer;"
-          [routerLink]="['/products/category/' + category.name]"
+          [routerLink]="['/products/' + (category ? category.name : 'all')]"
           routerLinkActive="active-category"
           >
             <div class="d-flex justify-content-around">
-                <h5>{{ category.name }}</h5>
+                <h5>{{ category ? category.name : 'All Products' }}</h5>
                 <h5>></h5>
             </div>
         </a>

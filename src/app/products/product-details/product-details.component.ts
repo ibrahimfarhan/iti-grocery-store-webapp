@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {TranslateService} from '@ngx-translate/core'
+import { TranslateService } from '@ngx-translate/core';
 import { Product } from '../../models/product';
 import { Category } from '../../models/category';
 import { ProductService } from '../../services/product.service';
@@ -20,25 +20,25 @@ export class ProductDetailsComponent implements OnInit {
  // imgslider: string[]
   imageObject = [{
     image: 'assets/img/products/product1.jpeg',
-    thumbImage: 'assets/img/products/product1.jpeg',   
+    thumbImage: 'assets/img/products/product1.jpeg',
     title: 'one'}
     , { image: 'assets/img/products/product-1.jpg',
-    thumbImage: 'assets/img/products/product-1.jpg',   
+    thumbImage: 'assets/img/products/product-1.jpg',
     title: 'two'}
     ,{ image: 'assets/img/products/product-grey-9.jpg',
-    thumbImage: 'assets/img/products/product-grey-9.jpg',   
+    thumbImage: 'assets/img/products/product-grey-9.jpg',
     title: 'three'}
     ,{ image: 'assets/img/products/product-grey-9.jpg',
-    thumbImage: 'assets/img/products/product-grey-9.jpg',   
+    thumbImage: 'assets/img/products/product-grey-9.jpg',
     title: 'three'}
     ,{ image: 'assets/img/products/product-grey-9.jpg',
-    thumbImage: 'assets/img/products/product-grey-9.jpg',   
+    thumbImage: 'assets/img/products/product-grey-9.jpg',
     title: 'three'}
 ]
   // wait to test
-    
-  constructor(public translate:TranslateService ,private route: ActivatedRoute,
-    private products: ProductService ) 
+
+  constructor(public translate: TranslateService, private route: ActivatedRoute,
+              private products: ProductService )
   {
     translate.addLangs(['en', 'ar']);
     translate.setDefaultLang('en');
@@ -56,12 +56,12 @@ export class ProductDetailsComponent implements OnInit {
       this.products.getProductById(this.product.id).subscribe({
         next: (product) => (this.product = product),
       });
-    });  
-    console.log(this.x) 
+    });
+    console.log(this.x)
   }
 
   categoryName() {
     console.log(this.x)
     console.log('cate name');
-  }  
+  }
 }

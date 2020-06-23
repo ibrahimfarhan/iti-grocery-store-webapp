@@ -10,17 +10,12 @@
 
     <div class="row">
       <div class="col-12">
-
-        <h4 class="text-center pb-4">
-          Filter By Category
-        </h4>
-
-        <app-category
-          *ngFor="let category of categories"
-          [category]="category"
-          >
-        </app-category>
-
+        <div class="sidebar animate-left" #sidebarCategories>
+          <i class="fa fa-times hide-icon" aria-hidden="true" (click)="close()"></i>
+          <h4 class="text-center pb-4">Filter By Category</h4>
+          <app-category *ngFor="let category of categories" [category]="category"></app-category>
+        </div>
+        <i class="fa fa-list hide-icon" aria-hidden="true" (click)="open()"></i>
       </div>
     </div>
   </div>

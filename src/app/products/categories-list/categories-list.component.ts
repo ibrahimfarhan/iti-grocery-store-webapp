@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 // import { Subscription } from 'rxjs';
 
 import { Category } from '../../models/category';
@@ -13,8 +13,10 @@ import { tap } from 'rxjs/operators';
 })
 export class CategoriesListComponent implements OnInit {
 
+  @ViewChild ('sidebarCategories') sidebarCategories: ElementRef;
   categories: Category[];
   categoriesExpanded = false;
+
 
   // subscription: Subscription;
 
@@ -32,6 +34,13 @@ export class CategoriesListComponent implements OnInit {
       categoriesList.style.transform = 'translateX(-66.6%)';
     }
     this.categoriesExpanded = !this.categoriesExpanded;
+  }
+  close(){
+    this.sidebarCategories.nativeElement.style.display ='none';
+  }
+
+  open(){
+    this.sidebarCategories.nativeElement.style.display ='block';
   }
 
 }

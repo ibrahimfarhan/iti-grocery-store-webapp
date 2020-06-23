@@ -4,34 +4,38 @@
             {{title}}
         </div>
         <div class="card-body">
-            <form novalidate autocomplete="off"
-                *ngIf="category || !this.editMode"
+            <form novalidate
+                autocomplete="off"
                 [formGroup]="addOREditCategoryForm"
-                (ngSubmit)="saveCategory()"
-                >
+                (ngSubmit)="saveCategory()">
+    
                 <div class="form-group row">
-                    <label class="col-md-2 col-form-label" for="productNameId">Name</label>
+                    <label class="col-md-2 col-form-label"
+                            for="productNameId">Name</label>
                     <div class="col-md-8">
-                        <input
-                            type="text"
+                        <input 
                             class="form-control"
                             id="productNameId"
+                            type="text"
                             placeholder="Name (required)"
                             formControlName="name"
-                            [class]="{'is-invalid': displayMessage.name}"
+                            [class]="{
+                                'is-invalid': displayMessage.name
+                              }"
                             />
                         <span class="invalid-feedback">
                             {{displayMessage.name}}
                         </span>
                     </div>
                 </div>
+
                 <div class="row">
                     <div class="col-md-4 offset-md-2">
-                        <button
-                            type="submit"
+                        <button 
                             class="btn bg-green-light text-white mr-4"
                             [disabled]="!addOREditCategoryForm.valid"
-                            [title]="addOREditCategoryForm.valid ? 'Save your entered data': 'Disabled until the form data is valid'"
+                            type="submit"
+                            [title]="addOREditCategoryForm.valid ? 'Save your entered data': 'Disabled until the form data is valid' "
                         >
                             Save
                         </button>
@@ -40,6 +44,7 @@
                         </button>
                     </div>
                 </div>
+    
             </form>
         </div>
     </div>

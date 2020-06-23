@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, HostListener, ViewChild, ElementRef } from '@angular/core';
-import { ProductSearch } from 'src/app/models/productSearch';
+import { ProductSearch } from 'src/app/models/product-search';
 
 /**
  * @input categoryNames: the names to be put in the HTML select element options.

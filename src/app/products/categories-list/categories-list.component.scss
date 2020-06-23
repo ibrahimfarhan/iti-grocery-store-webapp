@@ -15,7 +15,12 @@
   // transition: all 0.5s;
 
   .categories-container {
+
     h4 {
+      color: $primary-color;
+    }
+    i{
+      cursor: pointer;
       color: $primary-color;
     }
   }
@@ -36,3 +41,40 @@
 //     }
 //   }
 // }
+
+
+.sidebar{
+  //height:100%;
+  
+  background-color:#fff;
+  
+  // overflow:auto;
+  border:2px $primary-color solid;
+  padding: 10px; 
+}
+@media (min-width:768px){
+  .sidebar{
+    display:block!important
+  }
+  .hide-icon{
+    display:none!important
+  }
+}
+
+@media (max-width:767px){
+  .sidebar{
+    display:none;
+    width:300px;
+    position:fixed!important;
+  z-index:1;
+  }
+}
+
+.animate-left{
+  position:relative;
+  animation:animateleft 0.4s
+}
+@keyframes animateleft{
+  from{left:-300px;opacity:0} 
+  to{left:0;opacity:1}
+}

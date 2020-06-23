@@ -1,6 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr';
 import { Order } from '../models/order';
+import { apiRoutes } from '../shared/configs/api-routes';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class SignalRService {
 
   public buildConnection = () => {
     this.hubConnection = new HubConnectionBuilder()
-      .withUrl("http://localhost:22459/orderHub")
+      .withUrl(apiRoutes.signalrR)
       .build();
   };
 

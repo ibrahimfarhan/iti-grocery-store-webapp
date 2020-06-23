@@ -20,19 +20,19 @@ export class ProductDetailsComponent implements OnInit {
   imageObject = [{
     image: 'assets/img/products/product1.jpeg',
     thumbImage: 'assets/img/products/product1.jpeg',
-    title: 'one'}
+    }
     , { image: 'assets/img/products/product-1.jpg',
     thumbImage: 'assets/img/products/product-1.jpg',
-    title: 'two'}
+    }
     ,{ image: 'assets/img/products/product-grey-9.jpg',
     thumbImage: 'assets/img/products/product-grey-9.jpg',
-    title: 'three'}
+   }
     ,{ image: 'assets/img/products/product-grey-9.jpg',
     thumbImage: 'assets/img/products/product-grey-9.jpg',
-    title: 'three'}
+    }
     ,{ image: 'assets/img/products/product-grey-9.jpg',
     thumbImage: 'assets/img/products/product-grey-9.jpg',
-    title: 'three'}
+   }
 ]
   // wait to test
 
@@ -44,18 +44,19 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.product={id:11,name:'test Product',price:100,imgUrl:['assets/img/products/product1.jpeg',
-    // 'assets/img/products/product-1.jpg',
-    // 'assets/img/products/product-grey-9.jpg',
-    // 'assets/img/products/product-grey-6.jpg']}
-    // this.imgslider=this.product.imgUrl
-    // wait to test
-    this.route.params.subscribe((params) => {
-      this.x = +params['id'];
-      this.products.getProductById(this.product.id).subscribe({
-        next: (product) => (this.product = product),
-      });
-    });
+    this.product={id:11,name:'test Product',price:100,imgUrl:['assets/img/products/product1.jpeg',
+    'assets/img/products/product-1.jpg',
+    'assets/img/products/product-grey-9.jpg',
+    'assets/img/products/product-grey-6.jpg']}
+   // this.imgslider=this.product.imgUrl
+   // wait to test
+    // this.route.params.subscribe((params) => {
+    //   this.x = +params['id'];
+    //   this.products.getProductById(this.product.id).subscribe({
+    //     next: (product) => (this.product = product),
+    //   });
+    // });
+    console.log(this.product)
     console.log(this.x)
   }
 

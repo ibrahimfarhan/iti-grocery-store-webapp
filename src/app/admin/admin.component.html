@@ -1,11 +1,16 @@
-<div class="container-fluid">
+<div class="container-fluid ">
     <div class="row">
-        <div class="col-4 col-md-3 col-lg-2 p-2 side-bar">
+        <div class="col-6 p-4 side-bar" #sideBar>
+            <div class="row justify-content-end">
+                <div class="col-4 d-flex justify-content-end">
+                  <a class="toggle-sidebar text-white" (click)="toggleSideBar();"><i class="fa fa-bars"></i></a>
+                </div>
+            </div>
             <ul class="nav flex-column">
 
                 <li class="nav-item p-2">
                     <a
-                        class="nav-link text-light"
+                        class="nav-link"
                         [routerLink]="['/admin/products']"
                         (click)="toggleSubMenu(productsSubMenu); productMenuStatus = !productMenuStatus"
                         >
@@ -15,13 +20,13 @@
                     <div class="sub-link collapsed" #productsSubMenu>
                         <ul class="flex-column pl-2 nav">
                             <li class="nav-item">
-                                <a class="nav-link text-light p-2" [routerLink]="['/admin/products/new']">
+                                <a class="nav-link p-2" [routerLink]="['/admin/products/new']">
                                     <i class="fa fa-plus"></i>
                                      Add Product
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-light p-2" [routerLink]="'/admin/products'">
+                                <a class="nav-link p-2" [routerLink]="'/admin/products'">
                                     <i class="fa fa-list-ul"></i> 
                                     List Product
                                 </a>
@@ -32,7 +37,7 @@
 
                 <li class="nav-item p-2">
                     <a
-                        class="nav-link text-light"
+                        class="nav-link "
                         [routerLink]="['/admin/categories']"
                         (click)="toggleSubMenu(categoriesSubMenu); categoryMenuStatus = !categoryMenuStatus"
                         >
@@ -42,13 +47,13 @@
                     <div class="sub-link collapsed" #categoriesSubMenu>
                         <ul class="flex-column pl-2 nav">
                             <li class="nav-item">
-                                <a class="nav-link text-light p-2" [routerLink]="['/admin/categories/new']">
+                                <a class="nav-link p-2" [routerLink]="['/admin/categories/new']">
                                     <i class="fa fa-plus"></i>
                                      Add Category
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-light p-2" [routerLink]="'/admin/categories'">
+                                <a class="nav-link p-2" [routerLink]="'/admin/categories'">
                                     <i class="fa fa-list-ul"></i>
                                      List Category
                                 </a>
@@ -58,12 +63,12 @@
                 </li>
         
                 <li class="nav-item p-2">
-                    <a class="nav-link text-light" [routerLink]="'/admin/orders'">Orders</a>
+                    <a class="nav-link " [routerLink]="'/admin/orders'">Orders</a>
                 </li>
 
             </ul>
         </div>
-        <div class="col-8 col-md-9 col-lg-10 p-2">
+        <div class="col-8 p-4 display">
             <router-outlet></router-outlet>
         </div>
     </div>

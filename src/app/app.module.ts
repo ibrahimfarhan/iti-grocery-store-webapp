@@ -9,10 +9,13 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { ErrorInterceptorProvider } from './interceptors/error.interceptor';
+import { ErrorService } from './services/error.service';
+import { AuthService } from './services/auth.service';
+import { AuthenticationInterceptor, AuthenticationInterceptorProvider } from './interceptors/authentication.interceptor';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +26,7 @@ import { ErrorInterceptorProvider } from './interceptors/error.interceptor';
     FormsModule,
     AppRoutingModule
   ],
-  providers: [ErrorInterceptorProvider],
+  providers: [ErrorInterceptorProvider, AuthenticationInterceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

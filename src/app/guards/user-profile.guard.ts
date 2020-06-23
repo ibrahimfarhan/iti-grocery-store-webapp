@@ -15,11 +15,11 @@ export class UserProfileGuard implements CanActivate {
 
     console.log(next.params.id);
     let userId;
-    this.authService.currentUserSubject.asObservable().subscribe(data => {
+    this.authService.getCurrentUserSubject().asObservable().subscribe(data => {
       userId = data.id;
     });
 
-    if (!(this.authService.isLogged && next.params.id === userId)) {
+    if (!(this.authService.isLoggedIn() && next.params.id === userId)) {
       this.router.navigate(['/home']);
       return false;
     }

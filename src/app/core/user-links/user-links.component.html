@@ -4,8 +4,9 @@
       <img class="user-dropdown__img" src="../../../assets/images/profile.jpg" />
     </div>
     <div class="dropdown-items user-dropdown__menu">
-      <div class="user-dropdown__item">Settings</div>
-      <div class="user-dropdown__item">Log out</div>
+      <a [routerLink]="['/profile/' + currentUser?.id]" class="user-dropdown__item">Profile</a>
+      <div class="user-dropdown__item" (click)="onLogoutClick()">Log out</div>
+      <a *ngIf="isAdmin" [routerLink]="['/admin']" class="user-dropdown__item">Admin Panel</a>
     </div>
   </app-dropdown-menu>
 </div>

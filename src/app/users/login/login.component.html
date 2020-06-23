@@ -25,7 +25,7 @@
               id="email"
               type="text"
               placeholder="Email (required)"
-              formControlName="userName"
+              formControlName="email"
               [class]="{
                 'is-invalid': displayMessage.email
               }"
@@ -93,9 +93,9 @@
 
 <!-- checking login form state and values -->
 <!-- <pre>
-    loginForm Dirty: {{ loginForm.dirty }} 
+    loginForm Dirty: {{ loginForm.dirty }}
     loginForm Touched: {{ loginForm.touched }}
-    loginForm Valid: {{ loginForm.valid }} 
+    loginForm Valid: {{ loginForm.valid }}
     loginForm Value: {{ loginForm.value | json }}
     Username valid: {{ loginForm.get("userName").valid }}
     Username touched: {{ loginForm.get("userName").touched }}

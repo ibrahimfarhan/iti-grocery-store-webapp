@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-
-import { Category } from '../models/category';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { tap, catchError, map } from 'rxjs/operators';
+
+import { Category } from '../models/category';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,6 @@ export class CategoryService {
 
   getCategories(): Observable<Category[]> {
     return this.http.get<Category[]>(this.categoryUrl).pipe(
-      tap(data => console.log('All Categories: ' + JSON.stringify(data))),
       catchError(this.HandleError)
     );
   }
@@ -28,11 +27,11 @@ export class CategoryService {
   // }
 
   //lama est5dmt eli fo2 da msh rady ygeeb l category msh 3rfa leh 
-     //bs eli t7t da shghal 3ady w 3amal kda brdo m3 l products wel orders
+  //bs eli t7t da shghal 3ady w 3amal kda brdo m3 l products wel orders
 
   getCategoryById(id: number): Observable<Category> {
     return this.getCategories().pipe(
-      map((categories:Category[]) => categories.find(c => c.id === id))
+      map((categories: Category[]) => categories.find(c => c.id === id))
     );
   }
 

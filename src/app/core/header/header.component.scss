@@ -14,6 +14,16 @@
     align-items: center;
     justify-content: space-between;
   }
+  &__contactUs{
+    align-items: center;
+    font-size: 0.8rem;
+    margin-right: 2rem;
+    padding-top: 8px;
+    p{
+      margin-bottom: 0px;
+    }
+    
+  }
 }
 
 .navbar-nav {
@@ -38,5 +48,6 @@ app-user-links {
   display: flex;
   align-items: center;
 }
+
 
 

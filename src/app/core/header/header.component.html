@@ -2,6 +2,10 @@
   <app-logo [src]="'./assets/images/logo.png'"></app-logo>
   <app-search-bar [categoryNames]="categories" (searchSubmit)="handleSearch($event)"></app-search-bar>
   <div class="header__right">
+    <div class="header__contactUs text-center">
+      <p class="font-weight-bolder">Call Us</p>
+      <p class="text-black-50">+987654321</p>
+    </div>
     <app-shopping-cart></app-shopping-cart>
     <app-user-links></app-user-links>
   </div>

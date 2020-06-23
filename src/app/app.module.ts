@@ -15,7 +15,7 @@ import { AuthenticationInterceptor, AuthenticationInterceptorProvider } from './
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,

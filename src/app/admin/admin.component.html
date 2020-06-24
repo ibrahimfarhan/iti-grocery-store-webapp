@@ -20,14 +20,14 @@
                     <div class="sub-link collapsed" #productsSubMenu>
                         <ul class="flex-column pl-2 nav">
                             <li class="nav-item">
-                                <a class="nav-link p-2" [routerLink]="['/admin/products/new']">
+                                <a class="nav-link p-2" [routerLink]="['/admin/products/add']">
                                     <i class="fa fa-plus"></i>
                                      Add Product
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link p-2" [routerLink]="'/admin/products'">
-                                    <i class="fa fa-list-ul"></i> 
+                                    <i class="fa fa-list-ul"></i>
                                     List Product
                                 </a>
                             </li>
@@ -41,13 +41,13 @@
                         [routerLink]="['/admin/categories']"
                         (click)="toggleSubMenu(categoriesSubMenu); categoryMenuStatus = !categoryMenuStatus"
                         >
-                        Categories 
+                        Categories
                         <i class="fa fa-caret-down" [ngClass]="categoryMenuStatus ? 'fa-caret-up' : 'fa-caret-down'"></i>
                     </a>
                     <div class="sub-link collapsed" #categoriesSubMenu>
                         <ul class="flex-column pl-2 nav">
                             <li class="nav-item">
-                                <a class="nav-link p-2" [routerLink]="['/admin/categories/new']">
+                                <a class="nav-link p-2" [routerLink]="['/admin/categories/add']">
                                     <i class="fa fa-plus"></i>
                                      Add Category
                                 </a>
@@ -61,7 +61,7 @@
                         </ul>
                     </div>
                 </li>
-        
+
                 <li class="nav-item p-2">
                     <a class="nav-link " [routerLink]="'/admin/orders'">Orders</a>
                 </li>

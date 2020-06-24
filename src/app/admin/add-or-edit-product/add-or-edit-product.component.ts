@@ -6,6 +6,8 @@ import { GenericValidator } from 'src/app/shared/validators/generic-validator-me
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { ProductService } from 'src/app/services/product.service';
 import { Product } from 'src/app/models/product';
+import { CategoryService } from 'src/app/services/category.service';
+import { Category } from 'src/app/models/category';
 
 @Component({
   selector: 'app-add-or-edit-product',
@@ -18,9 +20,12 @@ export class AddOrEditProductComponent implements OnInit, AfterViewInit {
 
   title = 'Add Product';
   product: Product;
-  id:number;
-  editMode:boolean = false;
+  id: number;
+  editMode: boolean = false;
+  products: Product[];
   subscription: Subscription;
+  categories: Category[];
+  categoryNames: string[];
 
   displayMessage: { [key: string]: string } = {};
   private validationMessages: { [key: string]: { [key: string]: string } };
@@ -31,6 +36,7 @@ export class AddOrEditProductComponent implements OnInit, AfterViewInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private productService: ProductService,
+    private categoryService: CategoryService
   ) {
     this.validationMessages = {
       name: {
@@ -42,10 +48,16 @@ export class AddOrEditProductComponent implements OnInit, AfterViewInit {
       },
     };
     this.genericValidator = new GenericValidator(this.validationMessages);
-    
+
   }
-  
+
   ngOnInit(): void {
+
+    this.categoryService.getCategories().subscribe(c => {
+      this.categories = c;
+      this.categoryNames = this.categories.map(cat => cat.name);
+    });
+
     this.subscription = this.activatedRoute.params.subscribe(
       (params: Params) => {
         this.id = +params['id'];
@@ -53,12 +65,7 @@ export class AddOrEditProductComponent implements OnInit, AfterViewInit {
         this.initForm();
       }
     );
-    // this.addOREditProductForm = this.fb.group({
-    //   name: ['', [Validators.required, Validators.minLength(3)]],
-    //   price: ['', [Validators.required]],
-    //   description: [''],
-    //   categoryName: ['']
-    // });
+
   }
   ngAfterViewInit(): void {
     // Watch for the blur event from any input element on the form.
@@ -69,54 +76,52 @@ export class AddOrEditProductComponent implements OnInit, AfterViewInit {
 
     // Merge the blur event observable with the valueChanges observable
     // so we only need to subscribe once.
-    merge(this.addOREditProductForm.valueChanges, ...controlBlurs)
-      .pipe(debounceTime(1000))
-      .subscribe((value) => {
-        this.displayMessage = this.genericValidator.processMessages(
-          this.addOREditProductForm
-        );
-      });
+    // merge(this.addOREditProductForm.valueChanges, ...controlBlurs)
+    //   .pipe(debounceTime(1000))
+    //   .subscribe((value) => {
+    //     this.displayMessage = this.genericValidator.processMessages(
+    //       this.addOREditProductForm
+    //     );
+    //   });
   }
 
   private initForm() {
+
     if (this.editMode) {
       console.log(`form intialization`);
-      this.productService.getProductById(this.id).subscribe({
-        next: product => {
-          this.product = product;
-          this.title = `Edit Product: ${this.product.name}`;
-
-          //lama 3mlt new formGroup brdo gab nafs error wtf!
-
-          // this.addOREditCategoryForm = new FormGroup({
-          //   name:new FormControl(this.category.name)
-          // });
-          this.addOREditProductForm = this.fb.group({
-            name: [this.product.name, [Validators.required, Validators.minLength(3)]],
-            price: [this.product.price, [Validators.required]],
-            description: [this.product.description],
-            categoryName: [this.product.categoryName]
-          });
-        }
+      this.productService.getProductsSubject().subscribe(ps => {
+        this.products = ps;
+        this.product = this.products.find(p => p.id === this.id);
       });
-    }else{
+
+      this.title = `Edit Product: ${this.product.name}`;
+
+      this.addOREditProductForm = this.fb.group({
+        name: [this.product.name, [Validators.required, Validators.minLength(1)]],
+        price: [this.product.price, [Validators.required]],
+        description: [this.product.description],
+        categoryId: [this.product.categoryId]
+
+
+      });
+    } else {
       // this.addOREditCategoryForm = new FormGroup({
       //   name:new FormControl()
       // });
       this.title = 'Add Product';
       this.addOREditProductForm = this.fb.group({
-        name: ['', [Validators.required, Validators.minLength(3)]],
+        name: ['', [Validators.required, Validators.minLength(1)]],
         price: ['', [Validators.required]],
         description: [''],
-        categoryName: ['']
+        categoryId: ['']
       });
     }
   }
   saveProduct(): void {
     if (this.addOREditProductForm.valid) {
       if (this.addOREditProductForm.dirty) {
-        const product = {...this.product, ...this.addOREditProductForm.value}
-        if(!this.editMode){
+        const product = { ...this.product, ...this.addOREditProductForm.value }
+        if (!this.editMode) {
           this.productService.addProduct(product).subscribe({
             next: () => {
               this.addOREditProductForm.reset();
@@ -124,19 +129,19 @@ export class AddOrEditProductComponent implements OnInit, AfterViewInit {
             }
           });
         } else {
-        this.productService.updateProduct(product).subscribe({
-          next: () => {
-            this.addOREditProductForm.reset();
-            this.router.navigate(['admin/products']);
-          }
-        });
+          this.productService.updateProduct(product).subscribe({
+            next: () => {
+              this.addOREditProductForm.reset();
+              this.router.navigate(['admin/products']);
+            }
+          });
+        }
       }
     }
   }
-}
 
-onCancel() {
-  this.router.navigate(['admin/products']);
-}
+  onCancel() {
+    this.router.navigate(['admin/products']);
+  }
 
 }

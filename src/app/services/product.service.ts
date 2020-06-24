@@ -42,9 +42,13 @@ export class ProductService {
     this.fetchProductsByRoute(apiRoutes.getProducts + `/${categoryName}`);
   }
 
-  getProductById(id: number): Observable<Product> {
+  getProductById(id: number): Product {
 
-    return this.http.get<Product>(apiRoutes.getProducts + `/${id}`).pipe(catchError(this.handleError));
+    if (this.products) {
+      return this.products.find(p => p.id === id);
+    }
+
+    return null;
   }
 
   private fetchProductsByRoute(apiRoute: string): BehaviorSubject<Product[]> {
@@ -115,6 +119,7 @@ export class ProductService {
 
   addProduct(product: Product): Observable<boolean> {
 
+    product = {...product, price: Number(product.price), categoryId: Number(product.categoryId) };
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post<HttpResponse<any>>(apiRoutes.addProduct , product, { headers, observe: 'response' }).pipe(
       catchError(this.handleError), map(res => res.ok)
@@ -131,8 +136,9 @@ export class ProductService {
 
   updateProduct(product: Product): Observable<boolean> {
 
+    product = {...product, categoryId: Number(product.categoryId)};
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.put<boolean>(apiRoutes.editProduct , product, { headers, observe: 'response' }).pipe(
+    return this.http.post<boolean>(apiRoutes.editProduct , product, { headers, observe: 'response' }).pipe(
       catchError(this.handleError), map(res => res.ok)
     );
   }

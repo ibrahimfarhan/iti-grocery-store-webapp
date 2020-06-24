@@ -4,8 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Product } from '../../models/product';
 import { Category } from '../../models/category';
 import { ProductService } from '../../services/product.service';
-import { Subscription, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-product-details',

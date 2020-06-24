@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Product } from '../../models/product';
 import { Router } from '@angular/router';
+
+import { Product } from '../../models/product';
 import { AuthService } from 'src/app/services/auth.service';
 import { ProductService } from 'src/app/services/product.service';
 
@@ -39,4 +40,5 @@ export class ProductComponent implements OnInit {
       imgUrl: this.product.imgUrl
     });
   }
+
 }
